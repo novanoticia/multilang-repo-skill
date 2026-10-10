@@ -1,0 +1,78 @@
+# MultiLang Repo Skill
+
+Skill para Claude Code que guía a un agente para hacer multiidioma un repositorio: programas,
+bibliotecas, servidores, CLI, skills, plugins, instrucciones para modelos, proyectos híbridos y
+repositorios que ya usan i18next, gettext o ICU.
+
+El agente descubre el proyecto, separa el texto para personas de los contratos de máquina, pregunta
+solo lo que decide la persona, diseña en proporción al proyecto, comprueba con evidencias de nivel
+declarado y publica solo lo autorizado, acción por acción.
+
+## Instalación
+
+Como plugin, desde este repositorio:
+
+```
+/plugin marketplace add novanoticia/multilang-repo-skill
+/plugin install multilang-repo-skill@multilang-repo-skill
+```
+
+O copiando la carpeta de la skill a mano: `skills/multilang-repo-skill/` va en `~/.claude/skills/`
+(para todos tus proyectos) o en `.claude/skills/` de un repositorio. Comprueba que aparece con
+`/skills`.
+
+## Ejemplos
+
+1. «Haz multiidioma este repositorio: español (referencia) e inglés. Modo guiado.»
+2. «Antes de tocar nada, audita el soporte de idiomas de este repo y dime qué textos están
+   hardcodeados y cuáles son contratos de máquina.» (solo análisis: no modifica nada)
+3. «Añade francés y pt-BR a la app, que ya usa i18next. Modo autónomo; puedes subir la rama `i18n`
+   cada vez que termines una tarea, nada más.»
+
+## Qué incluye
+
+```
+skills/multilang-repo-skill/
+├── SKILL.md       núcleo: activación, precedencia, permisos, seguridad, evidencia, modos, escala, módulos, flujo y cierre
+├── references/    12 módulos que se leen solo si se activan
+├── assets/        5 plantillas (datos y alcance, registro de sesión, inventario, escenarios, evidencias)
+└── scripts/       verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py y sus pruebas
+```
+
+Los scripts usan solo la biblioteca estándar de Python 3.8+ y nunca modifican ficheros. Para ejecutar
+sus pruebas:
+
+```
+cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tests
+```
+
+## Estado
+
+Versión 9.0.0. La skill se ha validado así (detalle en [docs/VALIDACION.md](docs/VALIDACION.md)):
+
+- Validador de skills, comprobaciones estructurales y de identificadores: sin errores.
+- 78 pruebas de los scripts con Python 3.14 y 3.9; sabotaje con 32 de 32 mutantes detectados.
+- Activación real en Claude Code y escenarios de comportamiento simulados (17 ejecuciones, tres
+  versiones de la skill), calificados por agentes distintos de los que los ejecutaron.
+
+Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
+una ejecución cada uno; la subida a claude.ai no se ha probado (su ayuda limita `description` a 200
+caracteres y esta tiene 966).
+
+## Documentación
+
+- [docs/INFORME-ENTREGA.md](docs/INFORME-ENTREGA.md): resumen, estructura y uso.
+- [docs/AUDITORIA.md](docs/AUDITORIA.md): auditoría de las versiones anteriores del marco (v1–v8).
+- [docs/TRAZABILIDAD.md](docs/TRAZABILIDAD.md): cambios respecto a v7 y destino de cada propuesta de v8.
+- [docs/VALIDACION.md](docs/VALIDACION.md): cómo se validó y con qué resultados.
+
+Esos documentos citan `evaluacion/` y `entrega/`, carpetas del entorno de trabajo donde se hicieron
+las pruebas; las herramientas y los datos brutos de evaluación no se publican aquí.
+
+## Licencia
+
+[MIT](LICENSE).
+
+---
+
+Elaborado con asistencia de IA; requiere revisión humana.

@@ -1,0 +1,15 @@
+{
+  "name": "multilang-repo-skill",
+  "description": "Marketplace de un solo plugin: MultiLang Repo Skill",
+  "owner": {
+    "name": "novanoticia",
+    "url": "https://github.com/novanoticia"
+  },
+  "plugins": [
+    {
+      "name": "multilang-repo-skill",
+      "source": "./",
+      "description": "Guía a un agente para hacer multiidioma un repositorio con rigor proporcional, permiso por cada publicación y evidencias de nivel declarado."
+    }
+  ]
+}
