@@ -34,9 +34,10 @@ O copiando la carpeta de la skill a mano: `skills/multilang-repo-skill/` va en `
 ## Idiomas
 
 La skill está en español (idioma de referencia) y tiene una traducción al inglés. Para pedir la
-respuesta en inglés, escribe `idioma=en` (o `lang=en`) en la primera línea de tu mensaje. Sin marca
-responde en español, como hasta ahora: no se detecta el idioma en que escribes. Un idioma no
-disponible da un aviso y sigue en español. La traducción es un `borrador-ia` sin revisión humana
+respuesta en inglés, escribe `idioma=en` (o `lang=en`) en la primera línea de tu mensaje; la marca vale
+para toda la conversación. Sin marca no cambia nada respecto a 9.0.0: la skill sigue respondiendo en el
+idioma en que escribes (R16) y usa los ficheros en español. Un idioma no disponible da un aviso y
+continúa como sin marca. La traducción es un `borrador-ia` sin revisión humana
 (estado en [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)).
 Este README también está en [inglés](README.en.md). <!-- i18n:exento -->
 

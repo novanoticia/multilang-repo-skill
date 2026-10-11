@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=a9b043ab189b estado=borrador-ia -->
+<!-- i18n fuente-sha256=676d0be02e60 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -35,9 +35,10 @@ all your projects) or in `.claude/skills/` of a repository. Check that it shows 
 ## Languages
 
 The skill is in Spanish (the reference language) and has an English translation. To ask for the answer in
-English, write `idioma=en` (or `lang=en`) on the first line of your message. Without a marker it answers
-in Spanish, as before: the language you write in is not detected. An unavailable language gives a notice
-and continues in Spanish. The translation is a `borrador-ia` (AI draft) with no human review (status in
+English, write `idioma=en` (or `lang=en`) on the first line of your message; the marker holds for the
+whole conversation. Without a marker nothing changes with respect to 9.0.0: the skill keeps answering in
+the language you write in (R16) and uses the Spanish files. An unavailable language gives a notice and
+continues as without a marker. The translation is a `borrador-ia` (AI draft) with no human review (status in
 [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)). This README is
 also available in [Spanish](README.md). <!-- i18n:exento -->
 

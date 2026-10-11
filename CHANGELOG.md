@@ -9,7 +9,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 - Traducción al inglés de la skill en `skills/multilang-repo-skill/i18n/en/`: `SKILL.md`, 12
   referencias y 5 plantillas, con `i18n/GLOSARIO.md` y `i18n/ESTADO.md`.
 - Selección de idioma por marca explícita (`idioma=en` o `lang=en`) en la primera línea del mensaje,
-  con respaldo al español, aviso de idioma no disponible y fallo seguro si no se puede leer `i18n/`.
+  vigente toda la conversación, aviso de idioma no disponible (continúa como sin marca) y fallo seguro
+  si no se puede leer `i18n/`.
 - `scripts/comprobar_paridad.py`: compara cada traducción con su original (identificadores, marcas de
   módulo, encabezados, tablas, bloques de código, enlaces y huella del original). Ignora los
   comentarios de los bloques de shell, también al final de línea, y admite la marca
@@ -26,7 +27,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
   órdenes».
 - **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.0.0 a 9.1.0 (y `version` de `plugin.json`).
 - `SKILL.md` gana un bloque delimitado por `<!-- i18n:inicio -->` y `<!-- i18n:fin -->` (sección
-  «Idioma de la respuesta», 1 345 bytes). `SKILL.md` pasa de 455 a 473 líneas. El resto del texto
+  «Idioma de la respuesta», 1 687 bytes; presupuesto propio de 1 700, sin límite externo que lo fije). `SKILL.md` pasa de 455 a
+  477 líneas. El resto del texto
   original no cambia, comprobado con `verificar_adiciones.py --git 51649dc`.
 - `AGENTS.md`, `README.md` y `docs/VALIDACION.md` (adenda) recogen lo anterior.
 
@@ -38,7 +40,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 - La activación en la plataforma real, con la `description` nueva, y los escenarios de selección de
   idioma no se han ejecutado (`pendiente`).
 - Los mensajes de los scripts siguen en español; `docs/` y este `CHANGELOG.md` no se traducen.
-- No se detecta el idioma en que escribe la persona: sin marca se responde en español.
+- Sin marca no cambia el comportamiento de 9.0.0: la respuesta sigue el idioma de la persona (R16) y se
+  leen los ficheros en español. No se detecta el idioma para elegir la traducción.
 
 ### Cómo retirar la excepción de `description`
 1. En `skills/multilang-repo-skill/SKILL.md`, restaura la línea 3 a la de 9.0.0

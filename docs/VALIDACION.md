@@ -172,7 +172,8 @@ Las secciones 1 a 7 describen la validación de 9.0.0 y no se reescriben: este i
 | `claude plugin validate --strict .` | Sin errores. El validador no impone límite a `description` (probado con 1 025 y 2 000 caracteres) | `local` |
 | Paridad de `i18n/en/` | 18 ficheros (`SKILL.md`, 12 referencias, 5 plantillas) sin errores ni avisos con `--arbol --completo`, y `README.en.md` y `AGENTS.en.md` con `--par` | `local` |
 | Adiciones a `SKILL.md` frente a 9.0.0 | Solo el bloque delimitado y los reemplazos aprobados (`description` y versión), con `verificar_adiciones.py --git 51649dc` | `estática` |
-| `SKILL.md` | 473 líneas; `description` de 1 023 caracteres | `estática` |
+| `SKILL.md` | 477 líneas; bloque de 1 687 bytes; `description` de 1 023 caracteres | `estática` |
+| Autorrevisión del autor (P14, no independiente) | Halló que el bloque de idioma contradecía R16 y cambiaba la respuesta por defecto de quien escribe en otro idioma (D1); corregido el 2026-10-11 tras aprobarlo la persona. Corregido también un comentario en español que quedaba en `i18n/en/` | `estática` |
 | Calidad de la traducción | Releída por quien la redactó (una IA); sin revisión humana | `estática` |
 
 Pendiente, y por tanto **no medido en 9.1.0**:

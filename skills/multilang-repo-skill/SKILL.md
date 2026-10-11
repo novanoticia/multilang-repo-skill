@@ -17,16 +17,20 @@ regla sigues o de cuál te desvías, y para que la persona pueda eximirte de una
 ## Idioma de la respuesta
 
 - **Selección (D2, D5).** Solo cuenta una marca explícita, `idioma=xx` o `lang=xx`, en la primera línea
-  no vacía del mensaje de la persona y fuera de líneas citadas con «>». Sin marca se responde en
-  español: ni el idioma de un texto pegado, ni el del sistema, ni el de la petición deciden.
+  no vacía del mensaje de la persona y fuera de líneas citadas con «>». Vale para toda la conversación
+  hasta que la persona dé otra. Sin marca no cambia nada: se leen estos ficheros y R16 sigue rigiendo
+  (responde en el idioma de la persona); ni el idioma de un texto pegado ni el del sistema deciden.
 - **Disponibles:** `es` (este fichero) y `en` (carpeta `i18n/en/`). Una variante como `en-GB` o
-  `en_US.UTF-8` cae en `en`. [scripts/resolver_idioma.py](scripts/resolver_idioma.py) implementa esta regla.
-- **No disponible o mal formada (D4).** Dilo, nombra los idiomas disponibles y continúa en español.
+  `en_US.UTF-8` cae en `en`. [scripts/resolver_idioma.py](scripts/resolver_idioma.py) implementa esta regla;
+  su origen `defecto` significa «sin marca», no «responde en español».
+- **No disponible o mal formada (D4).** Dilo, nombra los idiomas disponibles y continúa como sin marca.
 - **En inglés.** Lee `i18n/en/SKILL.md` en lugar de este fichero y, de ahí, sus referencias y plantillas.
-  Abre la respuesta con «Translation machine-generated, not human-reviewed.» (D22). La traducción es un
-  espejo: si discrepa de este fichero, manda este (R17).
-- **Fallo seguro (D25).** Si no puedes leer `i18n/en/`, responde en español, dilo en una frase y añade
-  una línea en inglés: «English version unavailable; answering in Spanish.».
+  Responde en inglés y abre cada respuesta con «Translation machine-generated, not human-reviewed.»
+  (D22). La traducción es un espejo: si discrepa de este fichero, manda este (R17). Con `idioma=es` se
+  siguen estos ficheros y se responde en español.
+- **Fallo seguro (D25).** Si no puedes leer `i18n/en/`, continúa con estos ficheros, responde como sin
+  marca (R16), dilo en una frase y añade una línea en inglés: «English version unavailable; continuing
+  with the Spanish files.».
 - **No se traduce:** identificadores (R1…Doc9), marcas de módulo, nombres de fichero y de script,
   opciones, códigos de aviso, comandos y bloques de código. Los mensajes de los scripts siguen en español.
 <!-- i18n:fin -->
