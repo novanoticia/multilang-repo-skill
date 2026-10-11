@@ -171,7 +171,7 @@ Las secciones 1 a 7 describen la validación de 9.0.0 y no se reescriben: este i
 | Sabotaje de `comprobar_paridad.py` | 38 mutantes, 38 detectados, con control sin mutar superado. Arnés fuera del repositorio | `local` |
 | `claude plugin validate --strict .` | Sin errores. El validador no impone límite a `description` (probado con 1 025 y 2 000 caracteres) | `local` |
 | Paridad de `i18n/en/` | 18 ficheros (`SKILL.md`, 12 referencias, 5 plantillas) sin errores ni avisos con `--arbol --completo`, y `README.en.md` y `AGENTS.en.md` con `--par` | `local` |
-| Adiciones a `SKILL.md` frente a 9.0.0 | Solo el bloque delimitado y los reemplazos aprobados (`description` y versión), con `verificar_adiciones.py --git 51649dc` | `estática` |
+| Adiciones a `SKILL.md` frente a 9.0.0 | Solo el bloque delimitado y los reemplazos aprobados (`description` y versión), con `verificar_adiciones.py --git v9.0.0` | `estática` |
 | `SKILL.md` | 477 líneas; bloque de 1 687 bytes; `description` de 1 023 caracteres | `estática` |
 | Autorrevisión del autor (P14, no independiente) | Halló que el bloque de idioma contradecía R16 y cambiaba la respuesta por defecto de quien escribe en otro idioma (D1); corregido el 2026-10-11 tras aprobarlo la persona. Corregido también un comentario en español que quedaba en `i18n/en/` | `estática` |
 | Calidad de la traducción | Releída por quien la redactó (una IA); sin revisión humana | `estática` |
@@ -180,7 +180,7 @@ Pendiente, y por tanto **no medido en 9.1.0**:
 
 - **Activación** (sección 4) en español y en inglés con la `description` nueva (`plataforma`).
 - **Escenarios** (sección 5) sobre la selección de idioma: marca válida, sin marca, idioma no disponible,
-  fallo seguro sin `i18n/` y marca dentro de un texto pegado (`simulada`; sin preregistrar ni ejecutar).
+  fallo seguro sin `i18n/` y marca dentro de un texto pegado (`simulada`; preregistrados en [ESCENARIOS-9.1.0.md](ESCENARIOS-9.1.0.md), sin ejecutar).
 - **Revisión humana** del inglés.
 - **Límite de `description` de la plataforma de destino:** el validador local no lo impone, y la ayuda
   de claude.ai habla de 200 caracteres (`no-comprobado`).
