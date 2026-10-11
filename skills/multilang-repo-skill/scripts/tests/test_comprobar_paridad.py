@@ -133,6 +133,31 @@ class PruebasComparar(unittest.TestCase):
     def test_comentarios_del_bloque_pueden_traducirse(self):
         self.assertEqual(errores(cp.comparar(ES, en())), [])
 
+    def test_comentario_al_final_de_linea_en_bash_puede_traducirse(self):
+        es = b"# T\n\n```bash\nclaude plugin validate .   # manifiesto y skill\n```\n"
+        trad = en("# T\n\n```bash\nclaude plugin validate .   # manifest and skill\n```\n", es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), [])
+
+    def test_el_comando_antes_del_comentario_se_compara(self):
+        es = b"# T\n\n```bash\nclaude plugin validate .   # manifiesto\n```\n"
+        trad = en("# T\n\n```bash\nclaude plugin validate --strict .   # manifest\n```\n", es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), ["bloques_difieren"])
+
+    def test_almohadilla_entre_comillas_no_es_comentario(self):
+        es = b"# T\n\n```bash\necho \"a # b\"\n```\n"
+        trad = en("# T\n\n```bash\necho \"a # c\"\n```\n", es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), ["bloques_difieren"])
+
+    def test_almohadilla_pegada_no_es_comentario(self):
+        es = b"# T\n\n```bash\ngit log origin/x#1\n```\n"
+        trad = en("# T\n\n```bash\ngit log origin/x#2\n```\n", es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), ["bloques_difieren"])
+
+    def test_comentario_al_final_solo_se_ignora_en_shell(self):
+        es = b"# T\n\n```json\n{\"a\": 1} # uno\n```\n"
+        trad = en("# T\n\n```json\n{\"a\": 1} # one\n```\n", es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), ["bloques_difieren"])
+
     def test_bloque_de_codigo_eliminado(self):
         incs = cp.comparar(ES, en(EN_CUERPO.replace("```\nPhase 0  Environment\n```\n\n", "")))
         self.assertEqual(errores(incs), ["bloques_difieren"])
@@ -167,6 +192,33 @@ class PruebasComparar(unittest.TestCase):
         es = b"Ver [arriba](#seccion-uno).\n"
         self.assertEqual(errores(cp.comparar(es, en("See [up](#section-one).\n", es=es))), [])
         self.assertEqual(errores(cp.comparar(es, en("See up.\n", es=es))), ["enlaces_difieren"])
+
+
+class PruebasExencion(unittest.TestCase):
+    ES_BASE = "# T\n\nVer R1.\n\nTambién en [inglés](README.en.md).{marca}\n"
+    EN_BASE = "# T\n\nSee R1.\n\nAlso in [Spanish](README.md).{marca}\n"
+
+    def par(self, marca_es, marca_en):
+        es = self.ES_BASE.format(marca=marca_es).encode("utf-8")
+        return cp.comparar(es, en(self.EN_BASE.format(marca=marca_en), es=es))
+
+    def test_sin_marca_el_enlace_distinto_es_error(self):
+        self.assertEqual(errores(self.par("", "")), ["enlaces_difieren"])
+
+    def test_linea_exenta_en_ambos_no_cuenta(self):
+        marca = " <!-- i18n:exento -->"
+        self.assertEqual(errores(self.par(marca, marca)), [])
+
+    def test_exencion_en_un_solo_lado_sigue_siendo_error(self):
+        marca = " <!-- i18n:exento -->"
+        self.assertEqual(errores(self.par(marca, "")), ["enlaces_difieren"])
+        self.assertEqual(errores(self.par("", marca)), ["enlaces_difieren"])
+
+    def test_la_exencion_no_oculta_el_resto_del_fichero(self):
+        marca = " <!-- i18n:exento -->"
+        es = self.ES_BASE.format(marca=marca).encode("utf-8")
+        trad = en(self.EN_BASE.format(marca=marca).replace("See R1", "See R2"), es=es)
+        self.assertEqual(errores(cp.comparar(es, trad)), ["ids_difieren"])
 
 
 class PruebasCabecera(unittest.TestCase):

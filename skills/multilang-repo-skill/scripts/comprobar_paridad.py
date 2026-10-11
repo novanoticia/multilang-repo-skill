@@ -29,10 +29,14 @@ Qué comprueba (error salvo que se diga lo contrario):
   estructura_difiere     secuencia de niveles de encabezado
   tablas_difieren        número de líneas de tabla
   bloques_difieren       bloques de código: número, lenguaje y, si tienen lenguaje, su contenido sin
-                         líneas de comentario (los bloques sin lenguaje solo cuentan, su texto se traduce)
+                         líneas de comentario y, en shell, sin el comentario del final de línea (los
+                         bloques sin lenguaje solo cuentan, su texto se traduce)
   enlaces_difieren       destinos de enlace, sin fragmento y con las rutas relativas resueltas
   enlace_roto            (solo --arbol) enlace relativo de la traducción que no existe en disco
   cabecera_* / fuente_desfasada / estado_sin_revisor / nota_ia_ausente / no_utf8
+  (una línea de prosa que contenga <!-- i18n:exento --> queda fuera de todas las comprobaciones de
+   contenido; sirve para lo que difiere por diseño, como el enlace «también en inglés» y su espejo. Se
+   ve en el diff y debe usarse en las dos versiones)
   texto_sin_traducir     AVISO: líneas con letras propias del español (ñ, ¿, ¡, vocales con tilde)
 Qué NO comprueba: que la traducción sea correcta, fiel ni completa en sentido; solo que no ha roto la
 estructura. Una traducción con paridad perfecta puede seguir siendo mala.
@@ -61,6 +65,8 @@ RE_CABECERA = re.compile(
 RE_ESPANOL = re.compile(r"[ñÑ¿¡áéíóúÁÉÍÓÚü]")
 RE_CODIGO_EN_LINEA = re.compile(r"`[^`]*`")
 LENGUAJES_DE_PROSA = ("text", "txt", "markdown", "md")
+MARCA_EXENTA = "<!-- i18n:exento -->"
+LENGUAJES_DE_SHELL = ("bash", "sh", "shell", "zsh", "console")
 MAX_EJEMPLOS = 5
 
 
@@ -103,15 +109,32 @@ def es_comentario(linea):
     return corta.startswith(("#", "//", "<!--"))
 
 
+def quitar_comentario_final(linea):
+    """En shell, corta el comentario que empieza en un «#» precedido de espacio y fuera de comillas."""
+    comilla = ""
+    for i, c in enumerate(linea):
+        if comilla:
+            if c == comilla:
+                comilla = ""
+        elif c in "\"'":
+            comilla = c
+        elif c == "#" and i > 0 and linea[i - 1] in " \t":
+            return linea[:i].rstrip()
+    return linea
+
+
 def contenido_comparable(info, lineas):
     lenguaje = info.split()[0].lower() if info.split() else ""
     if lenguaje == "" or lenguaje in LENGUAJES_DE_PROSA:
         return None
+    if lenguaje in LENGUAJES_DE_SHELL:
+        lineas = [quitar_comentario_final(l) for l in lineas]
     return tuple(l.rstrip() for l in lineas if l.strip() and not es_comentario(l))
 
 
 def analizar(texto):
     prosa, bloques = separar(texto)
+    prosa = [(n, l) for n, l in prosa if MARCA_EXENTA not in l]
     sin_destinos = [(n, RE_ENLACE.sub("](#)", l)) for n, l in prosa]
     juntas = "\n".join(l for _, l in sin_destinos)
     return {
