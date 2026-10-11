@@ -3,6 +3,22 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
+## Sin publicar (a fecha 2026-10-11)
+
+### Cambiado
+- `SKILL.md`, bloque «Idioma de la respuesta», frase de selección: sin marca, «no cambia nada, y no menciones el
+  idioma». Corrige el escenario E-13 de `docs/ESCENARIOS-9.1.0.md` (`simulada`, una ejecución): una respuesta
+  sin marca abría con «Sin marca `idioma=xx`, respondo en español (R16)», una mención que 9.0.0 no hacía y que
+  cambiaba la salida por defecto (D1). El bloque pasa de 1 687 a 1 715 bytes (presupuesto propio: de 1 700
+  a 1 750, sin límite externo que lo fije) y `SKILL.md`, de 477 a 478 líneas. Traducción y huella actualizadas
+  en `i18n/en/SKILL.md`.
+
+### Limitaciones
+- No cambia la versión: quien tiene instalada la 9.1.0 no recibe este cambio hasta que se suba `version`
+  (restricción de `AGENTS.md`).
+- La corrección no se ha vuelto a ejecutar por escenarios (`pendiente`): con una sola ejecución previa no se
+  sabe con qué frecuencia ocurría el fallo.
+
 ## 9.1.0 — 2026-10-11 (rama `i18n`, sin publicar)
 
 ### Añadido
