@@ -6,7 +6,7 @@ Lo que hay que saber antes de tocar nada en este repositorio. Vale para agentes 
 
 Un plugin de Claude Code con una sola skill, `multilang-repo-skill`, que guía a un agente para hacer
 multiidioma un repositorio. El producto es sobre todo prosa normativa: reglas con identificador que
-otro agente lee y sigue. El único código ejecutable son tres scripts de apoyo y sus pruebas.
+otro agente lee y sigue. El único código ejecutable son cuatro scripts de apoyo y sus pruebas.
 
 ```
 .claude-plugin/plugin.json            manifiesto del plugin (nombre, versión, autor, licencia)
@@ -14,8 +14,12 @@ otro agente lee y sigue. El único código ejecutable son tres scripts de apoyo 
 skills/multilang-repo-skill/SKILL.md  núcleo: se carga entero en cada invocación
 skills/multilang-repo-skill/references/  módulos que el agente lee solo si se activan
 skills/multilang-repo-skill/assets/      plantillas que el agente copia junto a su registro
-skills/multilang-repo-skill/scripts/     verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py
-skills/multilang-repo-skill/scripts/tests/  pruebas unittest de los tres scripts
+skills/multilang-repo-skill/i18n/        traducción espejo al inglés (en/), GLOSARIO.md y ESTADO.md
+skills/multilang-repo-skill/scripts/     verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py,
+                                      comprobar_paridad.py
+skills/multilang-repo-skill/scripts/tests/  pruebas unittest de los cuatro scripts
+README.en.md, AGENTS.en.md            traducciones al inglés de estos dos documentos
+CHANGELOG.md                          cambios por versión, con las excepciones aprobadas
 docs/                                 auditoría, trazabilidad, validación e informe (no forman parte de la skill)
 ```
 
@@ -27,11 +31,20 @@ Ejecuta las pruebas sin tuberías detrás, para que el código de salida sea el 
 cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tests
 ```
 
-Hoy son **78 pruebas** y salen todas en verde. Si ves menos, alguna no se está descubriendo.
+Hoy son **138 pruebas** y salen todas en verde. Si ves menos, alguna no se está descubriendo.
 
 ```bash
 claude plugin validate --strict .                 # manifiesto, marketplace y skill
 wc -l skills/multilang-repo-skill/SKILL.md        # debe quedar por debajo de 500
+```
+
+Paridad de las traducciones: sin errores ni avisos, con la nota de IA en los dos documentos.
+
+```bash
+S=skills/multilang-repo-skill
+python3 -B $S/scripts/comprobar_paridad.py --arbol $S $S/i18n/en --completo
+python3 -B $S/scripts/comprobar_paridad.py --par README.md README.en.md --nota-ia "AI-assisted; requires human review."
+python3 -B $S/scripts/comprobar_paridad.py --par AGENTS.md AGENTS.en.md --nota-ia "AI-assisted; requires human review."
 ```
 
 `-B` evita que se cree `__pycache__` dentro de la skill: no debe acabar en el paquete.
@@ -66,20 +79,33 @@ wc -l skills/multilang-repo-skill/SKILL.md        # debe quedar por debajo de 50
    comprobación como pendiente.
 8. **Nada personal ni local.** Sin rutas absolutas, nombres de usuario ni datos de quien ejecutó las
    pruebas. Las herramientas y los datos brutos de evaluación no se publican en este repositorio.
-9. **Nota de IA solo donde toca.** Los documentos públicos para personas (README, notas de Release)
-   terminan una vez con «Elaborado con asistencia de IA; requiere revisión humana.». Nunca en
-   ficheros que consume una máquina (código, JSON, YAML).
+9. **Nota de IA solo donde toca.** Los documentos públicos para personas (README, CHANGELOG, notas de
+   Release y las versiones `.en.md` de README y AGENTS) terminan una vez, en su idioma, con
+   «Elaborado con asistencia de IA; requiere revisión humana.». Nunca en ficheros que consume una
+   máquina (código, JSON, YAML).
 10. **Prosa en español.** Los textos de la skill, los mensajes de los scripts y la documentación van
-    en español con acentuación correcta; los nombres en el código, en ASCII.
+    en español con acentuación correcta; los nombres en el código, en ASCII. Excepción: `i18n/en/`,
+    `README.en.md` y `AGENTS.en.md` van en inglés por diseño (restricción 11). Los mensajes de los
+    scripts y `docs/` siguen en español.
+11. **El español es la fuente; el inglés es un espejo.** Cada fichero de `i18n/en/` y cada `.en.md`
+    empieza por `<!-- i18n fuente-sha256=… estado=… -->` con la huella de su original
+    (`comprobar_paridad.py --hash FICHERO`). Si cambias un original, el comprobador marca su traducción
+    como desfasada: retradúcela, o revisa que sigue siendo fiel y actualiza la huella. Identificadores,
+    marcas de módulo, nombres de fichero, opciones, códigos de aviso y bloques de código no se
+    traducen. Todo lo que traduce una IA es `borrador-ia` hasta que lo revise una persona identificada
+    (`i18n/ESTADO.md`, `i18n/GLOSARIO.md`). Los cambios de `description` y de versión en `SKILL.md`
+    se aprueban como reemplazos de `verificar_adiciones.py` frente al commit base de la versión.
 
 ## Publicar una versión
 
 1. Sube a la vez `version` en `.claude-plugin/plugin.json` y `metadata.version` en el frontmatter de
-   `SKILL.md`. Si no cambias `version`, quien ya tiene el plugin no recibe la actualización.
-2. Pasa las pruebas y `claude plugin validate --strict .`.
+   `SKILL.md`. Si no cambias `version`, quien ya tiene el plugin no recibe la actualización. Al cambiar
+   `SKILL.md` cambia su huella: actualiza la cabecera de `i18n/en/SKILL.md` y añade la entrada al
+   `CHANGELOG.md`.
+2. Pasa las pruebas, `claude plugin validate --strict .` y la paridad de las traducciones.
 3. Crea la Release con la etiqueta `vX.Y.Z` y adjunta `multilang-repo-skill.zip`, que contiene la
-   carpeta `skills/multilang-repo-skill/` en la raíz del ZIP, sin `__pycache__` ni `.DS_Store`.
-   Comprueba el ZIP descomprimiéndolo en una carpeta vacía y pasando allí las pruebas.
+   carpeta `skills/multilang-repo-skill/` (con `i18n/`) en la raíz del ZIP, sin `__pycache__` ni
+   `.DS_Store`. Comprueba el ZIP descomprimiéndolo en una carpeta vacía y pasando allí las pruebas.
 
 ---
 

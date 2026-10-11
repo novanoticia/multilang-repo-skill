@@ -28,6 +28,17 @@ O copiando la carpeta de la skill a mano: `skills/multilang-repo-skill/` va en `
    hardcodeados y cuáles son contratos de máquina.» (solo análisis: no modifica nada)
 3. «Añade francés y pt-BR a la app, que ya usa i18next. Modo autónomo; puedes subir la rama `i18n`
    cada vez que termines una tarea, nada más.»
+4. «idioma=en Make this repository multilingual: Spanish (reference) and French. Guided mode.» (la
+   skill responde en inglés).
+
+## Idiomas
+
+La skill está en español (idioma de referencia) y tiene una traducción al inglés. Para pedir la
+respuesta en inglés, escribe `idioma=en` (o `lang=en`) en la primera línea de tu mensaje. Sin marca
+responde en español, como hasta ahora: no se detecta el idioma en que escribes. Un idioma no
+disponible da un aviso y sigue en español. La traducción es un `borrador-ia` sin revisión humana
+(estado en [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)).
+Este README también está en [inglés](README.en.md). <!-- i18n:exento -->
 
 ## Qué incluye
 
@@ -36,7 +47,8 @@ skills/multilang-repo-skill/
 ├── SKILL.md       núcleo: activación, precedencia, permisos, seguridad, evidencia, modos, escala, módulos, flujo y cierre
 ├── references/    12 módulos que se leen solo si se activan
 ├── assets/        5 plantillas (datos y alcance, registro de sesión, inventario, escenarios, evidencias)
-└── scripts/       verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py y sus pruebas
+├── i18n/          traducción al inglés (espejo de lo anterior), glosario y estado de las traducciones
+└── scripts/       verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py, comprobar_paridad.py y sus pruebas
 ```
 
 Los scripts usan solo la biblioteca estándar de Python 3.8+ y nunca modifican ficheros. Para ejecutar
@@ -48,19 +60,28 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.0.0. La skill se ha validado así (detalle en [docs/VALIDACION.md](docs/VALIDACION.md)):
+Versión 9.1.0 (sin publicar a fecha 2026-10-11). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda
+de 9.1.0 en [docs/VALIDACION.md](docs/VALIDACION.md)):
 
-- Validador de skills, comprobaciones estructurales y de identificadores: sin errores.
-- 78 pruebas de los scripts con Python 3.14 y 3.9; sabotaje con 32 de 32 mutantes detectados.
-- Activación real en Claude Code y escenarios de comportamiento simulados (17 ejecuciones, tres
-  versiones de la skill), calificados por agentes distintos de los que los ejecutaron.
+- **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
+  (`local`); 78 pruebas de los scripts con Python 3.14 y 3.9 y sabotaje con 32 de 32 mutantes
+  detectados (`local`); activación real en Claude Code y escenarios de comportamiento simulados (17
+  ejecuciones, tres versiones de la skill), calificados por agentes distintos de los que los
+  ejecutaron (`plataforma`, `simulada`).
+- **9.1.0:** 138 pruebas con Python 3.9, 3.10, 3.13 y 3.14 (`local`); `comprobar_paridad.py` con 38 de
+  38 mutantes detectados (`local`); paridad estructural de los 18 ficheros de `i18n/en/` con sus
+  originales (`local`); `claude plugin validate --strict` sin errores (`local`).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
-una ejecución cada uno; la subida a claude.ai no se ha probado (su ayuda limita `description` a 200
-caracteres y esta tiene 966).
+una ejecución cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha revisado. La
+activación y los escenarios se midieron con la `description` y el texto de 9.0.0: 9.1.0 los cambia
+(`description` de 966 a 1023 caracteres y un bloque nuevo en `SKILL.md`) y no se han repetido
+(`pendiente`, `plataforma`). La subida a claude.ai no se ha probado (su ayuda limita `description` a 200
+caracteres y esta tiene 1023).
 
 ## Documentación
 
+- [CHANGELOG.md](CHANGELOG.md): cambios por versión, con las excepciones aprobadas y cómo retirarlas.
 - [docs/INFORME-ENTREGA.md](docs/INFORME-ENTREGA.md): resumen, estructura y uso.
 - [docs/AUDITORIA.md](docs/AUDITORIA.md): auditoría de las versiones anteriores del marco (v1–v8).
 - [docs/TRAZABILIDAD.md](docs/TRAZABILIDAD.md): cambios respecto a v7 y destino de cada propuesta de v8.

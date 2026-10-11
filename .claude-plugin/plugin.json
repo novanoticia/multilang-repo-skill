@@ -1,7 +1,7 @@
 {
   "name": "multilang-repo-skill",
   "displayName": "MultiLang Repo Skill",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "description": "Guía a un agente para hacer multiidioma un repositorio (programas, skills, plugins, instrucciones e híbridos) con rigor proporcional, permiso por cada publicación y evidencias de nivel declarado.",
   "author": {
     "name": "novanoticia",

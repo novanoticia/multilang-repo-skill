@@ -159,3 +159,28 @@ v2) y `-r3.md` (v3). Las respuestas íntegras de los ejecutores están en `evalu
 - La activación se midió con un solo modelo (el configurado por defecto en tu Claude Code) y 2
   ejecuciones por consulta.
 - Ninguna inspección del texto demuestra que la skill funcionará en todos los proyectos.
+
+## 8. Adenda de 9.1.0 (traducción al inglés, 2026-10-11)
+
+Las secciones 1 a 7 describen la validación de 9.0.0 y no se reescriben: este informe y los demás de
+`docs/` quedan como registro de esa versión. Lo que 9.1.0 cambia en lo que miden, con su nivel:
+
+| Qué | Resultado | Nivel |
+|---|---|---|
+| Pruebas de los scripts | 138 superadas con Python 3.9.6, 3.10.22, 3.13.16 y 3.14.8 (78 de 9.0.0 más 60 de `comprobar_paridad.py`). Python 3.8 no se ha probado | `local` |
+| Sabotaje de `comprobar_paridad.py` | 38 mutantes, 38 detectados, con control sin mutar superado. Arnés fuera del repositorio | `local` |
+| `claude plugin validate --strict .` | Sin errores. El validador no impone límite a `description` (probado con 1 025 y 2 000 caracteres) | `local` |
+| Paridad de `i18n/en/` | 18 ficheros (`SKILL.md`, 12 referencias, 5 plantillas) sin errores ni avisos con `--arbol --completo`, y `README.en.md` y `AGENTS.en.md` con `--par` | `local` |
+| Adiciones a `SKILL.md` frente a 9.0.0 | Solo el bloque delimitado y los reemplazos aprobados (`description` y versión), con `verificar_adiciones.py --git 51649dc` | `estática` |
+| `SKILL.md` | 473 líneas; `description` de 1 023 caracteres | `estática` |
+| Calidad de la traducción | Releída por quien la redactó (una IA); sin revisión humana | `estática` |
+
+Pendiente, y por tanto **no medido en 9.1.0**:
+
+- **Activación** (sección 4) en español y en inglés con la `description` nueva (`plataforma`).
+- **Escenarios** (sección 5) sobre la selección de idioma: marca válida, sin marca, idioma no disponible,
+  fallo seguro sin `i18n/` y marca dentro de un texto pegado (`simulada`; sin preregistrar ni ejecutar).
+- **Revisión humana** del inglés.
+- **Límite de `description` de la plataforma de destino:** el validador local no lo impone, y la ayuda
+  de claude.ai habla de 200 caracteres (`no-comprobado`).
+
