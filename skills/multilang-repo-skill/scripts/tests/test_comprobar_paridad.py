@@ -331,6 +331,25 @@ class PruebasCli(unittest.TestCase):
     def test_sin_argumentos_sale_2(self):
         self.assertEqual(self.ejecutar().returncode, 2)
 
+    def test_par_en_subcarpeta_necesita_las_raices(self):
+        raiz = os.path.join(self.tmp, "skill")
+        trad = os.path.join(raiz, "i18n", "en")
+        es_datos = b"# A\n\nVer [b](../assets/b.md).\n"
+        for ruta, datos in (("references/a.md", es_datos), ("assets/b.md", b"# B\n")):
+            os.makedirs(os.path.dirname(os.path.join(raiz, ruta)), exist_ok=True)
+            with open(os.path.join(raiz, ruta), "wb") as f:
+                f.write(datos)
+        os.makedirs(os.path.join(trad, "references"), exist_ok=True)
+        with open(os.path.join(trad, "references", "a.md"), "wb") as f:
+            f.write(en("# A\n\nSee [b](../assets/b.md).\n", es=es_datos))
+        par = ("--par", os.path.join(raiz, "references", "a.md"), os.path.join(trad, "references", "a.md"))
+        self.assertEqual(self.ejecutar(*par).returncode, 1)  # sin raíces, el enlace parece distinto
+        con_raices = par + ("--raiz-es", raiz, "--raiz-trad", trad)
+        self.assertEqual(self.ejecutar(*con_raices).returncode, 0)
+
+    def test_raices_solo_con_par(self):
+        self.assertEqual(self.ejecutar("--hash", self.es, "--raiz-es", self.tmp).returncode, 2)
+
     def test_no_escribe_ficheros(self):
         with open(self.en, "wb") as f:
             f.write(en())

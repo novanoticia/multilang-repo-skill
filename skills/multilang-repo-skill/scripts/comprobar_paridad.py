@@ -6,10 +6,12 @@ espejo del original: la prosa cambia, pero lo que consume una máquina o ancla l
 
 Uso:
     python3 comprobar_paridad.py --arbol RAIZ_ORIGINAL RAIZ_TRADUCCION [--completo]
-    python3 comprobar_paridad.py --par ORIGINAL TRADUCCION [--nota-ia TEXTO]
+    python3 comprobar_paridad.py --par ORIGINAL TRADUCCION [--nota-ia TEXTO] [--raiz-es DIR --raiz-trad DIR]
     python3 comprobar_paridad.py --hash ORIGINAL        # imprime la huella para la cabecera
     (todos admiten --json; --arbol y --par admiten --estricto)
 
+--par resuelve los enlaces relativos desde la carpeta de cada fichero; para un fichero dentro de una
+subcarpeta (references/…) indica las raíces de los dos árboles con --raiz-es y --raiz-trad.
 --arbol compara SKILL.md, references/*.md y assets/*.md del original con el mismo fichero bajo la
 raíz de la traducción (p. ej. skills/x y skills/x/i18n/en). Un fichero sin traducir es un aviso, o
 un error con --completo. Un fichero traducido sin original es un error.
@@ -283,13 +285,15 @@ def comprobar_arbol(raiz_es, raiz_trad, completo=False, nota_ia=None):
     return resumir(ficheros)
 
 
-def comprobar_par(ruta_es, ruta_trad, nota_ia=None):
+def comprobar_par(ruta_es, ruta_trad, nota_ia=None, raiz_es=None, raiz_trad=None):
     es_datos, trad_datos = leer(ruta_es), leer(ruta_trad)
     for nombre, datos in (("original", es_datos), ("traducción", trad_datos)):
         if decodificar(datos) is None:
             raise ErrorUso("el %s no es UTF-8 válido" % nombre)
     dir_es, dir_trad = os.path.dirname(os.path.abspath(ruta_es)), os.path.dirname(os.path.abspath(ruta_trad))
-    incs = comparar(es_datos, trad_datos, dir_es, dir_trad, dir_es, dir_trad, nota_ia)
+    raiz_es = os.path.abspath(raiz_es) if raiz_es else dir_es
+    raiz_trad = os.path.abspath(raiz_trad) if raiz_trad else dir_trad
+    incs = comparar(es_datos, trad_datos, dir_es, dir_trad, raiz_es, raiz_trad, nota_ia)
     return resumir([{"ruta": os.path.basename(ruta_trad), "incidencias": incs}])
 
 
@@ -299,17 +303,21 @@ def main(argv=None):
     modo.add_argument("--arbol", nargs=2, metavar=("RAIZ_ORIGINAL", "RAIZ_TRADUCCION"), help="compara dos árboles espejo")
     modo.add_argument("--par", nargs=2, metavar=("ORIGINAL", "TRADUCCION"), help="compara dos ficheros")
     modo.add_argument("--hash", metavar="ORIGINAL", help="imprime la huella del original para la cabecera")
+    parser.add_argument("--raiz-es", metavar="DIR", help="con --par, raíz del original (por defecto, la carpeta del fichero)")
+    parser.add_argument("--raiz-trad", metavar="DIR", help="con --par, raíz de la traducción (por defecto, la carpeta del fichero)")
     parser.add_argument("--completo", action="store_true", help="con --arbol, un fichero sin traducir es un error")
     parser.add_argument("--nota-ia", metavar="TEXTO", help="línea con la que debe terminar la traducción")
     parser.add_argument("--estricto", action="store_true", help="los avisos también hacen fallar")
     parser.add_argument("--json", action="store_true", help="salida JSON")
     args = parser.parse_args(argv)
     try:
+        if (args.raiz_es or args.raiz_trad) and not args.par:
+            raise ErrorUso("--raiz-es y --raiz-trad solo se usan con --par")
         if args.hash:
             print(hash_fuente(leer(args.hash)))
             return 0
         resultado = (comprobar_arbol(args.arbol[0], args.arbol[1], args.completo, args.nota_ia) if args.arbol
-                     else comprobar_par(args.par[0], args.par[1], args.nota_ia))
+                     else comprobar_par(args.par[0], args.par[1], args.nota_ia, args.raiz_es, args.raiz_trad))
     except ErrorUso as exc:
         print("error: %s" % exc, file=sys.stderr)
         return 2
