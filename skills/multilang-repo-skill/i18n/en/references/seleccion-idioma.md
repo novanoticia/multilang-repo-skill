@@ -132,7 +132,7 @@ is useful to test the table with the real catalogs; copy it into the project onl
 foresees it, and adapt the marker keys and the fallback links.
 
 ```bash
-# El agente escribió antes el mensaje en /ruta/temporal/mensaje.txt con su herramienta de ficheros.
+# The agent first wrote the message to /ruta/temporal/mensaje.txt with its file tool.
 python3 <skill>/scripts/resolver_idioma.py --catalogos ruta/a/catalogos --defecto es \
   --respaldo zh-TW=zh-Hant < /ruta/temporal/mensaje.txt
 ```
