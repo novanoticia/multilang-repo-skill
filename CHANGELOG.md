@@ -29,7 +29,7 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 - `SKILL.md` gana un bloque delimitado por `<!-- i18n:inicio -->` y `<!-- i18n:fin -->` (sección
   «Idioma de la respuesta», 1 687 bytes; presupuesto propio de 1 700, sin límite externo que lo fije). `SKILL.md` pasa de 455 a
   477 líneas. El resto del texto
-  original no cambia, comprobado con `verificar_adiciones.py --git 51649dc`.
+  original no cambia, comprobado con `verificar_adiciones.py --git v9.0.0`.
 - `AGENTS.md`, `README.md` y `docs/VALIDACION.md` (adenda) recogen lo anterior.
 
 ### Corregido
@@ -45,15 +45,16 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 
 ### Cómo retirar la excepción de `description`
 1. En `skills/multilang-repo-skill/SKILL.md`, restaura la línea 3 a la de 9.0.0
-   (`git show 51649dc:skills/multilang-repo-skill/SKILL.md`).
+   (`git show v9.0.0:skills/multilang-repo-skill/SKILL.md`).
 2. Borra el bloque entre `<!-- i18n:inicio -->` y `<!-- i18n:fin -->` y su línea en blanco.
 3. Borra `skills/multilang-repo-skill/i18n/` y, si ya no hace falta, `comprobar_paridad.py` y sus pruebas.
 4. Ajusta la versión en `plugin.json` y en el frontmatter, y vuelve a pasar pruebas y validador.
 
 ## 9.0.0
 
-Versión del repositorio en su commit inicial (`51649dc`): skill con `SKILL.md`, 12 referencias, 5
-plantillas y 3 scripts con 78 pruebas.
+Primera versión publicada, con la etiqueta `v9.0.0` (commit `7702ca6`): skill con `SKILL.md`, 12
+referencias, 5 plantillas y 3 scripts con 78 pruebas. `AGENTS.md` se añadió después, en `51649dc`; el
+`SKILL.md` de ese commit es idéntico al de `v9.0.0`.
 
 ---
 
