@@ -61,8 +61,8 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.0 (sin publicar a fecha 2026-10-11). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda
-de 9.1.0 en [docs/VALIDACION.md](docs/VALIDACION.md)):
+Versión 9.1.1 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+[docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
   (`local`); 78 pruebas de los scripts con Python 3.14 y 3.9 y sabotaje con 32 de 32 mutantes
@@ -72,12 +72,15 @@ de 9.1.0 en [docs/VALIDACION.md](docs/VALIDACION.md)):
 - **9.1.0:** 138 pruebas con Python 3.9, 3.10, 3.13 y 3.14 (`local`); `comprobar_paridad.py` con 38 de
   38 mutantes detectados (`local`); paridad estructural de los 18 ficheros de `i18n/en/` con sus
   originales (`local`); `claude plugin validate --strict` sin errores (`local`).
+- **9.1.1:** una frase del bloque de idioma, tras un fallo de los escenarios (E-13). Segunda ronda de
+  escenarios de selección de idioma: 7 PASS y 1 FAIL en 8 ejecuciones simuladas (`simulada`); el fallo, E-04,
+  sigue sin corregir (detalle en [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
-una ejecución cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha revisado. La
-activación y los escenarios se midieron con la `description` y el texto de 9.0.0: 9.1.0 los cambia
-(`description` de 966 a 1023 caracteres y un bloque nuevo en `SKILL.md`) y no se han repetido
-(`pendiente`, `plataforma`). La subida a claude.ai no se ha probado (su ayuda limita `description` a 200
+entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha
+revisado. La activación y los 17 escenarios de 9.0.0 se midieron con la `description` y el texto de 9.0.0:
+9.1.x los cambia (`description` de 966 a 1023 caracteres y un bloque nuevo en `SKILL.md`) y no se han
+repetido (`pendiente`, `plataforma`). La subida a claude.ai no se ha probado (su ayuda limita `description` a 200
 caracteres y esta tiene 1023).
 
 ## Documentación
