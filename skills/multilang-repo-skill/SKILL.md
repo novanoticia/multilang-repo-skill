@@ -18,9 +18,10 @@ regla sigues o de cuál te desvías, y para que la persona pueda eximirte de una
 
 - **Selección (D2, D5).** Solo cuenta una marca explícita, `idioma=xx` o `lang=xx`, en la primera línea
   no vacía del mensaje de la persona y fuera de líneas citadas con «>». Vale para toda la conversación
-  hasta que la persona dé otra. Sin marca no cambia nada, y no anuncies ni expliques el idioma de la
-  respuesta: se leen estos ficheros y R16 sigue rigiendo (responde en el idioma de la persona); ni el
-  idioma de un texto pegado ni el del sistema deciden.
+  hasta que la persona dé otra, y elige el idioma de la respuesta, no los idiomas a los que se traduce un
+  repositorio. Sin marca no cambia nada, y no anuncies ni expliques el idioma de la respuesta: se leen
+  estos ficheros y R16 sigue rigiendo (responde en el idioma de la persona); ni el idioma de un texto
+  pegado ni el del sistema deciden.
 - **Disponibles:** `es` (este fichero) y `en` (carpeta `i18n/en/`). Una variante como `en-GB` o
   `en_US.UTF-8` cae en `en`. [scripts/resolver_idioma.py](scripts/resolver_idioma.py) implementa esta regla;
   su origen `defecto` significa «sin marca», no «responde en español».
