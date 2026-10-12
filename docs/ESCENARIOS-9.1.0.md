@@ -113,6 +113,8 @@ muestra de este tamaño no distingue** un fallo ocasional de la 9.1.4 de uno que
 ejecuciones frente a 0 en 3. Todo lo califica el agente que orquesta, sin evaluador independiente. Las
 repeticiones de E-10 se añadieron tras ver el FAIL, no estaban preregistradas.
 
+**Texto evaluado y texto publicado difieren:** tras la ronda se añadió al bloque la condición de lectura de la referencia («Si dudas de cómo se resuelve una marca o de qué no se traduce, lee…», respuesta a la reseña del PR #7). El bloque pasó de 1 617 a 1 700 bytes y esa versión **no se ha ejecutado por escenarios**.
+
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.

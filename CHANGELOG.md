@@ -28,6 +28,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
   E-10 falló en una ejecución (no citó el marcador `<!-- i18n:inicio -->`) y pasó en tres repeticiones; sobre la
   9.1.3 pasó 3 de 3. Es compatible con variabilidad, pero 1 fallo en 4 frente a 0 en 3 no permite descartar un
   efecto del cambio. Las calificó el agente que orquesta, sin evaluador independiente.
+  La ronda se ejecutó sobre un bloque de 1 617 bytes; la condición de lectura añadida después (1 700 bytes)
+  **no se ha ejecutado por escenarios**.
 - Sin cambios respecto a la 9.1.3 en lo demás: la activación real, el fallo intermitente de E-04 y la revisión
   humana del inglés siguen pendientes.
 
