@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=3ec3329d58e2 estado=borrador-ia -->
+<!-- i18n fuente-sha256=1ca378d6aa19 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -61,7 +61,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.1 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+Version 9.1.2 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
@@ -73,8 +73,10 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   of 38 mutants detected (`local`); structural parity of the 18 files of `i18n/en/` with their originals
   (`local`); `claude plugin validate --strict` without errors (`local`).
 - **9.1.1:** one sentence of the language block, after a scenario failure (E-13). Second round of language
-  selection scenarios: 7 PASS and 1 FAIL in 8 simulated runs (`simulada`); the failure, E-04, is still
-  uncorrected (details in [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
+  selection scenarios: 7 PASS and 1 FAIL in 8 simulated runs (`simulada`); the failure, E-04, is fixed
+  in 9.1.2 (details in [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
+- **9.1.2:** one bullet of the language block, so that the translation notice appears only with `idioma=en`
+  (E-04). The fix **has not been measured again** (`pendiente`).
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
 four runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
