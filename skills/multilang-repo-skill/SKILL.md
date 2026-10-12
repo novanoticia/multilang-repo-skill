@@ -25,10 +25,10 @@ regla sigues o de cuál te desvías, y para que la persona pueda eximirte de una
   `en_US.UTF-8` cae en `en`. [scripts/resolver_idioma.py](scripts/resolver_idioma.py) implementa esta regla;
   su origen `defecto` significa «sin marca», no «responde en español».
 - **No disponible o mal formada (D4).** Dilo, nombra los idiomas disponibles y continúa como sin marca.
-- **En inglés.** Lee `i18n/en/SKILL.md` en lugar de este fichero y, de ahí, sus referencias y plantillas.
+- **Con `idioma=en`.** Lee `i18n/en/SKILL.md` en lugar de este fichero y, de ahí, sus referencias y plantillas.
   Responde en inglés y abre cada respuesta con «Translation machine-generated, not human-reviewed.»
-  (D22). La traducción es un espejo: si discrepa de este fichero, manda este (R17). Con `idioma=es` se
-  siguen estos ficheros y se responde en español.
+  (D22), solo con esta marca. La traducción es un espejo: si discrepa de este fichero, manda este
+  (R17). Con `idioma=es` se siguen estos ficheros y se responde en español.
 - **Fallo seguro (D25).** Si no puedes leer `i18n/en/`, continúa con estos ficheros, responde como sin
   marca (R16), dilo en una frase y añade una línea en inglés: «English version unavailable; continuing
   with the Spanish files.».
