@@ -57,7 +57,7 @@ python3 -B $S/scripts/comprobar_paridad.py --par AGENTS.md AGENTS.en.md --nota-i
    línea que lo dice (como S5). Cada identificador se define una sola vez y todo lo citado existe.
 2. **Carga progresiva.** `SKILL.md` por debajo de 500 líneas, con el núcleo (precedencia, permisos,
    seguridad, evidencia, modos) siempre en él. Las referencias cuelgan directamente de `SKILL.md`, a
-   un solo nivel, y cada una aparece en su tabla de Recursos con el momento en que se lee. Una
+   un solo nivel, y cada una aparece en su tabla de Recursos con el momento en que se lee. Única excepción: `references/idioma-de-la-respuesta.md`, que se lee desde el bloque delimitado «Idioma de la respuesta», porque el texto original de `SKILL.md` no puede cambiar fuera de ese bloque. Una
    referencia de más de 100 líneas lleva índice al principio.
 3. **Frontmatter válido.** `name` igual al nombre de la carpeta, en kebab-case. `description` en
    YAML válido y como mucho de 1024 caracteres. Cuidado con «: » dentro del texto, que ya rompió el

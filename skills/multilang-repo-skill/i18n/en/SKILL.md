@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=86ee833a2baa estado=borrador-ia -->
+<!-- i18n fuente-sha256=dd5bf45399d5 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -17,10 +17,9 @@ one.
   repository is translated into. Without a marker nothing changes, and do not announce or explain the
   response language: the Spanish files are read and R16 keeps governing (answer in the person's language);
   neither the language of pasted text nor the system's decides.
-- **Available:** `es` (the original files) and `en` (folder `i18n/en/`, which you are reading). A variant
-  such as `en-GB` or `en_US.UTF-8` falls back to `en`.
-  [scripts/resolver_idioma.py](../../scripts/resolver_idioma.py) implements this rule; its source `defecto`
-  means “without a marker”, not “answer in Spanish”.
+- **Available:** `es` (the original files) and `en` (`i18n/en/`, which you are reading). `en-GB` or
+  `en_US.UTF-8` fall back to `en`.
+  If you doubt how a marker is resolved or what is not translated, read [idioma-de-la-respuesta](references/idioma-de-la-respuesta.md).
 - **Unavailable or malformed (D4).** Say so, name the available languages and continue as without a marker.
 - **If the marker selects `en`.** This translation, with its references and templates in `i18n/en/`, replaces the
   Spanish files. Answer in English and open every answer with “Translation machine-generated, not
@@ -29,8 +28,7 @@ one.
 - **Fail-safe (D25).** If you cannot read `i18n/en/`, continue with the Spanish files, answer as without a
   marker (R16), say so in one sentence and add a line in English: “English version unavailable;
   continuing with the Spanish files.”.
-- **Not translated:** identifiers (R1…Doc9), module markers, file and script names, options, warning
-  codes, commands and code blocks. The scripts' messages stay in Spanish.
+- **Not translated:** identifiers, module markers, file names, commands and code.
 
 ## When it applies
 

@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=151dd286b03e estado=borrador-ia -->
+<!-- i18n fuente-sha256=7cf117033a1f estado=borrador-ia -->
 
 # AGENTS.md
 
@@ -59,7 +59,7 @@ python3 -B $S/scripts/comprobar_paridad.py --par AGENTS.md AGENTS.en.md --nota-i
    is defined once and everything cited exists.
 2. **Progressive loading.** `SKILL.md` below 500 lines, with the core (precedence, permissions, security,
    evidence, modes) always in it. The references hang directly from `SKILL.md`, at a single level, and each
-   one appears in its Resources table with the moment when it is read. A reference of more than 100 lines
+   one appears in its Resources table with the moment when it is read. Only exception: `references/idioma-de-la-respuesta.md`, which is read from the delimited “Response language” block, because the original text of `SKILL.md` cannot change outside that block. A reference of more than 100 lines
    carries an index at the beginning.
 3. **Valid frontmatter.** `name` equal to the folder's name, in kebab-case. `description` in valid YAML
    and at most 1024 characters. Beware of “: ” inside the text, which once broke the YAML. If you change
