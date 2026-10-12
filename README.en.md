@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=676d0be02e60 estado=borrador-ia -->
+<!-- i18n fuente-sha256=3ec3329d58e2 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -61,8 +61,8 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.0 (unpublished as of 2026-10-11). What has been checked, with its level (details of 9.0.0 and
-the 9.1.0 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
+Version 9.1.1 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
   tests of the scripts with Python 3.14 and 3.9 and sabotage with 32 of 32 mutants detected (`local`);
@@ -72,12 +72,15 @@ the 9.1.0 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 - **9.1.0:** 138 tests with Python 3.9, 3.10, 3.13 and 3.14 (`local`); `comprobar_paridad.py` with 38
   of 38 mutants detected (`local`); structural parity of the 18 files of `i18n/en/` with their originals
   (`local`); `claude plugin validate --strict` without errors (`local`).
+- **9.1.1:** one sentence of the language block, after a scenario failure (E-13). Second round of language
+  selection scenarios: 7 PASS and 1 FAIL in 8 simulated runs (`simulada`); the failure, E-04, is still
+  uncorrected (details in [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
 
-Limits: it has had no human review nor real use in projects; the scenarios are simulations with one run
-each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the
-scenarios were measured with the `description` and the text of 9.0.0: 9.1.0 changes them (`description`
-from 966 to 1023 characters and a new block in `SKILL.md`) and they have not been repeated (`pendiente`
-(pending), `plataforma`). Uploading to claude.ai has not been tested (its help limits `description` to
+Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
+four runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
+scenarios of 9.0.0 were measured with the `description` and the text of 9.0.0: 9.1.x changes them
+(`description` from 966 to 1023 characters and a new block in `SKILL.md`) and they have not been repeated
+(`pendiente` (pending), `plataforma`). Uploading to claude.ai has not been tested (its help limits `description` to
 200 characters and this one has 1023).
 
 ## Documentation

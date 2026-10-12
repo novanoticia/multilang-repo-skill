@@ -3,25 +3,30 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
-## Sin publicar (a fecha 2026-10-12)
+## 9.1.1 — 2026-10-12
 
 ### Cambiado
 - `SKILL.md`, bloque «Idioma de la respuesta», frase de selección: sin marca, «no cambia nada, y no anuncies
-  ni expliques el idioma de la respuesta». Corrige el escenario E-13 de `docs/ESCENARIOS-9.1.0.md` (`simulada`,
-  una ejecución): una respuesta sin marca abría con «Sin marca `idioma=xx`, respondo en español (R16)», una
-  mención que 9.0.0 no hacía y que cambiaba la salida por defecto (D1). Una primera redacción, «no menciones el
-  idioma», era demasiado amplia (impedía hablar de idiomas en tareas que tratan de ellos), como señaló la
-  reseña automática del PR, y se cambió antes de fusionar. El bloque pasa de 1 687 a 1 743 bytes (presupuesto
-  propio: de 1 700 a 1 750, sin límite externo que lo fije) y `SKILL.md`, de 477 a 478 líneas. Traducción y
-  huella actualizadas en `i18n/en/SKILL.md`.
-- `docs/ESCENARIOS-9.1.0.md` recoge la primera ronda de ejecución del 2026-10-11 (13 PASS, 1 INDETERMINADO y 1
-  FAIL, el de E-13); `docs/VALIDACION.md` (adenda) lo refleja.
+  ni expliques el idioma de la respuesta». Corrige el escenario E-13 de `docs/ESCENARIOS-9.1.0.md` (`simulada`):
+  una respuesta sin marca abría con «Sin marca `idioma=xx`, respondo en español (R16)», una mención que 9.0.0 no
+  hacía y que cambiaba la salida por defecto (D1). Una primera redacción, «no menciones el idioma», era
+  demasiado amplia (impedía hablar de idiomas en tareas que tratan de ellos), como señaló la reseña automática
+  del PR, y se cambió antes de fusionar. El bloque pasa de 1 687 a 1 743 bytes (presupuesto propio: de 1 700 a
+  1 750, sin límite externo que lo fije) y `SKILL.md`, de 477 a 478 líneas. Traducción y huella actualizadas en
+  `i18n/en/SKILL.md`.
+- **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.1.0 a 9.1.1 (y `version` de `plugin.json`).
+- `docs/ESCENARIOS-9.1.0.md` recoge las dos rondas de ejecución (2026-10-11 y 2026-10-12); `docs/VALIDACION.md`
+  (adenda) y los dos README lo reflejan.
 
 ### Limitaciones
-- No cambia la versión: quien tiene instalada la 9.1.0 no recibe este cambio hasta que se suba `version`
-  (restricción de `AGENTS.md`).
-- La corrección, con su redacción final, no se ha vuelto a ejecutar por escenarios (`pendiente`): con una sola
-  ejecución previa no se sabe con qué frecuencia ocurría el fallo.
+- **Segunda ronda de escenarios** (2026-10-12, `simulada`, commit `16659ba`, solo los escenarios sin marca):
+  E-13 pasó 4 de 4 sin la mención, E-03 2 de 2 y E-07 1 de 1. **E-04 falló 1 de 1** (en la primera ronda
+  había pasado): una respuesta en inglés a una petición en inglés sin marca terminó con «Translation
+  machine-generated, not human-reviewed.», aviso que solo corresponde a `idioma=en`. **No se ha corregido.**
+  Causa probable: la viñeta «En inglés.» del bloque se lee como «siempre que se responda en inglés». Propuesta,
+  pendiente de aprobación: «Con `idioma=en`.».
+- Una o cuatro ejecuciones por escenario no miden la variabilidad.
+- La activación en la plataforma real, con la `description` de 9.1.x, sigue sin medirse (`pendiente`).
 
 ## 9.1.0 — 2026-10-11 (rama `i18n`, sin publicar)
 

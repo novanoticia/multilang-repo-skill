@@ -180,8 +180,7 @@ Pendiente, o medido solo en parte, en 9.1.0:
 
 - **Activación** (sección 4) en español y en inglés con la `description` nueva (`plataforma`).
 - **Escenarios** (sección 5) sobre la selección de idioma: primera ronda ejecutada el 2026-10-11 (`simulada`, una
-  ejecución por escenario, 15 ejecuciones y 1 evaluador): 13 PASS, 1 INDETERMINADO y 1 FAIL (E-13, corregido sin
-  haber vuelto a medir). Detalle en [ESCENARIOS-9.1.0.md](ESCENARIOS-9.1.0.md). Falta una segunda ronda.
+  ejecución por escenario, 15 ejecuciones y 1 evaluador): 13 PASS, 1 INDETERMINADO y 1 FAIL (E-13, corregido). Segunda ronda el 2026-10-12, solo con los escenarios sin marca (8 ejecuciones): 7 PASS y 1 FAIL (E-13 pasó 4 de 4 tras la corrección; E-04, aviso de traducción en una petición en inglés sin marca; sin corregir). Detalle en [ESCENARIOS-9.1.0.md](ESCENARIOS-9.1.0.md).
 - **Revisión humana** del inglés.
 - **Límite de `description` de la plataforma de destino:** el validador local no lo impone, y la ayuda
   de claude.ai habla de 200 caracteres (`no-comprobado`).

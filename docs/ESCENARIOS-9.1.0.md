@@ -3,7 +3,7 @@
 Preregistro de evaluación (P13) de la selección de idioma de `multilang-repo-skill` 9.1.0 (etiqueta
 `v9.1.0`, commit `0f0c4bd`, cuyo árbol es idéntico al de `5f27486`, donde se cerró el diseño).
 
-Estado a fecha 2026-10-12: **primera ronda ejecutada el 2026-10-11** (nivel `simulada`, una ejecución por escenario): 13 PASS, 1 INDETERMINADO y 1 FAIL. Falta una segunda ronda. Quien ejecute un escenario
+Estado a fecha 2026-10-12: **dos rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Quien ejecute un escenario
 no debe ver las columnas «Pasa si…» y «Falla si…». Casos ficticios.
 
 ## Decisión de diseño que fijan estos criterios
@@ -53,7 +53,15 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 1 | E-11a | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | `en-GB` sirve `en` sin aviso de error. | declarados dentro del paquete y del repo ficticio |
 | 1 | E-11b | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | `EN_us.UTF-8` sirve `en` sin aviso de error. | declarados dentro del paquete y del repo ficticio |
 | 1 | E-12 | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Con el historial real de E-01, el seguimiento «Vale, sigue» sigue en inglés con el aviso. | declarados dentro del paquete y del repo ficticio |
-| 1 | E-13 | subagente de solo lectura | otro subagente de solo lectura | `simulada` | FAIL | La respuesta abría con «Sin marca `idioma=xx`, respondo en español (R16)». Corregido en el PR #3; sin segunda ronda. | declarados dentro del paquete y del repo ficticio |
+| 1 | E-13 | subagente de solo lectura | otro subagente de solo lectura | `simulada` | FAIL | La respuesta abría con «Sin marca `idioma=xx`, respondo en español (R16)». Corregido en el PR #3; en la segunda ronda pasó 4 de 4. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-03-a | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Español, sin aviso ni mención de idiomas disponibles. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-03-b | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Español, sin aviso ni mención de idiomas disponibles. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-04 | subagente de solo lectura | otro subagente de solo lectura | `simulada` | FAIL | Respuesta en inglés que **termina** con «Translation machine-generated, not human-reviewed.», aviso que solo corresponde a `idioma=en`. En la primera ronda pasó. El propio ejecutor dudó si aplicaba. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-07 | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Ninguna marca cuenta; responde en español. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-13-a | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-13-b | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-13-c | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 2 | E-13-d | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
 
 ## Cambios posteriores de criterio
 
@@ -62,14 +70,18 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 2026-10-11 | E-04, E-12 | Criterios fijados a «sin marca no cambia nada» y a la persistencia por conversación | Decisión de la persona sobre el idioma por defecto | No: no hay ejecuciones |
 | 2026-10-11 | E-08 | El ejemplo que pasa cita el aviso vigente, «…continuing with the Spanish files.», en lugar del anterior | El criterio no se había actualizado tras corregir el fallo seguro; se vio al versionar este documento | No: no hay ejecuciones |
 
-Tras ver los resultados de la primera ronda no se ha cambiado ningún criterio ni ningún veredicto.
+Tras ver los resultados de las dos rondas no se ha cambiado ningún criterio ni ningún veredicto.
+
+## Hallazgo de la segunda ronda: E-04
+
+Una respuesta en inglés a una petición en inglés **sin marca** terminó con el aviso de traducción, que solo corresponde a `idioma=en` (en la primera ronda, la misma prueba pasó: 1 PASS y 1 FAIL entre las dos). Causa probable: la viñeta «En inglés.» del bloque «Idioma de la respuesta» puede leerse como «siempre que se responda en inglés», y no como «con la marca `idioma=en`». **Sin corregir.** Propuesta, pendiente de aprobación: titular la viñeta «Con `idioma=en`.». El evaluador señaló además que el aviso salió al final y no al principio.
 
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.
-- La lista de ficheros leídos la declara el propio ejecutor: todos declararon leer solo dentro de sus rutas, y varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluye nombres de carpetas hermanas.
-- Una ejecución por escenario no mide la variabilidad.
-- Ejecutores y evaluador son modelos (15 ejecuciones y 1 evaluador), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
+- La lista de ficheros leídos la declara el propio ejecutor: todos, en las dos rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda ronda se ejecutó en una carpeta sin hermanas.
+- Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda y falló en la segunda.
+- Ejecutores y evaluadores son modelos (23 ejecuciones en dos rondas, 15 y 8, y un evaluador por ronda), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
 - Los paquetes de E-08 (solo `SKILL.md`) y completo deben construirse con `git archive` del commit evaluado: el
   repositorio no tiene script de empaquetado.
 
