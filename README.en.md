@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=d72b2237de20 estado=borrador-ia -->
+<!-- i18n fuente-sha256=383c3606f96a estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -81,7 +81,7 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   prove that the intermittent failure is resolved.
 - **9.1.3:** one sentence clarifying that `idioma=` chooses the response language and not the languages a
   repository is translated into. It has not been measured by scenarios (`pendiente`).
-- **9.1.4:** the “Response language” block is shortened (from 1,862 to 1,617 bytes) and its detail moves to a
+- **9.1.4:** the “Response language” block is shortened (from 1,862 to 1,700 bytes) and its detail moves to a
   new reference. Regression (`simulada`): E-05 to E-09 and E-12 pass; E-10 failed 1 of 4 runs (0 of 3 on 9.1.3).
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to

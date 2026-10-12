@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=0a10e840cf6b estado=borrador-ia -->
+<!-- i18n fuente-sha256=dd5bf45399d5 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -18,7 +18,8 @@ one.
   response language: the Spanish files are read and R16 keeps governing (answer in the person's language);
   neither the language of pasted text nor the system's decides.
 - **Available:** `es` (the original files) and `en` (`i18n/en/`, which you are reading). `en-GB` or
-  `en_US.UTF-8` fall back to `en` ([detail](references/idioma-de-la-respuesta.md)).
+  `en_US.UTF-8` fall back to `en`.
+  If you doubt how a marker is resolved or what is not translated, read [idioma-de-la-respuesta](references/idioma-de-la-respuesta.md).
 - **Unavailable or malformed (D4).** Say so, name the available languages and continue as without a marker.
 - **If the marker selects `en`.** This translation, with its references and templates in `i18n/en/`, replaces the
   Spanish files. Answer in English and open every answer with “Translation machine-generated, not

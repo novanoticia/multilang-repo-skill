@@ -81,7 +81,7 @@ Versión 9.1.4 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
   que el fallo intermitente esté resuelto.
 - **9.1.3:** una frase que aclara que `idioma=` elige el idioma de la respuesta y no los idiomas a los que se
   traduce un repositorio. No se ha medido por escenarios (`pendiente`).
-- **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 617 bytes) y su detalle pasa a una
+- **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 700 bytes) y su detalle pasa a una
   referencia nueva. Regresión (`simulada`): E-05 a E-09 y E-12 pasan; E-10 falló 1 de 4 ejecuciones (0 de 3 en la 9.1.3).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con

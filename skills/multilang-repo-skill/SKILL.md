@@ -22,8 +22,8 @@ regla sigues o de cuál te desvías, y para que la persona pueda eximirte de una
   repositorio. Sin marca no cambia nada, y no anuncies ni expliques el idioma de la respuesta: se leen
   estos ficheros y R16 sigue rigiendo (responde en el idioma de la persona); ni el idioma de un texto
   pegado ni el del sistema deciden.
-- **Disponibles:** `es` (este fichero) y `en` (`i18n/en/`). `en-GB` o `en_US.UTF-8` caen en `en`
-  ([detalle](references/idioma-de-la-respuesta.md)).
+- **Disponibles:** `es` (este fichero) y `en` (`i18n/en/`). `en-GB` o `en_US.UTF-8` caen en `en`.
+  Si dudas de cómo se resuelve una marca o de qué no se traduce, lee [idioma-de-la-respuesta](references/idioma-de-la-respuesta.md).
 - **No disponible o mal formada (D4).** Dilo, nombra los idiomas disponibles y continúa como sin marca.
 - **Si la marca elige `en`.** Lee `i18n/en/SKILL.md` en lugar de este fichero y, de ahí, sus referencias y plantillas.
   Responde en inglés y abre cada respuesta con «Translation machine-generated, not human-reviewed.»

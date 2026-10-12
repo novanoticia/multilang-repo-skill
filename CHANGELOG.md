@@ -10,9 +10,14 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
   no se traduce pasa a la referencia nueva `references/idioma-de-la-respuesta.md` (con su espejo en
   `i18n/en/references/`), enlazada desde el bloque. Siguen en el bloque la selección, el aviso de la
   traducción automática (D22), el caso de no disponible o mal formada (D4) y el fallo seguro (D25). El bloque
-  pasa de 1 862 a 1 617 bytes (presupuesto propio: de 1 900 a 1 700, sin límite externo que lo fije) y
+  pasa de 1 862 a 1 700 bytes (presupuesto propio: de 1 900 a 1 700, sin límite externo que lo fije) y
   `SKILL.md`, de 479 a 477 líneas. Es lo que el `CHANGELOG` de la 9.1.3 dejó anunciado.
 - **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.1.3 a 9.1.4 (y `version` de `plugin.json`).
+- **Excepción a la regla 2 de `AGENTS.md`** (aprobada por la persona el 2026-10-12): la referencia nueva no está en la
+  tabla de Recursos, porque añadir su fila cambiaría texto original de `SKILL.md` fuera del bloque delimitado. Se
+  carga desde el bloque, que escribe su condición («si dudas de cómo se resuelve una marca o de qué no se
+  traduce»). El bloque queda en 1 700 bytes, justo en el presupuesto (1 700): no hay margen. Para volver a la regla, se añade la fila
+  a la tabla con un cambio aprobado de texto original. La reseña automática del PR #7 lo señaló.
 - `i18n/en/SKILL.md` sigue el cambio y su huella se actualiza; `i18n/ESTADO.md` cuenta 13 referencias.
 
 ### Añadido
