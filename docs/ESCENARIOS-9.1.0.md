@@ -79,9 +79,9 @@ Una respuesta en inglés a una petición en inglés **sin marca** terminó con e
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.
-- La lista de ficheros leídos la declara el propio ejecutor: todos declararon leer solo dentro de sus rutas, y varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluye nombres de carpetas hermanas.
-- Una ejecución por escenario no mide la variabilidad.
-- Ejecutores y evaluador son modelos (15 ejecuciones y 1 evaluador), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
+- La lista de ficheros leídos la declara el propio ejecutor: todos, en las dos rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda ronda se ejecutó en una carpeta sin hermanas.
+- Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda y falló en la segunda.
+- Ejecutores y evaluadores son modelos (23 ejecuciones en dos rondas, 15 y 8, y un evaluador por ronda), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
 - Los paquetes de E-08 (solo `SKILL.md`) y completo deben construirse con `git archive` del commit evaluado: el
   repositorio no tiene script de empaquetado.
 
