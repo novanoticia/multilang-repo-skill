@@ -3,7 +3,7 @@
 Preregistro de evaluación (P13) de la selección de idioma de `multilang-repo-skill` 9.1.0 (etiqueta
 `v9.1.0`, commit `0f0c4bd`, cuyo árbol es idéntico al de `5f27486`, donde se cerró el diseño).
 
-Estado a fecha 2026-10-12: **tres rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Tercera, el 2026-10-12, con el texto de la 9.1.2 (E-04 cuatro veces y los escenarios, con marca y sin ella, que dependen de esa viñeta): 11 PASS. Quien ejecute un escenario
+Estado a fecha 2026-10-12: **cuatro rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Tercera, el 2026-10-12, con el texto de la 9.1.2 (E-04 cuatro veces y los escenarios, con marca y sin ella, que dependen de esa viñeta): 11 PASS. Cuarta, el 2026-10-12, regresión de la 9.1.4 (E-05 a E-10 y E-12; 14 ejecuciones): 13 PASS y 1 FAIL (E-10, no citó el marcador; 3 de 3 repeticiones pasaron sobre la 9.1.4 y 3 de 3 sobre la 9.1.3). Quien ejecute un escenario
 no debe ver las columnas «Pasa si…» y «Falla si…». Casos ficticios.
 
 ## Decisión de diseño que fijan estos criterios
@@ -97,7 +97,7 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 2026-10-11 | E-08 | El ejemplo que pasa cita el aviso vigente, «…continuing with the Spanish files.», en lugar del anterior | El criterio no se había actualizado tras corregir el fallo seguro; se vio al versionar este documento | No: no hay ejecuciones |
 | 2026-10-12 | E-14 | Escenario nuevo, añadido antes de ejecutar la tercera ronda | La reseña automática del PR #5 señaló que la corrección de E-04 podía dejar sin aviso a esa grafía | No: no había ejecuciones |
 
-Tras ver los resultados de las tres rondas no se ha cambiado ningún criterio ni ningún veredicto.
+Tras ver los resultados de las cuatro rondas no se ha cambiado ningún criterio ni ningún veredicto.
 
 ## Hallazgo de la segunda ronda: E-04
 
@@ -116,9 +116,9 @@ repeticiones de E-10 se añadieron tras ver el FAIL, no estaban preregistradas.
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.
-- La lista de ficheros leídos la declara el propio ejecutor: todos, en las tres rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda y la tercera se ejecutaron en una carpeta sin hermanas.
+- La lista de ficheros leídos la declara el propio ejecutor: todos, en las cuatro rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda y la tercera se ejecutaron en una carpeta sin hermanas. **La cuarta no**: sus paquetes (`completo`, `solo-skill` y `v913`, este con la 9.1.3) estaban uno junto a otro, y a los ejecutores se les pidió leer solo dentro de su paquete; no se verificó que lo hicieran, aunque ninguno declaró haber leído fuera.
 - Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda, falló en la segunda y pasó 4 de 4 en la tercera.
-- Ejecutores y evaluadores son modelos (34 ejecuciones en tres rondas, 15, 8 y 11; evaluador independiente en las dos primeras y, en la tercera, solo para E-04: las otras 7 ejecuciones de la tercera las calificó el agente que orquesta), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
+- Ejecutores y evaluadores son modelos (48 ejecuciones en cuatro rondas, 15, 8, 11 y 14; evaluador independiente en las dos primeras y, en la tercera, solo para E-04: las otras 7 ejecuciones de la tercera y las 14 de la cuarta las calificó el agente que orquesta), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
 - Los paquetes de E-08 (solo `SKILL.md`) y completo deben construirse con `git archive` del commit evaluado: el
   repositorio no tiene script de empaquetado.
 
