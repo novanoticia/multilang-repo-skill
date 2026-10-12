@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=692c7661659a estado=borrador-ia -->
+<!-- i18n fuente-sha256=86ee833a2baa estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -13,9 +13,10 @@ one.
 
 - **Selection (D2, D5).** Only an explicit marker counts, `idioma=xx` or `lang=xx`, on the first
   non-empty line of the person's message and outside lines quoted with “>”. It holds for the whole
-  conversation until the person gives another. Without a marker nothing changes, and do not announce or
-  explain the response language: the Spanish files are read and R16 keeps governing (answer in the
-  person's language); neither the language of pasted text nor the system's decides.
+  conversation until the person gives another, and it chooses the response language, not the languages a
+  repository is translated into. Without a marker nothing changes, and do not announce or explain the
+  response language: the Spanish files are read and R16 keeps governing (answer in the person's language);
+  neither the language of pasted text nor the system's decides.
 - **Available:** `es` (the original files) and `en` (folder `i18n/en/`, which you are reading). A variant
   such as `en-GB` or `en_US.UTF-8` falls back to `en`.
   [scripts/resolver_idioma.py](../../scripts/resolver_idioma.py) implements this rule; its source `defecto`

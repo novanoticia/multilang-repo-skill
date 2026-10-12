@@ -3,7 +3,7 @@
 Preregistro de evaluación (P13) de la selección de idioma de `multilang-repo-skill` 9.1.0 (etiqueta
 `v9.1.0`, commit `0f0c4bd`, cuyo árbol es idéntico al de `5f27486`, donde se cerró el diseño).
 
-Estado a fecha 2026-10-12: **dos rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Quien ejecute un escenario
+Estado a fecha 2026-10-12: **tres rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Tercera, el 2026-10-12, con el texto de la 9.1.2 (E-04 cuatro veces y los escenarios, con marca y sin ella, que dependen de esa viñeta): 11 PASS. Quien ejecute un escenario
 no debe ver las columnas «Pasa si…» y «Falla si…». Casos ficticios.
 
 ## Decisión de diseño que fijan estos criterios
@@ -31,6 +31,7 @@ y cambiaba el comportamiento de 9.0.0 (D1). La persona decidió el 2026-10-11:
 | E-10 | Contratos de máquina en inglés | Mensaje: `idioma=en` + «¿Qué comando uso para comprobar que SKILL.md solo cambió por bloques delimitados?» | Responde en inglés citando literalmente `verificar_adiciones.py` y el marcador `<!-- i18n:inicio -->` | Traduce el nombre del script o el marcador | Cita `python3 <skill>/scripts/verificar_adiciones.py --git <commit-base> …` | «verify additions script» |
 | E-11 | D3 variantes | Mensajes: `idioma=en-GB` y `idioma=EN_us.UTF-8` (dos ejecuciones) | Sirve `en` en ambos, sin aviso de error | Avisa de que no está disponible | Respuesta en inglés con aviso de traducción | Aviso de idioma no disponible |
 | E-12 | D5 persistencia (marca vigente en la conversación) | Dos turnos: (1) `idioma=en` + petición; (2) seguimiento sin marca en español («Vale, sigue») | Responde en inglés y abre con «Translation machine-generated, not human-reviewed.» | Vuelve al español o pierde el aviso | Respuesta en inglés con aviso | Respuesta en español |
+| E-14 | D5 clave `lang=` en minúsculas | Mensaje: `lang=en` + «Haz multiidioma el repo de ejemplo (una CLI en Python con textos en español). Solo análisis.» | Igual que E-01 | Ignora la marca | Respuesta en inglés con el aviso al principio | Respuesta en español sin aviso |
 | E-13 | D4 sin avisos nuevos (D1) | Mensaje sin marca en español pidiendo solo análisis, comparando estructura con 9.0.0 | La salida no contiene ningún aviso de idioma ni mención de `i18n/` | Aparece un aviso o una pregunta sobre idioma | Sin menciones | «Idioma: español (por defecto)» |
 
 Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
@@ -62,6 +63,17 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 2 | E-13-b | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
 | 2 | E-13-c | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
 | 2 | E-13-d | subagente de solo lectura | otro subagente de solo lectura | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-04-a | subagente de solo lectura | otro subagente de solo lectura (independiente) | `simulada` | PASS | En inglés y sin el aviso en ninguna parte. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-04-b | subagente de solo lectura | otro subagente de solo lectura (independiente) | `simulada` | PASS | En inglés y sin el aviso en ninguna parte. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-04-c | subagente de solo lectura | otro subagente de solo lectura (independiente) | `simulada` | PASS | En inglés y sin el aviso; empieza por «Translation is not yet started», que no es el aviso. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-04-d | subagente de solo lectura | otro subagente de solo lectura (independiente) | `simulada` | PASS | En inglés y sin el aviso en ninguna parte. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-01 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | `idioma=en`: en inglés, abre con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-02 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | `LANG=EN`: en inglés, abre con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-14 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | `lang=en`: en inglés, abre con el aviso. Escenario nuevo. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-11a | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | `idioma=en-GB`: en inglés, abre con el aviso, sin error de idioma no disponible. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-11b | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | `idioma=EN_us.UTF-8`: en inglés, abre con el aviso, sin error. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-03 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | Español, sin aviso ni mención de idiomas disponibles. | declarados dentro del paquete y del repo ficticio |
+| 3 | E-13 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
 
 ## Cambios posteriores de criterio
 
@@ -69,19 +81,20 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 |---|---|---|---|---|
 | 2026-10-11 | E-04, E-12 | Criterios fijados a «sin marca no cambia nada» y a la persistencia por conversación | Decisión de la persona sobre el idioma por defecto | No: no hay ejecuciones |
 | 2026-10-11 | E-08 | El ejemplo que pasa cita el aviso vigente, «…continuing with the Spanish files.», en lugar del anterior | El criterio no se había actualizado tras corregir el fallo seguro; se vio al versionar este documento | No: no hay ejecuciones |
+| 2026-10-12 | E-14 | Escenario nuevo, añadido antes de ejecutar la tercera ronda | La reseña automática del PR #5 señaló que la corrección de E-04 podía dejar sin aviso a esa grafía | No: no había ejecuciones |
 
-Tras ver los resultados de las dos rondas no se ha cambiado ningún criterio ni ningún veredicto.
+Tras ver los resultados de las tres rondas no se ha cambiado ningún criterio ni ningún veredicto.
 
 ## Hallazgo de la segunda ronda: E-04
 
-Una respuesta en inglés a una petición en inglés **sin marca** terminó con el aviso de traducción, que solo corresponde a `idioma=en` (en la primera ronda, la misma prueba pasó: 1 PASS y 1 FAIL entre las dos). Causa probable: la viñeta «En inglés.» del bloque «Idioma de la respuesta» puede leerse como «siempre que se responda en inglés», y no como «con la marca `idioma=en`». **Corregido en la 9.1.2**: la viñeta se titula «Si la marca elige `en`.» y la frase del aviso termina con «solo en ese caso»; así cubre también `lang=en`, `IDIOMA=EN` o `idioma=en-GB`. **No se ha vuelto a medir** (`pendiente`). El evaluador señaló además que el aviso salió al final y no al principio.
+Una respuesta en inglés a una petición en inglés **sin marca** terminó con el aviso de traducción, que solo corresponde a `idioma=en` (en la primera ronda, la misma prueba pasó: 1 PASS y 1 FAIL entre las dos). Causa probable: la viñeta «En inglés.» del bloque «Idioma de la respuesta» puede leerse como «siempre que se responda en inglés», y no como «con la marca `idioma=en`». **Corregido en la 9.1.2**: la viñeta se titula «Si la marca elige `en`.» y la frase del aviso termina con «solo en ese caso»; así cubre también `lang=en`, `IDIOMA=EN` o `idioma=en-GB`. **Tercera ronda (2026-10-12): 4 PASS de 4** con el texto corregido, calificadas por un evaluador independiente; con el texto anterior habían sido 1 PASS y 1 FAIL. Cuatro pases seguidos no prueban que el fallo intermitente esté resuelto: si fallaba la mitad de las veces, ocurrirían por azar en un 6 % de los casos. El evaluador de la segunda ronda señaló además que el aviso salió al final y no al principio.
 
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.
-- La lista de ficheros leídos la declara el propio ejecutor: todos, en las dos rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda ronda se ejecutó en una carpeta sin hermanas.
-- Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda y falló en la segunda.
-- Ejecutores y evaluadores son modelos (23 ejecuciones en dos rondas, 15 y 8, y un evaluador por ronda), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
+- La lista de ficheros leídos la declara el propio ejecutor: todos, en las tres rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda y la tercera se ejecutaron en una carpeta sin hermanas.
+- Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda, falló en la segunda y pasó 4 de 4 en la tercera.
+- Ejecutores y evaluadores son modelos (34 ejecuciones en tres rondas, 15, 8 y 11; evaluador independiente en las dos primeras y, en la tercera, solo para E-04: las otras 7 ejecuciones de la tercera las calificó el agente que orquesta), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
 - Los paquetes de E-08 (solo `SKILL.md`) y completo deben construirse con `git archive` del commit evaluado: el
   repositorio no tiene script de empaquetado.
 

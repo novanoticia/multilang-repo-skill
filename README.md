@@ -35,7 +35,8 @@ O copiando la carpeta de la skill a mano: `skills/multilang-repo-skill/` va en `
 
 La skill está en español (idioma de referencia) y tiene una traducción al inglés. Para pedir la
 respuesta en inglés, escribe `idioma=en` (o `lang=en`) en la primera línea de tu mensaje; la marca vale
-para toda la conversación. Sin marca no cambia nada respecto a 9.0.0: la skill sigue respondiendo en el
+para toda la conversación y elige el idioma de la respuesta, no los idiomas a los que se traduce tu
+repositorio (eso se acuerda en la conversación). Sin marca no cambia nada respecto a 9.0.0: la skill sigue respondiendo en el
 idioma en que escribes (R16) y usa los ficheros en español. Un idioma no disponible da un aviso y
 continúa como sin marca. La traducción es un `borrador-ia` sin revisión humana
 (estado en [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)).
@@ -61,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.2 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+Versión 9.1.3 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
 [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
@@ -76,7 +77,10 @@ Versión 9.1.2 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
   escenarios de selección de idioma: 7 PASS y 1 FAIL en 8 ejecuciones simuladas (`simulada`); el fallo, E-04,
   se corrige en la 9.1.2 (detalle en [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
 - **9.1.2:** una viñeta del bloque de idioma, para que el aviso de traducción salga solo con `idioma=en`
-  (E-04). La corrección **no se ha vuelto a medir** (`pendiente`).
+  (E-04). Tercera ronda de escenarios: E-04 pasa 4 de 4 y las 11 ejecuciones, 11 de 11 (`simulada`); no prueba
+  que el fallo intermitente esté resuelto.
+- **9.1.3:** una frase que aclara que `idioma=` elige el idioma de la respuesta y no los idiomas a los que se
+  traduce un repositorio. No se ha medido por escenarios (`pendiente`).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
 entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha

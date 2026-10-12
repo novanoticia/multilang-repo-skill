@@ -3,6 +3,30 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
+## 9.1.3 — 2026-10-12
+
+### Cambiado
+- `SKILL.md`, bloque «Idioma de la respuesta», viñeta de selección: añade que la marca «elige el idioma de la
+  respuesta, no los idiomas a los que se traduce un repositorio». Aclara una confusión vista en varias
+  ejecuciones simuladas (E-05 y las rondas siguientes): quien ejecutaba la skill se preguntaba si `idioma=en`
+  significaba «añade inglés al repositorio». Los dos README lo dicen también y la traducción de `SKILL.md`
+  lleva la misma frase. El bloque pasa de 1 773 a 1 862 bytes (presupuesto propio: de 1 800 a 1 900, sin límite
+  externo que lo fije; es la cuarta vez que se sube, y si vuelve a crecer conviene mover detalle a una
+  referencia) y `SKILL.md`, de 478 a 479 líneas.
+- **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.1.2 a 9.1.3 (y `version` de `plugin.json`).
+- `docs/ESCENARIOS-9.1.0.md` y `docs/VALIDACION.md` (adenda) recogen la **tercera ronda de escenarios**
+  (2026-10-12, `simulada`, sobre 9.1.2): 11 ejecuciones y 11 PASS, con E-04 pasando 4 de 4 tras la corrección de
+  la 9.1.2 y el escenario nuevo E-14 (`lang=en`). Las 4 ejecuciones de E-04 las calificó un evaluador
+  independiente; las otras 7, el agente que orquesta.
+
+### Limitaciones
+- **La aclaración no se ha medido por escenarios** (`pendiente`): es una frase informativa y no hay un
+  escenario preregistrado que la compruebe.
+- Cuatro ejecuciones de E-04 sin fallo no prueban que el fallo intermitente esté resuelto: si fallaba la mitad
+  de las veces, cuatro pases seguidos ocurrirían por azar en un 6 % de los casos.
+- Siguen vigentes las limitaciones anteriores: el inglés es un `borrador-ia` y la activación real no se ha
+  medido.
+
 ## 9.1.2 — 2026-10-12
 
 ### Cambiado
@@ -18,8 +42,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 - `docs/ESCENARIOS-9.1.0.md`, `docs/VALIDACION.md` (adenda) y los dos README reflejan la corrección.
 
 ### Limitaciones
-- **La corrección de E-04 no se ha vuelto a medir** (`pendiente`): ni una tercera ronda de escenarios ni la
-  activación en la plataforma real. El fallo era intermitente (1 de 2 ejecuciones), así que una ejecución sin
+- **La corrección de E-04 no se había vuelto a medir al publicar esta versión** (la tercera ronda la midió
+  después: 4 PASS de 4, ver 9.1.3); la activación en la plataforma real sigue `pendiente`. El fallo era intermitente (1 de 2 ejecuciones), así que una ejecución sin
   fallo no lo demostraría.
 - Siguen vigentes las limitaciones de 9.1.0 y 9.1.1: el inglés es un `borrador-ia` y la activación real no se
   ha medido.

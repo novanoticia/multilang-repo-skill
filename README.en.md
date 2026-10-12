@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=1ca378d6aa19 estado=borrador-ia -->
+<!-- i18n fuente-sha256=c1dddb001b30 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -36,7 +36,8 @@ all your projects) or in `.claude/skills/` of a repository. Check that it shows 
 
 The skill is in Spanish (the reference language) and has an English translation. To ask for the answer in
 English, write `idioma=en` (or `lang=en`) on the first line of your message; the marker holds for the
-whole conversation. Without a marker nothing changes with respect to 9.0.0: the skill keeps answering in
+whole conversation and chooses the response language, not the languages your repository is translated into
+(that is agreed in the conversation). Without a marker nothing changes with respect to 9.0.0: the skill keeps answering in
 the language you write in (R16) and uses the Spanish files. An unavailable language gives a notice and
 continues as without a marker. The translation is a `borrador-ia` (AI draft) with no human review (status in
 [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)). This README is
@@ -61,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.2 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+Version 9.1.3 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
@@ -76,7 +77,10 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   selection scenarios: 7 PASS and 1 FAIL in 8 simulated runs (`simulada`); the failure, E-04, is fixed
   in 9.1.2 (details in [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
 - **9.1.2:** one bullet of the language block, so that the translation notice appears only with `idioma=en`
-  (E-04). The fix **has not been measured again** (`pendiente`).
+  (E-04). Third round of scenarios: E-04 passes 4 of 4 and all 11 runs, 11 of 11 (`simulada`); it does not
+  prove that the intermittent failure is resolved.
+- **9.1.3:** one sentence clarifying that `idioma=` chooses the response language and not the languages a
+  repository is translated into. It has not been measured by scenarios (`pendiente`).
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
 four runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
