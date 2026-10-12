@@ -3,6 +3,27 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
+## 9.1.2 — 2026-10-12
+
+### Cambiado
+- `SKILL.md`, bloque «Idioma de la respuesta», viñeta del inglés: «En inglés.» pasa a «Si la marca elige
+  `en`.» y la frase del aviso termina con «solo en ese caso». Redactado así y no con el literal `idioma=en`
+  para cubrir también `lang=en`, `IDIOMA=EN` o `idioma=en-GB`, como señaló la reseña automática del PR. Corrige
+  el escenario E-04 de `docs/ESCENARIOS-9.1.0.md` (`simulada`): una respuesta en inglés a una petición en
+  inglés sin marca terminó con «Translation machine-generated, not human-reviewed.», aviso que solo
+  corresponde a la marca que elige `en`. El bloque pasa de 1 743 a 1 773 bytes (presupuesto propio: de 1 750 a
+  1 800, sin límite externo que lo fije); `SKILL.md` sigue en 478 líneas. Traducción y huella actualizadas en
+  `i18n/en/SKILL.md`.
+- **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.1.1 a 9.1.2 (y `version` de `plugin.json`).
+- `docs/ESCENARIOS-9.1.0.md`, `docs/VALIDACION.md` (adenda) y los dos README reflejan la corrección.
+
+### Limitaciones
+- **La corrección de E-04 no se ha vuelto a medir** (`pendiente`): ni una tercera ronda de escenarios ni la
+  activación en la plataforma real. El fallo era intermitente (1 de 2 ejecuciones), así que una ejecución sin
+  fallo no lo demostraría.
+- Siguen vigentes las limitaciones de 9.1.0 y 9.1.1: el inglés es un `borrador-ia` y la activación real no se
+  ha medido.
+
 ## 9.1.1 — 2026-10-12
 
 ### Cambiado
@@ -22,9 +43,8 @@ las líneas del original que cambian. Las frases de estado valen a la fecha de c
 - **Segunda ronda de escenarios** (2026-10-12, `simulada`, commit `16659ba`, solo los escenarios sin marca):
   E-13 pasó 4 de 4 sin la mención, E-03 2 de 2 y E-07 1 de 1. **E-04 falló 1 de 1** (en la primera ronda
   había pasado): una respuesta en inglés a una petición en inglés sin marca terminó con «Translation
-  machine-generated, not human-reviewed.», aviso que solo corresponde a `idioma=en`. **No se ha corregido.**
-  Causa probable: la viñeta «En inglés.» del bloque se lee como «siempre que se responda en inglés». Propuesta,
-  pendiente de aprobación: «Con `idioma=en`.».
+  machine-generated, not human-reviewed.», aviso que solo corresponde a `idioma=en`. **No se corrigió en esta versión** (se corrige
+  en la 9.1.2). Causa probable: la viñeta «En inglés.» del bloque se lee como «siempre que se responda en inglés».
 - Una o cuatro ejecuciones por escenario no miden la variabilidad.
 - La activación en la plataforma real, con la `description` de 9.1.x, sigue sin medirse (`pendiente`).
 

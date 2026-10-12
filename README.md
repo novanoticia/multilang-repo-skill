@@ -61,7 +61,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.1 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+Versión 9.1.2 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
 [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
@@ -74,7 +74,9 @@ Versión 9.1.1 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
   originales (`local`); `claude plugin validate --strict` sin errores (`local`).
 - **9.1.1:** una frase del bloque de idioma, tras un fallo de los escenarios (E-13). Segunda ronda de
   escenarios de selección de idioma: 7 PASS y 1 FAIL en 8 ejecuciones simuladas (`simulada`); el fallo, E-04,
-  sigue sin corregir (detalle en [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
+  se corrige en la 9.1.2 (detalle en [docs/ESCENARIOS-9.1.0.md](docs/ESCENARIOS-9.1.0.md)).
+- **9.1.2:** una viñeta del bloque de idioma, para que el aviso de traducción salga solo con `idioma=en`
+  (E-04). La corrección **no se ha vuelto a medir** (`pendiente`).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
 entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha
