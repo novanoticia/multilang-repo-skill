@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=fc58e89bd54c estado=borrador-ia -->
+<!-- i18n fuente-sha256=86ee833a2baa estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
