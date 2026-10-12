@@ -62,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.3 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+Versión 9.1.4 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
 [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
@@ -81,6 +81,8 @@ Versión 9.1.3 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
   que el fallo intermitente esté resuelto.
 - **9.1.3:** una frase que aclara que `idioma=` elige el idioma de la respuesta y no los idiomas a los que se
   traduce un repositorio. No se ha medido por escenarios (`pendiente`).
+- **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 617 bytes) y su detalle pasa a una
+  referencia nueva. No se ha medido por escenarios (`pendiente`).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
 entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha

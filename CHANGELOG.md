@@ -3,6 +3,28 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
+## 9.1.4 — 2026-10-12
+
+### Cambiado
+- `SKILL.md`, bloque «Idioma de la respuesta», **acortado**: el detalle de los idiomas disponibles y de lo que
+  no se traduce pasa a la referencia nueva `references/idioma-de-la-respuesta.md` (con su espejo en
+  `i18n/en/references/`), enlazada desde el bloque. Siguen en el bloque la selección, el aviso de la
+  traducción automática (D22), el caso de no disponible o mal formada (D4) y el fallo seguro (D25). El bloque
+  pasa de 1 862 a 1 617 bytes (presupuesto propio: de 1 900 a 1 700, sin límite externo que lo fije) y
+  `SKILL.md`, de 479 a 477 líneas. Es lo que el `CHANGELOG` de la 9.1.3 dejó anunciado.
+- **Línea 5 de `SKILL.md`**, `metadata.version`, de 9.1.3 a 9.1.4 (y `version` de `plugin.json`).
+- `i18n/en/SKILL.md` sigue el cambio y su huella se actualiza; `i18n/ESTADO.md` cuenta 13 referencias.
+
+### Añadido
+- `references/idioma-de-la-respuesta.md` y `i18n/en/references/idioma-de-la-respuesta.md` (`borrador-ia`).
+
+### Limitaciones
+- **No se ha medido por escenarios** (`pendiente`): el cambio mueve texto que el modelo ya no lee de entrada
+  (la lista de lo que no se traduce y la nota sobre `resolver_idioma.py`). Podría cambiar el comportamiento en
+  E-05 a E-12; una regresión lo diría.
+- Sin cambios respecto a la 9.1.3 en lo demás: la activación real, el fallo intermitente de E-04 y la revisión
+  humana del inglés siguen pendientes.
+
 ## 9.1.3 — 2026-10-12
 
 ### Cambiado

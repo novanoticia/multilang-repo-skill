@@ -5,8 +5,8 @@ fichero valen **a fecha 2026-10-11, rama `i18n`**, y hay que revisarlas antes de
 
 | Idioma | Estado | Redactó | Revisó | Cobertura |
 |---|---|---|---|---|
-| `es` | `referencia` | Autoría del proyecto | — | `SKILL.md`, 12 referencias y 5 plantillas (originales) |
-| `en` | `borrador-ia` | IA (Claude Sonnet 5.5), 2026-10-11 | Nadie. Pendiente de revisión humana | `i18n/en/`: `SKILL.md`, 12 referencias y 5 plantillas |
+| `es` | `referencia` | Autoría del proyecto | — | `SKILL.md`, 13 referencias y 5 plantillas (originales) |
+| `en` | `borrador-ia` | IA (Claude Sonnet 5.5), 2026-10-11 | Nadie. Pendiente de revisión humana | `i18n/en/`: `SKILL.md`, 13 referencias y 5 plantillas |
 
 ## Qué significa `borrador-ia` aquí
 

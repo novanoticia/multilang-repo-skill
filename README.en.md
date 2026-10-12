@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=c1dddb001b30 estado=borrador-ia -->
+<!-- i18n fuente-sha256=486e3aa4bf9e estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -62,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.3 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+Version 9.1.4 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
@@ -81,6 +81,8 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   prove that the intermittent failure is resolved.
 - **9.1.3:** one sentence clarifying that `idioma=` chooses the response language and not the languages a
   repository is translated into. It has not been measured by scenarios (`pendiente`).
+- **9.1.4:** the “Response language” block is shortened (from 1,862 to 1,617 bytes) and its detail moves to a
+  new reference. It has not been measured by scenarios (`pendiente`).
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
 four runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
