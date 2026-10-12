@@ -176,11 +176,12 @@ Las secciones 1 a 7 describen la validación de 9.0.0 y no se reescriben: este i
 | Autorrevisión del autor (P14, no independiente) | Halló que el bloque de idioma contradecía R16 y cambiaba la respuesta por defecto de quien escribe en otro idioma (D1); corregido el 2026-10-11 tras aprobarlo la persona. Corregido también un comentario en español que quedaba en `i18n/en/` | `estática` |
 | Calidad de la traducción | Releída por quien la redactó (una IA); sin revisión humana | `estática` |
 
-Pendiente, y por tanto **no medido en 9.1.0**:
+Pendiente, o medido solo en parte, en 9.1.0:
 
 - **Activación** (sección 4) en español y en inglés con la `description` nueva (`plataforma`).
-- **Escenarios** (sección 5) sobre la selección de idioma: marca válida, sin marca, idioma no disponible,
-  fallo seguro sin `i18n/` y marca dentro de un texto pegado (`simulada`; preregistrados en [ESCENARIOS-9.1.0.md](ESCENARIOS-9.1.0.md), sin ejecutar).
+- **Escenarios** (sección 5) sobre la selección de idioma: primera ronda ejecutada el 2026-10-11 (`simulada`, una
+  ejecución por escenario, 15 ejecuciones y 1 evaluador): 13 PASS, 1 INDETERMINADO y 1 FAIL (E-13, corregido sin
+  haber vuelto a medir). Detalle en [ESCENARIOS-9.1.0.md](ESCENARIOS-9.1.0.md). Falta una segunda ronda.
 - **Revisión humana** del inglés.
 - **Límite de `description` de la plataforma de destino:** el validador local no lo impone, y la ayuda
   de claude.ai habla de 200 caracteres (`no-comprobado`).
