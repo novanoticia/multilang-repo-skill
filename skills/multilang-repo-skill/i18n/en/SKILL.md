@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=e9e1b062d31f estado=borrador-ia -->
+<!-- i18n fuente-sha256=692c7661659a estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -21,9 +21,9 @@ one.
   [scripts/resolver_idioma.py](../../scripts/resolver_idioma.py) implements this rule; its source `defecto`
   means “without a marker”, not “answer in Spanish”.
 - **Unavailable or malformed (D4).** Say so, name the available languages and continue as without a marker.
-- **With `idioma=en`.** This translation, with its references and templates in `i18n/en/`, replaces the
+- **If the marker selects `en`.** This translation, with its references and templates in `i18n/en/`, replaces the
   Spanish files. Answer in English and open every answer with “Translation machine-generated, not
-  human-reviewed.” (D22), only with this marker. The translation is a mirror: if it disagrees with the Spanish `SKILL.md`, the Spanish one
+  human-reviewed.” (D22), only in that case. The translation is a mirror: if it disagrees with the Spanish `SKILL.md`, the Spanish one
   prevails (R17). With `idioma=es` the Spanish files are followed and the answer is in Spanish.
 - **Fail-safe (D25).** If you cannot read `i18n/en/`, continue with the Spanish files, answer as without a
   marker (R16), say so in one sentence and add a line in English: “English version unavailable;

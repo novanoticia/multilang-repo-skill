@@ -74,7 +74,7 @@ Tras ver los resultados de las dos rondas no se ha cambiado ningún criterio ni 
 
 ## Hallazgo de la segunda ronda: E-04
 
-Una respuesta en inglés a una petición en inglés **sin marca** terminó con el aviso de traducción, que solo corresponde a `idioma=en` (en la primera ronda, la misma prueba pasó: 1 PASS y 1 FAIL entre las dos). Causa probable: la viñeta «En inglés.» del bloque «Idioma de la respuesta» puede leerse como «siempre que se responda en inglés», y no como «con la marca `idioma=en`». **Corregido en la 9.1.2**: la viñeta se titula «Con `idioma=en`.» y la frase del aviso termina con «solo con esta marca». **No se ha vuelto a medir** (`pendiente`). El evaluador señaló además que el aviso salió al final y no al principio.
+Una respuesta en inglés a una petición en inglés **sin marca** terminó con el aviso de traducción, que solo corresponde a `idioma=en` (en la primera ronda, la misma prueba pasó: 1 PASS y 1 FAIL entre las dos). Causa probable: la viñeta «En inglés.» del bloque «Idioma de la respuesta» puede leerse como «siempre que se responda en inglés», y no como «con la marca `idioma=en`». **Corregido en la 9.1.2**: la viñeta se titula «Si la marca elige `en`.» y la frase del aviso termina con «solo en ese caso»; así cubre también `lang=en`, `IDIOMA=EN` o `idioma=en-GB`. **No se ha vuelto a medir** (`pendiente`). El evaluador señaló además que el aviso salió al final y no al principio.
 
 ## Límites de esta evaluación
 
