@@ -62,7 +62,8 @@ RE_APERTURA = re.compile(r"^ {0,3}(`{3,})(.*)$")
 RE_ENCABEZADO = re.compile(r"^(#{1,6})\s+\S")
 RE_CABECERA = re.compile(
     r"^<!-- i18n fuente-sha256=([0-9a-f]{12}) estado=(borrador-ia|revisado-humano)(?: revisor=(\S[^>]*?))? -->$")
-RE_ESPANOL = re.compile(r"[ñÑ¿¡áéíóúÁÉÍÓÚü]")
+LETRAS_ESPANOL = "ñÑ¿¡áéíóúÁÉÍÓÚü"
+RE_ESPANOL = re.compile("[" + re.escape(LETRAS_ESPANOL) + "]")
 RE_CODIGO_EN_LINEA = re.compile(r"`[^`]*`")
 LENGUAJES_DE_PROSA = ("text", "txt", "markdown", "md")
 MARCA_EXENTA = "<!-- i18n:exento -->"
@@ -132,7 +133,13 @@ def contenido_comparable(info, lineas):
     return tuple(l.rstrip() for l in lineas if l.strip() and not es_comentario(l))
 
 
-def analizar(texto):
+def regex_espanol(tolera=""):
+    """Letras propias del español, sin las que la lengua de destino comparte (p. ej. «é» en francés)."""
+    letras = "".join(c for c in LETRAS_ESPANOL if c not in tolera)
+    return re.compile("[" + re.escape(letras) + "]")
+
+
+def analizar(texto, tolera=""):
     prosa, bloques = separar(texto)
     prosa = [(n, l) for n, l in prosa if MARCA_EXENTA not in l]
     sin_destinos = [(n, RE_ENLACE.sub("](#)", l)) for n, l in prosa]
@@ -146,7 +153,7 @@ def analizar(texto):
                     for info, lineas in bloques],
         "enlaces": [m for _, l in prosa for m in RE_ENLACE.findall(l)],
         "sin_traducir": [n for n, l in sin_destinos
-                         if RE_ESPANOL.search(RE_MARCA.sub("", RE_CODIGO_EN_LINEA.sub("", l)))],
+                         if regex_espanol(tolera).search(RE_MARCA.sub("", RE_CODIGO_EN_LINEA.sub("", l)))],
     }
 
 
@@ -203,14 +210,14 @@ def revisar_cabecera(es_datos, trad_texto):
     return incs
 
 
-def comparar(es, trad, dir_es="/r", dir_trad="/r/i18n/en", raiz_es="/r", raiz_trad="/r/i18n/en", nota_ia=None):
+def comparar(es, trad, dir_es="/r", dir_trad="/r/i18n/en", raiz_es="/r", raiz_trad="/r/i18n/en", nota_ia=None, tolera=""):
     """Compara los bytes de un original con los de su traducción. Devuelve una lista de incidencias."""
     es_texto, trad_texto = decodificar(es), decodificar(trad)
     if es_texto is None or trad_texto is None:
         quien = "el original" if es_texto is None else "la traducción"
         return [incidencia("no_utf8", "error", "%s no es UTF-8 válido" % quien)]
     incs = revisar_cabecera(es, trad_texto)
-    a, b = analizar(es_texto), analizar(quitar_cabecera(trad_texto))
+    a, b = analizar(es_texto), analizar(quitar_cabecera(trad_texto), tolera)
     if a["ids"] != b["ids"]:
         incs.append(incidencia("ids_difieren", "error", "identificadores: " + diferencias(a["ids"], b["ids"])))
     if a["marcas"] != b["marcas"]:
@@ -279,7 +286,7 @@ def resumir(ficheros):
             "avisos": sum(1 for i in todas if i["severidad"] == "aviso")}
 
 
-def comprobar_arbol(raiz_es, raiz_trad, completo=False, nota_ia=None):
+def comprobar_arbol(raiz_es, raiz_trad, completo=False, nota_ia=None, tolera=""):
     raiz_es, raiz_trad = os.path.abspath(raiz_es), os.path.abspath(raiz_trad)
     originales = listar_originales(raiz_es)
     traducidos = listar_traducidos(raiz_trad) if os.path.isdir(raiz_trad) else []
@@ -292,7 +299,7 @@ def comprobar_arbol(raiz_es, raiz_trad, completo=False, nota_ia=None):
             continue
         es_datos, trad_datos = leer(os.path.join(raiz_es, rel)), leer(ruta_trad)
         dir_es, dir_trad = os.path.dirname(os.path.join(raiz_es, rel)), os.path.dirname(ruta_trad)
-        incs = comparar(es_datos, trad_datos, dir_es, dir_trad, raiz_es, raiz_trad, nota_ia)
+        incs = comparar(es_datos, trad_datos, dir_es, dir_trad, raiz_es, raiz_trad, nota_ia, tolera)
         texto = decodificar(trad_datos)
         if texto is not None:
             for destino in analizar(quitar_cabecera(texto))["enlaces"]:
@@ -308,7 +315,7 @@ def comprobar_arbol(raiz_es, raiz_trad, completo=False, nota_ia=None):
     return resumir(ficheros)
 
 
-def comprobar_par(ruta_es, ruta_trad, nota_ia=None, raiz_es=None, raiz_trad=None):
+def comprobar_par(ruta_es, ruta_trad, nota_ia=None, raiz_es=None, raiz_trad=None, tolera=""):
     es_datos, trad_datos = leer(ruta_es), leer(ruta_trad)
     for nombre, datos in (("original", es_datos), ("traducción", trad_datos)):
         if decodificar(datos) is None:
@@ -316,7 +323,7 @@ def comprobar_par(ruta_es, ruta_trad, nota_ia=None, raiz_es=None, raiz_trad=None
     dir_es, dir_trad = os.path.dirname(os.path.abspath(ruta_es)), os.path.dirname(os.path.abspath(ruta_trad))
     raiz_es = os.path.abspath(raiz_es) if raiz_es else dir_es
     raiz_trad = os.path.abspath(raiz_trad) if raiz_trad else dir_trad
-    incs = comparar(es_datos, trad_datos, dir_es, dir_trad, raiz_es, raiz_trad, nota_ia)
+    incs = comparar(es_datos, trad_datos, dir_es, dir_trad, raiz_es, raiz_trad, nota_ia, tolera)
     return resumir([{"ruta": os.path.basename(ruta_trad), "incidencias": incs}])
 
 
@@ -330,6 +337,8 @@ def main(argv=None):
     parser.add_argument("--raiz-trad", metavar="DIR", help="con --par, raíz de la traducción (por defecto, la carpeta del fichero)")
     parser.add_argument("--completo", action="store_true", help="con --arbol, un fichero sin traducir es un error")
     parser.add_argument("--nota-ia", metavar="TEXTO", help="línea con la que debe terminar la traducción")
+    parser.add_argument("--tolera-letras", default="", metavar="LETRAS",
+                        help="letras del español que la lengua de destino también usa y no deben avisar como texto sin traducir (p. ej. éÉ para el francés)")
     parser.add_argument("--estricto", action="store_true", help="los avisos también hacen fallar")
     parser.add_argument("--json", action="store_true", help="salida JSON")
     args = parser.parse_args(argv)
@@ -339,8 +348,8 @@ def main(argv=None):
         if args.hash:
             print(hash_fuente(leer(args.hash)))
             return 0
-        resultado = (comprobar_arbol(args.arbol[0], args.arbol[1], args.completo, args.nota_ia) if args.arbol
-                     else comprobar_par(args.par[0], args.par[1], args.nota_ia, args.raiz_es, args.raiz_trad))
+        resultado = (comprobar_arbol(args.arbol[0], args.arbol[1], args.completo, args.nota_ia, args.tolera_letras) if args.arbol
+                     else comprobar_par(args.par[0], args.par[1], args.nota_ia, args.raiz_es, args.raiz_trad, args.tolera_letras))
     except ErrorUso as exc:
         print("error: %s" % exc, file=sys.stderr)
         return 2

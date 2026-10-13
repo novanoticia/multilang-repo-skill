@@ -279,6 +279,23 @@ class PruebasNotaYTextoSinTraducir(unittest.TestCase):
         trad = en(EN_CUERPO + "\nUse `ñandú` here.\n")
         self.assertNotIn("texto_sin_traducir", codigos(cp.comparar(ES, trad)))
 
+    def test_letras_toleradas_no_cuentan_como_texto_sin_traducir(self):
+        # En francés «é» es normal; sin tolerarla, el aviso saltaría en cada línea.
+        trad = en(EN_CUERPO + "\nUne règle écrite en français.\n")
+        self.assertIn("texto_sin_traducir", codigos(cp.comparar(ES, trad)))
+        self.assertNotIn("texto_sin_traducir", codigos(cp.comparar(ES, trad, tolera="éÉ")))
+
+    def test_letras_toleradas_no_apagan_el_resto_del_aviso(self):
+        # Tolerar «é» no exime «ñ» ni «á»: siguen delatando español sin traducir.
+        for resto in ("Il y a mañana.", "Il dit está."):
+            trad = en(EN_CUERPO + "\n" + resto + "\n")
+            self.assertIn("texto_sin_traducir", codigos(cp.comparar(ES, trad, tolera="éÉ")), resto)
+
+    def test_letras_toleradas_con_caracteres_de_regex_no_rompen(self):
+        trad = en(EN_CUERPO + "\nIl dit mañana.\n")
+        incs = cp.comparar(ES, trad, tolera="]^-\\")
+        self.assertIn("texto_sin_traducir", codigos(incs))
+
 
 class PruebasArbol(unittest.TestCase):
     def setUp(self):
@@ -304,6 +321,16 @@ class PruebasArbol(unittest.TestCase):
         self.traducir_a("references/a.md", b"# A\n\nTexto R1.\n", "# A\n\nText R1.\n")
         r = cp.comprobar_arbol(self.es, self.trad, completo=True)
         self.assertEqual(r["errores"], 0, r)
+
+    def test_arbol_tolera_letras_por_linea_de_ordenes(self):
+        self.traducir_a("SKILL.md", ES, EN_CUERPO + "\nUne règle écrite en français.\n")
+        self.traducir_a("references/a.md", b"# A\n\nTexto R1.\n", "# A\n\nText R1.\n")
+        os.makedirs(os.path.join(self.trad, "references"), exist_ok=True)
+        base = [sys.executable, "-B", "-I", SCRIPT, "--arbol", self.es, self.trad, "--json"]
+        sin = subprocess.run(base, capture_output=True, text=True)
+        self.assertIn("texto_sin_traducir", sin.stdout)
+        con = subprocess.run(base + ["--tolera-letras", "éÉ"], capture_output=True, text=True)
+        self.assertNotIn("texto_sin_traducir", con.stdout, con.stdout + con.stderr)
 
     def test_enlace_roto_en_la_traduccion(self):
         self.traducir_a("SKILL.md", ES, EN_CUERPO)  # apunta a references/a.md dentro de i18n/en, que no existe
@@ -364,6 +391,15 @@ class PruebasCli(unittest.TestCase):
             f.write(en(EN_CUERPO + "\nEste párrafo sigue en español.\n"))
         self.assertEqual(self.ejecutar("--par", self.es, self.en).returncode, 0)
         self.assertEqual(self.ejecutar("--par", self.es, self.en, "--estricto").returncode, 1)
+
+    def test_tolera_letras_por_linea_de_ordenes(self):
+        with open(self.en, "wb") as f:
+            f.write(en(EN_CUERPO + "\nUne règle écrite en français.\n"))
+        sin = self.ejecutar("--par", self.es, self.en, "--json")
+        self.assertIn("texto_sin_traducir", sin.stdout)
+        con = self.ejecutar("--par", self.es, self.en, "--json", "--tolera-letras", "éÉ")
+        self.assertEqual(con.returncode, 0, con.stdout + con.stderr)
+        self.assertNotIn("texto_sin_traducir", con.stdout)
 
     def test_hash(self):
         r = self.ejecutar("--hash", self.es)
