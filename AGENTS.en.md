@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=7cf117033a1f estado=borrador-ia -->
+<!-- i18n fuente-sha256=1e6573709488 estado=borrador-ia -->
 
 # AGENTS.md
 
@@ -85,9 +85,9 @@ python3 -B $S/scripts/comprobar_paridad.py --par AGENTS.md AGENTS.en.md --nota-i
    review.” (in Spanish: `Elaborado con asistencia de IA; requiere revisión humana.`). Never in files that
    a machine consumes (code, JSON, YAML).
 10. **Prose in Spanish.** The skill's texts, the scripts' messages and the documentation are in Spanish
-    with correct accents; names in code, in ASCII. Exception: `i18n/en/`, `README.en.md` and `AGENTS.en.md`
-    are in English by design (constraint 11). The scripts' messages and `docs/` remain in Spanish.
-11. **Spanish is the source; English is a mirror.** Every file in `i18n/en/` and every `.en.md` starts with
+    with correct accents; names in code, in ASCII. Exception: `i18n/<language>/`
+    (`en`, `fr`, `hi`, `zh-Hans`), `README.en.md` and `AGENTS.en.md` are in their own language by design (constraint 11). The scripts' messages and `docs/` remain in Spanish.
+11. **Spanish is the source; the other languages are mirrors.** Every file in `i18n/<language>/` and every `.en.md` starts with
     `<!-- i18n fuente-sha256=… estado=… -->` carrying the fingerprint of its original
     (`comprobar_paridad.py --hash FILE`). If you change an original, the checker marks its translation as
     outdated: retranslate it, or check that it is still faithful and update the fingerprint. Identifiers,

@@ -105,6 +105,42 @@ class TablaDeCasos(unittest.TestCase):
         r = resolver("idioma=zh-TW 你好", respaldos={"zh-TW": "zh-Hant"})
         self.assertEqual((r["idioma"], r["cadena"]), ("zh-Hant", ["zh-TW", "zh-Hant"]))
 
+    def test_chino_simplificado_nunca_sirve_a_quien_pide_tradicional(self):
+        # Catálogo solo en zh-Hans y `zh` declarado como simplificado: zh-Hant, zh-TW y similares NO deben
+        # caer en él (D3: truncar al primer componente sirve simplificado a quien pidió tradicional).
+        opciones = dict(disponibles=["es", "en", "fr", "hi", "zh-Hans"],
+                        respaldos={"zh": "zh-Hans", "zh-CN": "zh-Hans", "zh-SG": "zh-Hans",
+                                   "zh-TW": "zh-Hant", "zh-HK": "zh-Hant", "zh-MO": "zh-Hant"})
+        for marca in ("zh", "zh-CN", "zh-SG", "zh-Hans", "zh-Hans-CN", "ZH_cn.UTF-8"):
+            r = resolver("idioma=%s 你好" % marca, **opciones)
+            self.assertEqual(r["idioma"], "zh-Hans", marca)
+        for marca in ("zh-Hant", "zh-Hant-TW", "zh-TW", "zh-HK", "zh-MO", "zh_TW.UTF-8"):
+            r = resolver("idioma=%s 你好" % marca, **opciones)
+            self.assertEqual((r["idioma"], codigos(r)), ("es", ["no_disponible"]), marca)
+            self.assertTrue(r["avisos"][0]["visible"], marca)
+
+    def test_perder_la_escritura_al_truncar_no_activa_los_respaldos_declarados(self):
+        # El respaldo declarado para `zh` solo vale si se pidió `zh`, no si se llegó a él perdiendo la escritura.
+        r = resolver("idioma=zh-Hant 你好", disponibles=["es", "zh-Hans"], respaldos={"zh": "zh-Hans"})
+        self.assertEqual(r["idioma"], "es")
+        self.assertNotIn("zh-Hans", r["cadena"])
+
+    def test_los_respaldos_declarados_encadenados_se_siguen(self):
+        # Lo declarado a mano se sigue siempre, eslabón a eslabón; solo se ignora lo que sale de perder la escritura.
+        r = resolver("idioma=es-AR hola", disponibles=["es", "es-MX"], respaldos={"es-AR": "es-419", "es-419": "es-MX"})
+        self.assertEqual((r["idioma"], r["cadena"]), ("es-MX", ["es-AR", "es-419", "es-MX"]))
+
+    def test_respaldo_declarado_desde_una_escritura_a_la_lengua_sola_se_sigue_despues(self):
+        r = resolver("idioma=zh-Hant 你好", disponibles=["es", "zh-Hans"],
+                     respaldos={"zh-Hant": "zh", "zh": "zh-Hans"})
+        self.assertEqual((r["idioma"], r["cadena"]), ("zh-Hans", ["zh-Hant", "zh", "zh-Hans"]))
+
+    def test_idiomas_nuevos_y_sus_variantes(self):
+        opciones = dict(disponibles=["es", "en", "fr", "hi", "zh-Hans"])
+        for marca, esperado in (("fr-CA", "fr"), ("FR_fr.UTF-8", "fr"), ("hi-IN", "hi"), ("hi_IN.UTF-8", "hi"),
+                                ("en-GB", "en"), ("fr", "fr"), ("hi", "hi")):
+            self.assertEqual(resolver("idioma=%s hola" % marca, **opciones)["idioma"], esperado, marca)
+
     def test_codigo_heredado(self):
         self.assertEqual(resolver("idioma=iw שלום")["idioma"], "he")
 

@@ -97,12 +97,24 @@ def truncar(etiqueta):
     return "-".join(partes)
 
 
+def tiene_escritura(etiqueta):
+    """True si la etiqueta lleva subetiqueta de escritura (cuatro letras: Hant, Hans, Latn…)."""
+    return any(re.fullmatch(r"[A-Za-z]{4}", parte) for parte in etiqueta.split("-")[1:])
+
+
 def cadena_de(etiqueta, respaldos):
-    cadena, actual, vistos = [], etiqueta, set()
+    """Cadena de respaldo. Al truncar una etiqueta con escritura hasta perderla (zh-Hant → zh), el
+    eslabón resultante no sigue los respaldos declarados: quien pidió una escritura no recibe otra
+    solo porque se declaró un respaldo para la lengua sola (D3)."""
+    cadena, actual, vistos, perdio = [], etiqueta, set(), False
     while actual and actual.lower() not in vistos:
         vistos.add(actual.lower())
         cadena.append(actual)
-        actual = respaldos.get(actual.lower()) or truncar(actual)
+        declarado = None if perdio else respaldos.get(actual.lower())
+        siguiente = declarado or truncar(actual)
+        perdio = (not declarado and siguiente is not None
+                  and tiene_escritura(actual) and not tiene_escritura(siguiente))
+        actual = siguiente
     return cadena
 
 
