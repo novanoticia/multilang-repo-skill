@@ -82,7 +82,7 @@ Versión 9.1.4 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
 - **9.1.3:** una frase que aclara que `idioma=` elige el idioma de la respuesta y no los idiomas a los que se
   traduce un repositorio. No se ha medido por escenarios (`pendiente`).
 - **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 700 bytes) y su detalle pasa a una
-  referencia nueva. Regresión (`simulada`): E-05 a E-09 y E-12 pasan; E-10 falló 1 de 4 ejecuciones (0 de 3 en la 9.1.3).
+  referencia nueva. Regresión (`simulada`, rondas 4 a 6): sin fallos reproducibles, pero E-10 cita el marcador `<!-- i18n:inicio -->` en 5 de 8 ejecuciones (8 de 8 con la 9.1.3) y E-13 falló 1 de 6 (0 de 5 con la 9.1.3); sugiere un efecto de la 9.1.4, sin demostrarlo.
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
 entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha

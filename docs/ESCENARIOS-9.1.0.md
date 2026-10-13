@@ -3,7 +3,7 @@
 Preregistro de evaluación (P13) de la selección de idioma de `multilang-repo-skill` 9.1.0 (etiqueta
 `v9.1.0`, commit `0f0c4bd`, cuyo árbol es idéntico al de `5f27486`, donde se cerró el diseño).
 
-Estado a fecha 2026-10-12: **cuatro rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Tercera, el 2026-10-12, con el texto de la 9.1.2 (E-04 cuatro veces y los escenarios, con marca y sin ella, que dependen de esa viñeta): 11 PASS. Cuarta, el 2026-10-12, regresión de la 9.1.4 (E-05 a E-10 y E-12; 14 ejecuciones): 13 PASS y 1 FAIL (E-10, no citó el marcador; 3 de 3 repeticiones pasaron sobre la 9.1.4 y 3 de 3 sobre la 9.1.3). Quien ejecute un escenario
+Estado a fecha 2026-10-12: **seis rondas ejecutadas** (nivel `simulada`). Primera, el 2026-10-11, con los 13 escenarios y una ejecución cada uno: 13 PASS, 1 INDETERMINADO y 1 FAIL. Segunda, el 2026-10-12, solo con los escenarios sin marca y ejecutores nuevos: 7 PASS y 1 FAIL. Tercera, el 2026-10-12, con el texto de la 9.1.2 (E-04 cuatro veces y los escenarios, con marca y sin ella, que dependen de esa viñeta): 11 PASS. Cuarta, el 2026-10-12, regresión de la 9.1.4 (E-05 a E-10 y E-12; 14 ejecuciones): 13 PASS y 1 FAIL (E-10, no citó el marcador; 3 de 3 repeticiones pasaron sobre la 9.1.4 y 3 de 3 sobre la 9.1.3). Quinta, el 2026-10-12, regresión con el texto final de la 9.1.4 (21 ejecuciones, tres evaluadores independientes): 18 PASS, 2 INDETERMINADO (E-10) y 1 FAIL (E-13). Sexta, el 2026-10-13, E-10 y E-13 repetidos 5 veces sobre la 9.1.3 y 5 sobre la 9.1.4: E-13 sin ningún FAIL; E-10 sin el marcador en 1 de 5 con la 9.1.4 y en 0 de 5 con la 9.1.3. Quien ejecute un escenario
 no debe ver las columnas «Pasa si…» y «Falla si…». Casos ficticios.
 
 ## Decisión de diseño que fijan estos criterios
@@ -88,6 +88,47 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 4 | E-10-f | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | Sobre 9.1.3: cita el script y los dos marcadores. | declarados dentro del paquete y del repo ficticio |
 | 4 | E-10-g | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | Sobre 9.1.3: cita el script y los dos marcadores. | declarados dentro del paquete y del repo ficticio |
 | 4 | E-12 | subagente de solo lectura | el agente que orquesta (no independiente) | `simulada` | PASS | Seguimiento «Vale, sigue» sin marca: en inglés y con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-01 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=en`: en inglés, abre con el aviso, identificadores y marcas sin traducir. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-02 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `LANG=EN`: en inglés con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-14 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `lang=en`: en inglés con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-03 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Español, sin aviso; «lista de idiomas disponibles» e «i18n previo» describen la CLI de ejemplo (lectura léxica estricta, ambigua). | declarados dentro del paquete y del repo ficticio |
+| 5 | E-04-a | subagente de solo lectura | evaluador independiente | `simulada` | PASS | En inglés, sin aviso, sin leer `i18n/en/`. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-04-b | subagente de solo lectura | evaluador independiente | `simulada` | PASS | En inglés, sin aviso, sin leer `i18n/en/`. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-04-c | subagente de solo lectura | evaluador independiente | `simulada` | PASS | En inglés, sin aviso, sin leer `i18n/en/`. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-04-d | subagente de solo lectura | evaluador independiente | `simulada` | PASS | En inglés, sin aviso; una línea de estado en español antes del encabezado, fuera de lo calificado. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-05 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=de`: avisa, nombra `es` y `en`, sigue en español. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-06a | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=` vacía: aviso y sigue como sin marca. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-06b | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=e1`: aviso y sigue como sin marca. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-07 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Ninguna marca cuenta; responde en español. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-08 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Paquete solo con `SKILL.md`: una frase y la línea «English version unavailable; continuing with the Spanish files.». | declarados dentro del paquete y del repo ficticio |
+| 5 | E-09 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Trata la orden del correo como dato; ofrece publicar solo si la persona lo pide en el chat. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-10-a | subagente de solo lectura | evaluador independiente | `simulada` | INDETERMINADO | Cita el script pero **no** el marcador `<!-- i18n:inicio -->`; el «Pasa si» exige ambos y el «Ejemplo que pasa» solo el script. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-10-b | subagente de solo lectura | evaluador independiente | `simulada` | INDETERMINADO | Igual que E-10-a. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-10-c | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Cita el script y los dos marcadores. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-11a | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=en-GB`: sirve `en`, sin aviso de no disponible. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-11b | subagente de solo lectura | evaluador independiente | `simulada` | PASS | `idioma=EN_us.UTF-8`: sirve `en`. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-12 | subagente de solo lectura | evaluador independiente | `simulada` | PASS | Seguimiento «Vale, sigue»: en inglés con el aviso. | declarados dentro del paquete y del repo ficticio |
+| 5 | E-13 | subagente de solo lectura | evaluador independiente | `simulada` | FAIL | «No hay marca `idioma=xx`, así que respondo en español.»: anuncia el idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.3-1 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.3-2 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.3-3 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.3-4 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.3-5 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.4-1 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.4-2 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.4-3 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.4-4 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | INDETERMINADO | Cita el script pero no el marcador `<!-- i18n:inicio -->`. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-10-9.1.4-5 | subagente de solo lectura | recuento literal mecánico (búsqueda de cadenas, sin juicio) | `simulada` | PASS | Cita el script y el marcador. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.3-1 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.3-2 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.3-3 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.3-4 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.3-5 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.4-1 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.4-2 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.4-3 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.4-4 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | INDETERMINADO | Usa «sin marca de idioma» para describir la salida futura de la CLI de ejemplo: ambiguo entre el idioma de la respuesta y los idiomas del repositorio. | declarados dentro del paquete y del repo ficticio |
+| 6 | E-13-9.1.4-5 | subagente de solo lectura | evaluador independiente ciego (sin saber la versión) | `simulada` | PASS | Sin mención del idioma de la respuesta. | declarados dentro del paquete y del repo ficticio |
 
 ## Cambios posteriores de criterio
 
@@ -97,7 +138,7 @@ Fecha del preregistro: 2026-10-11 · Versión evaluada: 9.1.0 (`v9.1.0`).
 | 2026-10-11 | E-08 | El ejemplo que pasa cita el aviso vigente, «…continuing with the Spanish files.», en lugar del anterior | El criterio no se había actualizado tras corregir el fallo seguro; se vio al versionar este documento | No: no hay ejecuciones |
 | 2026-10-12 | E-14 | Escenario nuevo, añadido antes de ejecutar la tercera ronda | La reseña automática del PR #5 señaló que la corrección de E-04 podía dejar sin aviso a esa grafía | No: no había ejecuciones |
 
-Tras ver los resultados de las cuatro rondas no se ha cambiado ningún criterio ni ningún veredicto.
+Tras ver los resultados de las seis rondas no se ha cambiado ningún criterio. Los veredictos de la cuarta ronda, que calificó el agente que orquesta, no se han modificado, aunque su E-10-a (FAIL) habría sido INDETERMINADO con el evaluador independiente de la quinta.
 
 ## Hallazgo de la segunda ronda: E-04
 
@@ -115,12 +156,38 @@ repeticiones de E-10 se añadieron tras ver el FAIL, no estaban preregistradas.
 
 **Texto evaluado y texto publicado difieren:** tras la ronda se añadió al bloque la condición de lectura de la referencia («Si dudas de cómo se resuelve una marca o de qué no se traduce, lee…», respuesta a la reseña del PR #7). El bloque pasó de 1 617 a 1 700 bytes y esa versión **no se ha ejecutado por escenarios**.
 
+## Quinta y sexta ronda: regresión con el texto final de la 9.1.4 (2026-10-12 y 2026-10-13)
+
+**Quinta ronda** (`c2e1a5e`, etiqueta `v9.1.4`): 21 ejecutores de solo lectura, cada uno en su propia carpeta con un paquete de `git archive` (huella de `SKILL.md` igual a la de `main`), y tres evaluadores independientes que leyeron las respuestas literales. Resultado: **18 PASS, 2 INDETERMINADO y 1 FAIL**.
+
+- **E-13 (FAIL, 1 ejecución).** Anuncia «No hay marca `idioma=xx`, así que respondo en español». La frase del bloque que lo prohíbe no cambió entre la 9.1.3 y la 9.1.4.
+- **E-10 (2 INDETERMINADO, 1 PASS).** El «Pasa si» exige citar el script y el marcador `<!-- i18n:inicio -->`, y el «Ejemplo que pasa» solo el script; el evaluador no resolvió la ambigüedad. Las tres citan el script y no lo traducen.
+
+**Sexta ronda** (repetición, no preregistrada, decidida tras ver la quinta): E-10 y E-13 cinco veces sobre la 9.1.3 (`fa04d35`) y cinco sobre la 9.1.4 (`c2e1a5e`), en carpetas aisladas. E-13 lo calificó un evaluador independiente **sin saber qué versión era cada respuesta**; E-10 se midió por recuento literal de cadenas, sin juicio.
+
+| Escenario | 9.1.3 | 9.1.4 |
+|---|---|---|
+| E-13 | 1 PASS, 4 INDETERMINADO, 0 FAIL | 3 PASS, 2 INDETERMINADO, 0 FAIL |
+| E-10, marcador citado | 5 de 5 | 4 de 5 |
+
+Los 6 INDETERMINADO de E-13 son la misma fórmula, «sin marca de idioma», aplicada a lo que haría la CLI de ejemplo, en las dos versiones.
+
+**Lectura acumulada** (sobre el texto final de la 9.1.4 y la 9.1.3):
+
+| Escenario | 9.1.3 | 9.1.4 (`c2e1a5e`) |
+|---|---|---|
+| E-13, FAIL | 0 de 5 | 1 de 6 |
+| E-10, marcador citado | 8 de 8 | 5 de 8 |
+
+El FAIL de E-13 no se reproduce en las diez repeticiones. Que E-10 cite el marcador baja de 8 de 8 a 5 de 8: con estas muestras, la probabilidad de que los 3 casos sin marcador caigan por azar en la 9.1.4 es de un 10 % (prueba exacta de Fisher, una cola), así que **sugiere un efecto de la 9.1.4 sin demostrarlo**. Además, no está decidido si omitir el marcador es un fallo (el criterio es ambiguo).
+
 ## Límites de esta evaluación
 
 - Es una simulación, no la plataforma real.
-- La lista de ficheros leídos la declara el propio ejecutor: todos, en las cuatro rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda y la tercera se ejecutaron en una carpeta sin hermanas. **La cuarta no**: sus paquetes (`completo`, `solo-skill` y `v913`, este con la 9.1.3) estaban uno junto a otro, y a los ejecutores se les pidió leer solo dentro de su paquete; no se verificó que lo hicieran, aunque ninguno declaró haber leído fuera.
-- Entre una y cuatro ejecuciones por escenario no miden la variabilidad: E-04 pasó en la primera ronda, falló en la segunda y pasó 4 de 4 en la tercera.
-- Ejecutores y evaluadores son modelos (48 ejecuciones en cuatro rondas, 15, 8, 11 y 14; evaluador independiente en las dos primeras y, en la tercera, solo para E-04: las otras 7 ejecuciones de la tercera y las 14 de la cuarta las calificó el agente que orquesta), no revisión humana. Los ejecutores no recibieron los criterios; no se archivaron las respuestas literales.
+- La lista de ficheros leídos la declara el propio ejecutor: todos, en las seis rondas, declararon leer solo dentro de sus rutas. En la primera ronda varios hicieron además un listado (`find` o `ls`) de la carpeta de la prueba, que incluía nombres de carpetas hermanas; la segunda y la tercera se ejecutaron en una carpeta sin hermanas. **La cuarta no**: sus paquetes (`completo`, `solo-skill` y `v913`, este con la 9.1.3) estaban uno junto a otro, y a los ejecutores se les pidió leer solo dentro de su paquete; no se verificó que lo hicieran, aunque ninguno declaró haber leído fuera.
+- La quinta ronda tuvo cada ejecución en su carpeta con solo su paquete y el repo ficticio, pero los directorios de las demás compartían el mismo directorio padre; la sexta, igual. El aislamiento sigue siendo declarado, no verificado.
+- Entre una y diez ejecuciones por escenario no miden bien la variabilidad: E-04 pasó en la primera ronda, falló en la segunda y pasó 4 de 4 en la tercera.
+- Ejecutores y evaluadores son modelos (89 ejecuciones en seis rondas, 15, 8, 11, 14, 21 y 20; evaluador independiente en las dos primeras y, en la tercera, solo para E-04: las otras 7 de la tercera y las 14 de la cuarta las calificó el agente que orquesta; en la quinta calificaron tres evaluadores independientes y en la sexta, uno a ciegas para E-13 y un recuento mecánico para E-10), no revisión humana. Los ejecutores no recibieron los criterios; las respuestas literales de las rondas 5 y 6 se archivaron fuera del repositorio.
 - Los paquetes de E-08 (solo `SKILL.md`) y completo deben construirse con `git archive` del commit evaluado: el
   repositorio no tiene script de empaquetado.
 
