@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=dd5bf45399d5 estado=borrador-ia -->
+<!-- i18n fuente-sha256=5c6cc7a25fd8 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -17,17 +17,19 @@ one.
   repository is translated into. Without a marker nothing changes, and do not announce or explain the
   response language: the Spanish files are read and R16 keeps governing (answer in the person's language);
   neither the language of pasted text nor the system's decides.
-- **Available:** `es` (the original files) and `en` (`i18n/en/`, which you are reading). `en-GB` or
-  `en_US.UTF-8` fall back to `en`.
-  If you doubt how a marker is resolved or what is not translated, read [idioma-de-la-respuesta](references/idioma-de-la-respuesta.md).
+- **Available:** `es` (the original files) and the mirrors `en`, `fr`, `hi` and `zh-Hans`
+  (`i18n/<language>/`). `en-GB`, `fr-CA` or `zh-CN` fall back to their own; `zh-Hant` and `zh-TW` do not.
+  Variants, notices and what is not translated: [idioma-de-la-respuesta](references/idioma-de-la-respuesta.md).
 - **Unavailable or malformed (D4).** Say so, name the available languages and continue as without a marker.
-- **If the marker selects `en`.** This translation, with its references and templates in `i18n/en/`, replaces the
-  Spanish files. Answer in English and open every answer with “Translation machine-generated, not
-  human-reviewed.” (D22), only in that case. The translation is a mirror: if it disagrees with the Spanish `SKILL.md`, the Spanish one
-  prevails (R17). With `idioma=es` the Spanish files are followed and the answer is in Spanish.
-- **Fail-safe (D25).** If you cannot read `i18n/en/`, continue with the Spanish files, answer as without a
-  marker (R16), say so in one sentence and add a line in English: “English version unavailable;
-  continuing with the Spanish files.”.
+- **If the marker selects a translated language.** Read `i18n/<language>/SKILL.md` instead of this file
+  and, from there, its references and templates. Answer in that language and open every answer with its
+  machine-translation notice (D22; for `en`: “Translation machine-generated, not human-reviewed.”; for the
+  others, in the reference), only in that case. The translation is a mirror: if it disagrees with the
+  Spanish `SKILL.md`, the Spanish one prevails (R17). With `idioma=es` the Spanish files are followed and the
+  answer is in Spanish.
+- **Fail-safe (D25).** If you cannot read `i18n/<language>/`, continue with the Spanish files, answer as
+  without a marker (R16), say so in one sentence and add that language's line (for `en`: “English version
+  unavailable; continuing with the Spanish files.”; for the others, in the reference).
 - **Not translated:** identifiers, module markers, file names, commands and code.
 
 ## When it applies
