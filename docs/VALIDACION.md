@@ -185,3 +185,11 @@ Pendiente, o medido solo en parte, en 9.1.0:
 - **Límite de `description` de la plataforma de destino:** el validador local no lo impone, y la ayuda
   de claude.ai habla de 200 caracteres (`no-comprobado`).
 
+
+## Adenda 9.2.0 (2026-10-13): francés, chino simplificado e hindi
+
+Nivel `simulada` salvo lo indicado. Detalle y criterios en [ESCENARIOS-9.2.0.md](ESCENARIOS-9.2.0.md).
+
+- Paridad estructural de los espejos `en`, `fr`, `zh-Hans` y `hi` con los originales: 0 errores y 0 avisos (`local`; para `fr`, con `--tolera-letras éÉ`). 148 pruebas de los scripts, OK (`local`).
+- Ronda 7: 30 ejecuciones (E-01 a E-14 reejecutados y E-15 a E-24 nuevos), calificadas por tres evaluadores independientes con búsquedas literales: 30 PASS, 0 FAIL, 0 INDETERMINADO. E-21 pasa por equivalente, no literal (el paquete sin `i18n/` no contiene la frase fija francesa).
+- Límites: ninguna persona nativa ha revisado fr, zh-Hans ni hi (hi, `experimental`); el aislamiento de los ejecutores es declarado; muestras de una a dos ejecuciones por escenario; activación real en la plataforma sin medir.

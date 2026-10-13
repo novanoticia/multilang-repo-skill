@@ -33,12 +33,13 @@ O copiando la carpeta de la skill a mano: `skills/multilang-repo-skill/` va en `
 
 ## Idiomas
 
-La skill está en español (idioma de referencia) y tiene una traducción al inglés. Para pedir la
-respuesta en inglés, escribe `idioma=en` (o `lang=en`) en la primera línea de tu mensaje; la marca vale
+La skill está en español (idioma de referencia) y tiene traducciones al inglés (`en`), francés (`fr`), chino
+mandarín simplificado (`zh-Hans`) e hindi (`hi`, `experimental`). Para pedir la respuesta en uno de ellos,
+escribe p. ej. `idioma=en` o `idioma=fr` (o `lang=…`) en la primera línea de tu mensaje; la marca vale
 para toda la conversación y elige el idioma de la respuesta, no los idiomas a los que se traduce tu
 repositorio (eso se acuerda en la conversación). Sin marca no cambia nada respecto a 9.0.0: la skill sigue respondiendo en el
-idioma en que escribes (R16) y usa los ficheros en español. Un idioma no disponible da un aviso y
-continúa como sin marca. La traducción es un `borrador-ia` sin revisión humana
+idioma en que escribes (R16) y usa los ficheros en español. Un idioma no disponible (también el chino tradicional: `zh-Hant`, `zh-TW`) da un aviso y
+continúa como sin marca. Las traducciones son `borrador-ia` sin revisión humana
 (estado en [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)).
 Este README también está en [inglés](README.en.md). <!-- i18n:exento -->
 
@@ -49,7 +50,7 @@ skills/multilang-repo-skill/
 ├── SKILL.md       núcleo: activación, precedencia, permisos, seguridad, evidencia, modos, escala, módulos, flujo y cierre
 ├── references/    12 módulos que se leen solo si se activan
 ├── assets/        5 plantillas (datos y alcance, registro de sesión, inventario, escenarios, evidencias)
-├── i18n/          traducción al inglés (espejo de lo anterior), glosario y estado de las traducciones
+├── i18n/          traducciones (espejo de lo anterior: en, fr, zh-Hans, hi), glosarios y estado de las traducciones
 └── scripts/       verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py, comprobar_paridad.py y sus pruebas
 ```
 
@@ -62,7 +63,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.4 (a fecha 2026-10-13). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+Versión 9.2.0 (a fecha 2026-10-13). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
 [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
@@ -83,9 +84,10 @@ Versión 9.1.4 (a fecha 2026-10-13). Lo comprobado, con su nivel (detalle de 9.0
   traduce un repositorio. No se ha medido por escenarios (`pendiente`).
 - **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 700 bytes) y su detalle pasa a una
   referencia nueva. Regresión (`simulada`, rondas 4 a 6): sin fallos reproducibles, pero E-10 cita el marcador `<!-- i18n:inicio -->` en 5 de 8 ejecuciones (8 de 8 con la 9.1.3), lo que desde el 2026-10-13 ya no cuenta como fallo y E-13 falló 1 de 6 (0 de 5 con la 9.1.3); sugiere un efecto de la 9.1.4, sin demostrarlo.
+- **9.2.0:** idiomas `fr`, `zh-Hans` y `hi` (19 ficheros cada uno, `borrador-ia`; hindi `experimental`); `zh-Hant`/`zh-TW` no caen en `zh-Hans`. Regresión de la ronda 7 (`simulada`): 30 ejecuciones, 30 PASS (E-21 por equivalente, no literal), calificadas por tres evaluadores independientes (detalle en [docs/ESCENARIOS-9.2.0.md](docs/ESCENARIOS-9.2.0.md)).
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
-entre una y diez ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha
+entre una y diez ejecuciones cada uno. Las traducciones (en, fr, zh-Hans, hi) son `borrador-ia` que ninguna persona ha
 revisado. La activación y los 17 escenarios de 9.0.0 se midieron con la `description` y el texto de 9.0.0:
 9.1.x los cambia (`description` de 966 a 1023 caracteres y un bloque nuevo en `SKILL.md`) y no se han
 repetido (`pendiente`, `plataforma`). La subida a claude.ai no se ha probado (su ayuda limita `description` a 200

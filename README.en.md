@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=ecce9ca43818 estado=borrador-ia -->
+<!-- i18n fuente-sha256=db9aa0c61759 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -34,12 +34,12 @@ all your projects) or in `.claude/skills/` of a repository. Check that it shows 
 
 ## Languages
 
-The skill is in Spanish (the reference language) and has an English translation. To ask for the answer in
-English, write `idioma=en` (or `lang=en`) on the first line of your message; the marker holds for the
+The skill is in Spanish (the reference language) and has translations into English (`en`), French (`fr`), simplified Mandarin Chinese (`zh-Hans`) and Hindi (`hi`, `experimental`). To ask for the answer in
+one of them, write e.g. `idioma=en` or `idioma=fr` (or `lang=…`) on the first line of your message; the marker holds for the
 whole conversation and chooses the response language, not the languages your repository is translated into
 (that is agreed in the conversation). Without a marker nothing changes with respect to 9.0.0: the skill keeps answering in
-the language you write in (R16) and uses the Spanish files. An unavailable language gives a notice and
-continues as without a marker. The translation is a `borrador-ia` (AI draft) with no human review (status in
+the language you write in (R16) and uses the Spanish files. An unavailable language (traditional Chinese too: `zh-Hant`, `zh-TW`) gives a notice and
+continues as without a marker. The translations are a `borrador-ia` (AI draft) with no human review (status in
 [skills/multilang-repo-skill/i18n/ESTADO.md](skills/multilang-repo-skill/i18n/ESTADO.md)). This README is
 also available in [Spanish](README.md). <!-- i18n:exento -->
 
@@ -50,7 +50,7 @@ skills/multilang-repo-skill/
 ├── SKILL.md       core: activation, precedence, permissions, security, evidence, modes, scale, modules, workflow and closing
 ├── references/    12 modules that are read only if they are activated
 ├── assets/        5 templates (data and scope, session log, inventory, scenarios, evidence)
-├── i18n/          English translation (mirror of the above), glossary and translation status
+├── i18n/          translations (mirror of the above: en, fr, zh-Hans, hi), glossaries and translation status
 └── scripts/       verificar_adiciones.py, validar_catalogos.py, resolver_idioma.py, comprobar_paridad.py and their tests
 ```
 
@@ -62,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.4 (as of 2026-10-13). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+Version 9.2.0 (as of 2026-10-13). What has been checked, with its level (details of 9.0.0 and the 9.1.x
 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
@@ -83,9 +83,10 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   repository is translated into. It has not been measured by scenarios (`pendiente`).
 - **9.1.4:** the “Response language” block is shortened (from 1,862 to 1,700 bytes) and its detail moves to a
   new reference. Regression (`simulada`, rounds 4 to 6): no reproducible failures, but E-10 cites the `<!-- i18n:inicio -->` marker in 5 of 8 runs (8 of 8 on 9.1.3), which since 2026-10-13 no longer counts as a failure and E-13 failed 1 of 6 (0 of 5 on 9.1.3); it suggests an effect of 9.1.4, without proving it.
+- **9.2.0:** languages `fr`, `zh-Hans` and `hi` (19 files each, `borrador-ia`; Hindi `experimental`); `zh-Hant`/`zh-TW` do not fall back to `zh-Hans`. Round-7 regression (`simulada`): 30 runs, 30 PASS (E-21 by equivalent, not literal), graded by three independent evaluators (details in [docs/ESCENARIOS-9.2.0.md](docs/ESCENARIOS-9.2.0.md)).
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
-ten runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
+ten runs each. The translations (en, fr, zh-Hans, hi) are a `borrador-ia` that no person has reviewed. Activation and the 17
 scenarios of 9.0.0 were measured with the `description` and the text of 9.0.0: 9.1.x changes them
 (`description` from 966 to 1023 characters and a new block in `SKILL.md`) and they have not been repeated
 (`pendiente` (pending), `plataforma`). Uploading to claude.ai has not been tested (its help limits `description` to

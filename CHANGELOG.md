@@ -3,6 +3,23 @@
 El formato sigue Doc5: Añadido, Cambiado, Corregido y Limitaciones, con las excepciones aprobadas (D23) y
 las líneas del original que cambian. Las frases de estado valen a la fecha de cada entrada (R8).
 
+## 9.2.0 — 2026-10-13
+
+### Añadido
+- **Idiomas de respuesta `fr` (francés), `zh-Hans` (chino mandarín simplificado) y `hi` (hindi)**, cada uno con su espejo `i18n/<idioma>/` de 19 ficheros (`SKILL.md`, 13 referencias, 5 plantillas) y su glosario (`i18n/GLOSARIO.<idioma>.md`). `es` sigue siendo la referencia y `en` no cambia de comportamiento. Todos son `borrador-ia`; el hindi se entrega como `experimental` (T6) con aviso bilingüe.
+- `zh-Hant`, `zh-TW`, `zh-HK` y `zh-MO` **no** caen en `zh-Hans`: dan «no disponible» (D3, D4).
+- `scripts/comprobar_paridad.py --tolera-letras` (para que el francés pueda usar letras como `é` sin que cuenten como español) y `resolver_idioma.py`: no sigue un respaldo declarado tras truncar una etiqueta con escritura (`zh-Hant` ya no vuelve a `zh`). Con pruebas nuevas.
+- `docs/ESCENARIOS-9.2.0.md`: preregistro de E-15 a E-24 y resultados de la ronda 7.
+
+### Cambiado
+- `SKILL.md`, bloque «Idioma de la respuesta»: de «si la marca elige `en`» a «si la marca elige un idioma traducido» (1 896 bytes, presupuesto 1 900). Las frases fijas por idioma pasan a `references/idioma-de-la-respuesta.md`.
+- **Línea 5**, `metadata.version`, de 9.1.4 a 9.2.0 (y `plugin.json`). La `description` (línea 3) no cambia: no menciona los idiomas nuevos.
+
+### Limitaciones
+- Ronda 7 (`simulada`): 30 ejecuciones, 30 PASS, 0 FAIL. E-21 pasa por equivalente, no literal (ver `docs/ESCENARIOS-9.2.0.md`). E-10 y E-13 salen bien esta vez, lo que no resuelve su variabilidad anterior.
+- **Ninguna persona nativa ha revisado fr, zh-Hans ni hi**; el evaluador (modelo) comprueba idioma, aviso e identificadores, no naturalidad. El chino usa 用户 para «la persona».
+- Activación real en la plataforma y aislamiento de los ejecutores: no medidos / declarados.
+
 ## Sin publicar — 2026-10-13 (solo documentación)
 
 No cambia `SKILL.md`, los scripts ni la versión (sigue la 9.1.4). Registra dos rondas de regresión sobre el texto final de la 9.1.4.

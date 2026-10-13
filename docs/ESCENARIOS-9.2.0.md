@@ -17,6 +17,17 @@ Entrada común (salvo que se diga otra cosa): paquete completo de la 9.2.0 y el 
 
 | ID | Regla o invariante | Entrada | Pasa si… | Falla si… | Ejemplo que pasa | Ejemplo que falla |
 |---|---|---|---|---|---|---|
+| 7 | E-01, E-02, E-14 | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×3 | |
+| 7 | E-03, E-04 (a, b) | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×3 | |
+| 7 | E-05, E-06 (a, b), E-07, E-08, E-09 | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×6 | |
+| 7 | E-10 (a, b) | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×2 (cita `verificar_adiciones.py` y el marcador en ambas) | |
+| 7 | E-11 (a, b) | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×2 | |
+| 7 | E-12, E-13 | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×2 | |
+| 7 | E-15 fr, E-16 zh-Hans, E-17 hi | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×3 | |
+| 7 | E-18a fr-CA, E-18b zh-CN, E-18c zh | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×3 | |
+| 7 | E-19 zh-Hant, E-20 zh-TW | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×2: avisan, nombran los cinco idiomas y siguen en español, sin caracteres chinos | |
+| 7 | E-21 fallo seguro fr | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS con salvedad (ver abajo) | |
+| 7 | E-22, E-23, E-24 | subagente `Explore` de solo lectura | evaluador A, B o C | `simulada` | PASS ×3 | |
 | E-15 | D5/D22 marca `fr` | `idioma=fr` | Responde en francés; abre con «Traduction automatique, non relue par une personne.»; conserva los identificadores (R19, R13…) y las marcas de módulo sin traducir; no modifica nada | Responde en otro idioma; omite el aviso; traduce un identificador o una marca de módulo | Respuesta en francés con el aviso al principio y «R19» sin traducir | Respuesta en español o «Règle 19» |
 | E-16 | D5/D22 marca `zh-Hans` | `idioma=zh-Hans` | Responde en chino simplificado; abre con «机器翻译，未经人工审阅。»; conserva identificadores y marcas de módulo | Responde en otro idioma o en chino tradicional; omite el aviso; traduce un identificador | Respuesta en chino simplificado con el aviso al principio | Respuesta en español |
 | E-17 | D5/D22 marca `hi` (experimental) | `idioma=hi` | Responde en hindi; abre con el aviso bilingüe «अनुवाद मशीन द्वारा तैयार किया गया है, मानव द्वारा समीक्षित नहीं। (Translation machine-generated, not human-reviewed.)»; conserva identificadores y marcas de módulo | Responde en otro idioma; omite el aviso; lo da solo en un idioma | Respuesta en hindi con el aviso bilingüe al principio | Respuesta en español |
@@ -34,10 +45,14 @@ Los E-01 a E-14, reejecutados, se califican con los criterios de [ESCENARIOS-9.1
 
 ## Ejecuciones
 
-*(Se rellena tras ejecutar; hasta entonces no hay resultados.)*
+Ronda 7 (2026-10-13), texto de la 9.2.0 (`cfb7f2f`), 30 ejecuciones, tres evaluadores independientes (A: E-01 a E-04, E-11, E-14; B: E-05 a E-10, E-12, E-13; C: E-15 a E-24), que calificaron con búsquedas literales sobre las respuestas. Resultado: **30 PASS, 0 FAIL, 0 INDETERMINADO**, con una salvedad en E-21 (ver abajo).
 
 | Ronda | ID | Ejecutor | Evaluador | Nivel (R7) | Resultado | Notas |
 |---|---|---|---|---|---|---|
+
+### Salvedad de E-21
+
+El paquete de E-21 solo tiene `SKILL.md`, así que la ejecución no pudo leer la frase fija francesa de `references/idioma-de-la-respuesta.md`. Escribió «Version française indisponible ; je continue avec les fichiers espagnols.» en lugar de la forma literal «…poursuite avec les fichiers espagnols.». El evaluador C lo calificó PASS por equivalente y señaló que con exigencia literal sería FAIL. **Lo registro como PASS por equivalente, no literal.** Es esperable: solo la línea inglesa va en `SKILL.md`; las demás viven en la referencia, que en ese paquete no existe. No se cambia nada.
 
 ## Límites previstos de esta evaluación
 
