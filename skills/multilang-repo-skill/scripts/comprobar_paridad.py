@@ -136,6 +136,8 @@ def contenido_comparable(info, lineas):
 def regex_espanol(tolera=""):
     """Letras propias del español, sin las que la lengua de destino comparte (p. ej. «é» en francés)."""
     letras = "".join(c for c in LETRAS_ESPANOL if c not in tolera)
+    if not letras:
+        return re.compile(r"(?!)")
     return re.compile("[" + re.escape(letras) + "]")
 
 

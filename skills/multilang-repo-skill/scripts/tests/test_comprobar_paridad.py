@@ -296,6 +296,11 @@ class PruebasNotaYTextoSinTraducir(unittest.TestCase):
         incs = cp.comparar(ES, trad, tolera="]^-\\")
         self.assertIn("texto_sin_traducir", codigos(incs))
 
+    def test_tolerar_todas_las_letras_no_rompe_la_regex(self):
+        trad = en(EN_CUERPO + "\nIl dit mañana.\n")
+        incs = cp.comparar(ES, trad, tolera="ñÑ¿¡áéíóúÁÉÍÓÚü")
+        self.assertNotIn("texto_sin_traducir", codigos(incs))
+
 
 class PruebasArbol(unittest.TestCase):
     def setUp(self):

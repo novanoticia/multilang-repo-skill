@@ -495,9 +495,4 @@ chaînes de références.
 | [scripts/resolver_idioma.py](../../scripts/resolver_idioma.py) | Exécutez-le pour tester la table de sélection ; copiez-le dans le projet uniquement si la conception approuvée le prévoit (D7). |
 | [scripts/tests/](../../scripts/tests/) | Si vous modifiez un script : `python3 -B -m unittest discover -s scripts/tests` depuis la racine de la skill. |
 
-Les chemins de ce tableau sont relatifs au dossier de la skill ; les liens vers `references/` et `assets/`
-de cette traduction pointent vers les copies traduites dans `i18n/fr/`. Depuis le dépôt de travail,
-invoquez les scripts avec leur chemin complet (dans les références, il apparaît sous la forme
-`<skill>/scripts/…`). Ils n'utilisent que la bibliothèque standard de Python 3.8 ou supérieur, ne
-modifient pas de fichiers et expliquent leur usage avec `--help`. Ils signalent et comparent ; ils ne
-décident pas à la place de la personne ni ne remplacent les outils de l'écosystème.
+Les chemins de ce tableau sont relatifs au dossier de la skill ; les liens vers `references/` et `assets/` de cette traduction pointent vers les copies traduites dans `i18n/fr/`. Depuis le dépôt de travail, invoquez les scripts avec leur chemin complet (dans les références, il apparaît sous la forme `<skill>/scripts/…`). Ils n'utilisent que la bibliothèque standard de Python 3.8 ou supérieur, ne modifient pas de fichiers et expliquent leur usage avec `--help`. Ils signalent et comparent ; ils ne décident pas à la place de la personne ni ne remplacent les outils de l'écosystème.

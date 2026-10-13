@@ -84,10 +84,10 @@ python3 -B $S/scripts/comprobar_paridad.py --par AGENTS.md AGENTS.en.md --nota-i
    «Elaborado con asistencia de IA; requiere revisión humana.». Nunca en ficheros que consume una
    máquina (código, JSON, YAML).
 10. **Prosa en español.** Los textos de la skill, los mensajes de los scripts y la documentación van
-    en español con acentuación correcta; los nombres en el código, en ASCII. Excepción: `i18n/en/`,
-    `README.en.md` y `AGENTS.en.md` van en inglés por diseño (restricción 11). Los mensajes de los
+    en español con acentuación correcta; los nombres en el código, en ASCII. Excepción: `i18n/<idioma>/`
+    (`en`, `fr`, `hi`, `zh-Hans`), `README.en.md` y `AGENTS.en.md` van en su idioma por diseño (restricción 11). Los mensajes de los
     scripts y `docs/` siguen en español.
-11. **El español es la fuente; el inglés es un espejo.** Cada fichero de `i18n/en/` y cada `.en.md`
+11. **El español es la fuente; los demás idiomas son espejos.** Cada fichero de `i18n/<idioma>/` y cada `.en.md`
     empieza por `<!-- i18n fuente-sha256=… estado=… -->` con la huella de su original
     (`comprobar_paridad.py --hash FICHERO`). Si cambias un original, el comprobador marca su traducción
     como desfasada: retradúcela, o revisa que sigue siendo fiel y actualiza la huella. Identificadores,
