@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=4b52679a62d0 estado=borrador-ia -->
+<!-- i18n fuente-sha256=df2c21e65d58 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -62,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Status
 
-Version 9.1.4 (as of 2026-10-12). What has been checked, with its level (details of 9.0.0 and the 9.1.x
+Version 9.1.4 (as of 2026-10-13). What has been checked, with its level (details of 9.0.0 and the 9.1.x
 addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** skill validator, structural checks and identifier checks without errors (`local`); 78
@@ -85,7 +85,7 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
   new reference. Regression (`simulada`, rounds 4 to 6): no reproducible failures, but E-10 cites the `<!-- i18n:inicio -->` marker in 5 of 8 runs (8 of 8 on 9.1.3) and E-13 failed 1 of 6 (0 of 5 on 9.1.3); it suggests an effect of 9.1.4, without proving it.
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
-four runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
+ten runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17
 scenarios of 9.0.0 were measured with the `description` and the text of 9.0.0: 9.1.x changes them
 (`description` from 966 to 1023 characters and a new block in `SKILL.md`) and they have not been repeated
 (`pendiente` (pending), `plataforma`). Uploading to claude.ai has not been tested (its help limits `description` to
