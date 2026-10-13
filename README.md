@@ -62,7 +62,7 @@ cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tes
 
 ## Estado
 
-Versión 9.1.4 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
+Versión 9.1.4 (a fecha 2026-10-13). Lo comprobado, con su nivel (detalle de 9.0.0 y adenda de 9.1.x en
 [docs/VALIDACION.md](docs/VALIDACION.md)):
 
 - **9.0.0:** validador de skills, comprobaciones estructurales y de identificadores sin errores
@@ -82,10 +82,10 @@ Versión 9.1.4 (a fecha 2026-10-12). Lo comprobado, con su nivel (detalle de 9.0
 - **9.1.3:** una frase que aclara que `idioma=` elige el idioma de la respuesta y no los idiomas a los que se
   traduce un repositorio. No se ha medido por escenarios (`pendiente`).
 - **9.1.4:** el bloque «Idioma de la respuesta» se acorta (de 1 862 a 1 700 bytes) y su detalle pasa a una
-  referencia nueva. Regresión (`simulada`): E-05 a E-09 y E-12 pasan; E-10 falló 1 de 4 ejecuciones (0 de 3 en la 9.1.3).
+  referencia nueva. Regresión (`simulada`, rondas 4 a 6): sin fallos reproducibles, pero E-10 cita el marcador `<!-- i18n:inicio -->` en 5 de 8 ejecuciones (8 de 8 con la 9.1.3) y E-13 falló 1 de 6 (0 de 5 con la 9.1.3); sugiere un efecto de la 9.1.4, sin demostrarlo.
 
 Límites: no ha tenido revisión humana ni uso real en proyectos; los escenarios son simulaciones con
-entre una y cuatro ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha
+entre una y diez ejecuciones cada uno. La traducción al inglés es un `borrador-ia` que ninguna persona ha
 revisado. La activación y los 17 escenarios de 9.0.0 se midieron con la `description` y el texto de 9.0.0:
 9.1.x los cambia (`description` de 966 a 1023 caracteres y un bloque nuevo en `SKILL.md`) y no se han
 repetido (`pendiente`, `plataforma`). La subida a claude.ai no se ha probado (su ayuda limita `description` a 200
