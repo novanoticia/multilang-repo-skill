@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=df2c21e65d58 estado=borrador-ia -->
+<!-- i18n fuente-sha256=ecce9ca43818 estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
@@ -82,7 +82,7 @@ addendum in [docs/VALIDACION.md](docs/VALIDACION.md)):
 - **9.1.3:** one sentence clarifying that `idioma=` chooses the response language and not the languages a
   repository is translated into. It has not been measured by scenarios (`pendiente`).
 - **9.1.4:** the “Response language” block is shortened (from 1,862 to 1,700 bytes) and its detail moves to a
-  new reference. Regression (`simulada`, rounds 4 to 6): no reproducible failures, but E-10 cites the `<!-- i18n:inicio -->` marker in 5 of 8 runs (8 of 8 on 9.1.3) and E-13 failed 1 of 6 (0 of 5 on 9.1.3); it suggests an effect of 9.1.4, without proving it.
+  new reference. Regression (`simulada`, rounds 4 to 6): no reproducible failures, but E-10 cites the `<!-- i18n:inicio -->` marker in 5 of 8 runs (8 of 8 on 9.1.3), which since 2026-10-13 no longer counts as a failure and E-13 failed 1 of 6 (0 of 5 on 9.1.3); it suggests an effect of 9.1.4, without proving it.
 
 Limits: it has had no human review nor real use in projects; the scenarios are simulations with one to
 ten runs each. The English translation is a `borrador-ia` that no person has reviewed. Activation and the 17

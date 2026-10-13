@@ -10,9 +10,12 @@ No cambia `SKILL.md`, los scripts ni la versión (sigue la 9.1.4). Registra dos 
 ### Añadido
 - `docs/ESCENARIOS-9.1.0.md` y `docs/VALIDACION.md` (adenda) recogen la **quinta ronda** (2026-10-12, `simulada`, sobre `c2e1a5e`): 21 ejecuciones calificadas por tres evaluadores independientes, 18 PASS, 2 INDETERMINADO y 1 FAIL; y la **sexta** (2026-10-13): E-10 y E-13 cinco veces sobre la 9.1.3 y cinco sobre la 9.1.4, con E-13 calificado a ciegas y E-10 por recuento literal.
 
+### Cambiado
+- **Criterio de E-10** (`docs/ESCENARIOS-9.1.0.md`): el «Pasa si» deja de exigir citar el marcador `<!-- i18n:inicio -->`; basta citar `verificar_adiciones.py`. Decisión de la persona del 2026-10-13, **tomada con los resultados de las rondas 4 a 6 a la vista**, para resolver una ambigüedad del propio criterio. Los veredictos ya registrados no se modifican; con el criterio nuevo, las 3 ejecuciones sin marcador de E-10 (E-10-a y E-10-b de la quinta ronda, que el evaluador independiente dejó INDETERMINADO, y E-10-9.1.4-4 de la sexta, que sale de un recuento mecánico y que califiqué yo como INDETERMINADO) pasarían a PASS.
+
 ### Limitaciones (lo que dicen esas rondas)
 - **E-13** falló una vez (anunció «No hay marca `idioma=xx`, así que respondo en español»): 1 de 6 con la 9.1.4 y 0 de 5 con la 9.1.3. Con diez repeticiones no se reprodujo, pero la muestra es pequeña.
-- **E-10** cita el script siempre y el marcador `<!-- i18n:inicio -->` en 5 de 8 ejecuciones con la 9.1.4 y en 8 de 8 con la 9.1.3. Con tres casos sin marcador todos en la 9.1.4, la probabilidad de que sea azar es de un 10 % (prueba exacta de Fisher, una cola): **sugiere un efecto de la 9.1.4, sin demostrarlo**. Además, el criterio de E-10 es ambiguo (el «Pasa si» exige el marcador y el «Ejemplo que pasa» no), y **no se ha decidido si omitirlo es un fallo**.
+- **E-10** cita el script siempre y el marcador `<!-- i18n:inicio -->` en 5 de 8 ejecuciones con la 9.1.4 y en 8 de 8 con la 9.1.3. Con tres casos sin marcador todos en la 9.1.4, la probabilidad de que sea azar es de un 10 % (prueba exacta de Fisher, una cola): **sugiere un efecto de la 9.1.4, sin demostrarlo**. El criterio de E-10 era ambiguo (el «Pasa si» exigía el marcador y el «Ejemplo que pasa» no); el 2026-10-13 se decidió que omitirlo **no** es un fallo (ver «Cambiado»). El hecho medido, 5 de 8 frente a 8 de 8, queda como observación.
 - La calificación de E-10-a en la cuarta ronda (FAIL, por el agente que orquesta) habría sido INDETERMINADO con un evaluador independiente.
 - **Las notas de la Release `v9.1.4` no mencionan estas dos rondas** (se publicaron antes). No se han modificado.
 - El aislamiento de los ejecutores sigue siendo declarado, no verificado.
