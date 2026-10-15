@@ -1,8 +1,9 @@
-<!-- i18n fuente-sha256=fa2bc3b22c7a estado=borrador-ia -->
+<!-- i18n fuente-sha256=cde96dd358bb estado=borrador-ia -->
 
 # MultiLang Repo Skill
 
-[![Current version on main](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnovanoticia%2Fmultilang-repo-skill%2Fmain%2F.claude-plugin%2Fplugin.json&query=%24.version&prefix=v&label=Current%20version%20on%20main&color=blue)](https://github.com/novanoticia/multilang-repo-skill/blob/main/.claude-plugin/plugin.json)
+[![Version on main](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnovanoticia%2Fmultilang-repo-skill%2Fmain%2F.claude-plugin%2Fplugin.json&query=%24.version&prefix=v&label=main&color=blue)](https://github.com/novanoticia/multilang-repo-skill/blob/main/.claude-plugin/plugin.json)
+[![Latest published version](https://img.shields.io/github/v/release/novanoticia/multilang-repo-skill?display_name=tag&label=release&color=green)](https://github.com/novanoticia/multilang-repo-skill/releases/latest)
 
 A Claude Code skill that guides an agent to make a repository multilingual: programs, libraries,
 servers, CLIs, skills, plugins, instructions for models, hybrid projects and repositories that already
