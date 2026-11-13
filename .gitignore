@@ -1,0 +1,4 @@
+# Cachés y bytecode generados por Python.
+__pycache__/
+*.pyc
+*.pyo
