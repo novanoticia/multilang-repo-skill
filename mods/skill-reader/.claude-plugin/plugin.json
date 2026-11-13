@@ -1,7 +1,8 @@
 {
   "name": "novanoticia-lector-skills",
   "displayName": "NovaNoticia · Lector de skills",
-  "version": "0.1.2",
+  "version": "0.1.3",
+  "icon": "./.claude-plugin/icon.png",
   "description": "Mod en desarrollo: abre un panel de lectura vacío con /skill-reader. Aún no lee archivos ni traduce.",
   "author": {
     "name": "novanoticia"

@@ -1,8 +1,10 @@
 # NovaNoticia · Lector de skills (en desarrollo)
 
+![Icono de NovaNoticia · Lector de skills](.claude-plugin/icon.png)
+
 Componente opcional y separado de `multilang-repo-skill`.
 
-La versión `0.1.2` contiene el comando `/skill-reader` y un panel vacío con el
+La versión `0.1.3` contiene el comando `/skill-reader` y un panel vacío con el
 botón «Cerrar». Todavía no hay selección de archivo ni traducción. La
 visualización real en Claude Code está pendiente de comprobar.
 
@@ -22,6 +24,7 @@ del agente ni modificará el archivo original.
 ## Archivos actuales
 
 - `.claude-plugin/plugin.json`: identidad y versión propias del componente.
+- Icono del directorio: imagen incluida bajo el título y declarada en el manifiesto.
 - `hooks/hooks.json`: ubicación del módulo del mod.
 - `hooks/register.js`: registro del comando y dibujo del panel propio.
 
@@ -94,6 +97,10 @@ La revisión estática se ha realizado. Las llamadas del módulo se han comproba
 mediante una simulación local con API sustituida, sin ejecutar Claude Code.
 Esa simulación no comprueba el dibujo real, los permisos ni el motor de mods.
 
+Comprobación local del icono: PNG decodificado correctamente, cuadrado de
+1254 × 1254 píxeles, de 1.133.861 bytes, por debajo de 2 MB. Se ha revisado
+visualmente. Su detección por el portal está pendiente de volver a validar.
+
 No se ha ejecutado la validación ni la carga en Claude Code. La documentación
 oficial sitúa el inicio de soporte de mods del CLI en `2.1.287`; la versión mínima
 efectiva de este componente está pendiente de verificar. Desktop y VS Code
@@ -105,15 +112,18 @@ El objetivo es publicar este componente por separado para Claude Code. En el
 portal, su carpeta de plugin es `mods/skill-reader`, no la raíz del repositorio.
 
 La validación de plataforma del borrador, comunicada por la persona usuaria,
-pasó con avisos. Reconoció un mod y ningún servidor MCP. Esa validación no
+pasó con avisos y superó las comprobaciones del nombre y del editor. Reconoció
+un mod y ningún servidor MCP. Esa validación no
 comprueba el funcionamiento del panel ni sustituye el escaneo y la revisión
-posteriores a una solicitud. La versión `0.1.2` requiere una nueva validación
-para comprobar su nombre y documentación.
+posteriores a una solicitud. La versión `0.1.3` requiere una nueva validación
+para comprobar el icono incluido.
 
-El aviso de parecido del nombre con otra marca motivó el uso del identificador
-distintivo `novanoticia-lector-skills`. Su aceptación sigue pendiente del portal.
-El icono del directorio también está pendiente y debe prepararse antes de
-solicitar la publicación.
+El identificador es `novanoticia-lector-skills`. El icono representa un libro
+abierto con flechas de traducción, sin texto ni marcas ajenas.
+
+El portal advierte que el icono de la ficha se toma solo al guardar o enviar
+el plugin por primera vez. Añadirlo a otra versión no garantiza cambiar la
+imagen de una ficha ya guardada; esa imagen debe comprobarse en el portal.
 
 El portal ha mostrado `LOCAL_CODE_MOD` y `LOCAL_CODE_FILE_TYPE` como avisos que
 todavía no rechazan este mod, anunciando una futura restricción para
