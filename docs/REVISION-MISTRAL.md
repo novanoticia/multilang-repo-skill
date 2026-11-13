@@ -44,11 +44,29 @@ enviado; la sangría y los espacios de los extremos de cada línea citada no
 cuentan, el resto es literal. Las comprobaciones de rutas admiten renombrados,
 permisos y binarios sin hunks. Una respuesta inválida hace fallar el check, pero
 no equivale a un defecto demostrado en la skill. Si la API corta la respuesta, el
-informe añade su código de causa (`length` cuando se agota el margen de 8.000
+informe añade su código de causa (`length` cuando se agota el margen de 16.000
 tokens de salida), sin copiar nada del contenido.
 
 El prompt pide que cada comprobación intente romper el cambio y que cada hallazgo
 se intente refutar antes de publicarlo.
+
+**Segunda solicitud.** Si la respuesta llega pero no valida (esquema o citas
+fuera del diff), se pide una vez más; un fallo de API no se repite por esta vía.
+El registro de Actions y el comentario nombran la regla incumplida, nunca el
+contenido de la respuesta.
+
+**Modelos que razonan.** `mistral-large-latest` pasó a razonar antes de
+responder: devuelve el contenido en bloques (`thinking` y `text`) y gastaba el
+margen de salida entero en razonar, de ahí los informes «no completada»
+(medido en `email-triage-plugin#202`: 31.129 caracteres de razonamiento y
+ninguno de respuesta con 8.000 tokens). El revisor lee solo los bloques `text`,
+envía `reasoning_effort: "low"` —si el modelo no admite el parámetro, lo retira
+y repite— y da un margen de 16.000 tokens. Si la API corta la respuesta, el
+informe añade su código de causa (`length`) y el registro de Actions dice el
+modelo servido y cuánto ocupó el razonamiento y cuánto la respuesta: solo
+recuentos, nada del contenido. Cada revisión consume así del orden de 10.000
+tokens de salida; para evitarlo, fija un modelo sin razonamiento en
+`MISTRAL_MODEL`. Que 16.000 basten para diffs mucho mayores no está medido.
 
 No se excluyen las traducciones del diff. El límite es de 150.000 caracteres
 para el diff, 20.000 para la guía y 10.000 por archivo de contexto Python,
@@ -66,7 +84,7 @@ en `.github/scripts/mistral_review_es.json`.
 
 ## Evidencia
 
-- **Local:** 82 tests del revisor y 149 tests existentes de los scripts de la
+- **Local:** 96 tests del revisor y 149 tests existentes de los scripts de la
   skill pasan. Las pruebas del revisor fallaron antes de añadir su implementación;
   además, una prueba detectó un validador saboteado que aceptaba cualquier respuesta.
 - **Simulada:** los tests sustituyen las llamadas a Mistral y la publicación en
