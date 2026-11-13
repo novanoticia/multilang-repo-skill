@@ -1,0 +1,9 @@
+{
+  "name": "skill-reader",
+  "version": "0.1.0",
+  "description": "Base en desarrollo de un mod opcional para leer y traducir un SKILL.md elegido expresamente.",
+  "author": {
+    "name": "novanoticia"
+  },
+  "license": "MIT"
+}
