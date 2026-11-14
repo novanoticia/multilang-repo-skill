@@ -2,7 +2,7 @@
 
 ![Icono de NovaNoticia · Lector de skills](.claude-plugin/icon.png)
 
-Componente opcional y separado de `multilang-repo-skill`. La versión `0.2.0`
+Componente opcional y separado de `multilang-repo-skill`. La versión `0.2.1`
 permite introducir la ruta de un archivo `SKILL.md`, cargarlo expresamente y
 ver su contenido original. La traducción está pendiente de implementar.
 
@@ -18,6 +18,34 @@ aviso sobre el posible consumo o coste.
 
 La traducción será para la persona: no se incorporará como instrucciones del
 agente ni modificará el archivo original.
+
+## Preparación de la traducción
+
+Se incluye un módulo de funciones puras para preparar la prosa y comprobar una
+respuesta estructurada antes de reconstruir el documento. En esta entrega
+todavía no está conectado al panel ni a un modelo.
+
+Los bloques técnicos identificados se conservan localmente. Los literales
+reconocibles dentro de la prosa se sustituyen por marcadores. El mensaje preparado
+contiene solo los segmentos de texto y el idioma de destino; no incluye el
+contenido de los literales protegidos ni metadatos sobre la ruta seleccionada.
+
+La comprobación rechaza respuestas incompletas, segmentos desconocidos o
+repetidos y marcadores ausentes, duplicados o movidos a otro segmento. Una
+respuesta inválida no produce una traducción parcial.
+
+Esta protección es conservadora: un bloque ambiguo puede quedar sin traducir.
+Si un bloque de código comienza dentro de una lista o cita, esta primera
+preparación conserva desde esa apertura hasta el final del documento. También
+puede conservar palabras completas que parezcan nombres técnicos.
+Los nombres de herramientas y comandos escritos como prosa sin marcado no se
+pueden reconocer universalmente. Su conservación y la fidelidad de la prosa
+requieren revisión humana; no basta con superar una comprobación estructural.
+
+La preparación admite originales de hasta 64 KiB UTF-8. El mensaje preparado
+y la respuesta se limitan a 512 KiB; la reconstrucción, a 90.000 caracteres.
+Si el documento genera demasiados fragmentos, falla la preparación antes de
+una futura llamada al modelo.
 
 ## Carga, uso y retirada
 
@@ -93,10 +121,13 @@ no se interceptan ni aprueban permisos o llamadas a herramientas de Claude.
 La [guía de pruebas](PRUEBAS.md) distingue comprobaciones locales simuladas,
 pruebas escritas para el kit oficial y comprobaciones reales pendientes.
 
-No se ha ejecutado la validación, el kit de pruebas ni la carga en Claude Code.
-La documentación oficial sitúa el inicio de soporte de mods del CLI en
-`2.1.287`; la versión mínima efectiva de este componente está pendiente de
-verificar. Desktop y VS Code tampoco se han probado.
+Una prueba manual comunicada por la persona usuaria confirma apertura del panel
+y lectura visible del original, con estado «Preparado», en Claude Code CLI
+`2.1.325` (nivel humano). Esta comprobación corresponde al lector; la preparación
+de traducciones todavía no está conectada al panel.
+
+No se ha confirmado el resultado del kit oficial de pruebas. La versión mínima
+compatible sigue pendiente de determinar. Desktop y VS Code no se han probado.
 
 Comprobación local del icono: PNG válido de 1254 × 1254 píxeles y
 1.133.861 bytes. El portal ha aceptado el icono en la validación de desarrollo.
@@ -111,7 +142,7 @@ La validación de plataforma de la versión anterior, comunicada por la persona
 usuaria, pasó con avisos: reconoció un mod, ningún servidor MCP, el nombre,
 el editor y el icono. Esto no comprueba el funcionamiento del lector ni
 sustituye el escaneo y la revisión posteriores a una solicitud. La versión
-`0.2.0` necesita una validación nueva.
+`0.2.1` necesita una validación nueva.
 
 El portal ha mostrado `LOCAL_CODE_MOD` y `LOCAL_CODE_FILE_TYPE` como avisos que
 todavía no rechazan este mod, anunciando una futura restricción para

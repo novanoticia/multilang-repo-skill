@@ -1,24 +1,51 @@
 # Pruebas del lector de skills
 
-Esta guía corresponde a la versión `0.2.0`. Ninguna prueba de esta versión
+Esta guía corresponde a la versión `0.2.1`. Ninguna prueba de esta versión
 necesita un modelo ni una clave de API: todavía no se ha implementado la traducción.
 
 ## Niveles de comprobación
 
 - **Estática:** revisión del código, JSON, rutas y APIs documentadas.
+- **Local:** pruebas de funciones puras ejecutadas con Node.js.
 - **Simulada local:** ejecución del módulo con una API sustituida, sin Claude Code.
 - **Plataforma:** validación y pruebas con Claude Code o con el portal del directorio.
 - **Humana:** inspección del panel en una sesión real.
 
-Las pruebas del kit oficial se entregan escritas; su ejecución y la revisión
-visual en Claude Code están pendientes. Una simulación local no comprueba el
-motor de mods, los permisos efectivos ni cómo se dibuja la interfaz real.
+Las pruebas del kit oficial se entregan escritas; no se ha confirmado su
+resultado. Una prueba manual comunicada por la persona usuaria y acompañada de
+captura confirma apertura y lectura visible del original en Claude Code CLI
+`2.1.325`, con estado «Preparado» (nivel humano). No acredita por sí sola todos
+los casos de la tabla ni las pruebas automáticas.
+
+Una simulación local no comprueba el motor de mods, los permisos efectivos ni
+cómo se dibuja la interfaz real.
 
 Resultado local simulado: 13 escenarios superados, incluidos cambios de selección
 con lecturas pendientes, cierre durante `stat` o `read`, tamaño antes y después
 de leer, controles no admitidos y lectura del `SKILL.md` del repositorio sin
 modificarlo. Se mantuvieron fuera del paquete las herramientas y los datos brutos
 de esa simulación.
+
+## Funciones de preparación y reconstrucción
+
+Desde la raíz del repositorio, con Node.js (comprobado localmente con `24.19.0`):
+
+```bash
+node mods/skill-reader/tests/translation.node.test.mjs
+```
+
+Estas pruebas ejecutan funciones puras del módulo de traducción. No cargan el
+motor de Claude Code, no llaman a modelos y no necesitan credenciales. Se ejecutan
+por separado porque el kit de mods no ofrece los módulos de Node.js que utiliza
+este archivo de pruebas.
+
+Resultado local: 19 pruebas superadas con Node.js `24.19.0`. Incluyen CRLF y
+espacios originales, fences y comentarios HTML, identificadores y URLs, colisiones
+de marcadores, intercambio entre segmentos, respuestas malformadas y límites.
+
+La conservación literal y el rechazo de respuestas malformadas no demuestran
+fidelidad semántica de una traducción. La prueba con un modelo y la revisión
+humana del texto traducido siguen pendientes.
 
 ## Kit oficial de Claude Code
 
