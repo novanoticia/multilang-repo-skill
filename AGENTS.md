@@ -31,7 +31,7 @@ Ejecuta las pruebas sin tuberías detrás, para que el código de salida sea el 
 cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tests
 ```
 
-Hoy son **138 pruebas** y salen todas en verde. Si ves menos, alguna no se está descubriendo.
+Hoy son **149 pruebas** y salen todas en verde. Si ves menos, alguna no se está descubriendo.
 
 ```bash
 claude plugin validate --strict .                 # manifiesto, marketplace y skill
