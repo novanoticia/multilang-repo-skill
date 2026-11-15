@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=1e6573709488 estado=borrador-ia -->
+<!-- i18n fuente-sha256=6877aa04df4d estado=borrador-ia -->
 
 # AGENTS.md
 
@@ -33,7 +33,7 @@ Run the tests with nothing piped after them, so that the exit code is `unittest`
 cd skills/multilang-repo-skill/scripts && python3 -B -m unittest discover -s tests
 ```
 
-Today there are **138 tests** and all of them pass. If you see fewer, one is not being discovered.
+Today there are **149 tests** and all of them pass. If you see fewer, one is not being discovered.
 
 ```bash
 claude plugin validate --strict .                 # manifest, marketplace and skill
