@@ -230,7 +230,10 @@ test('cambiar la ruta invalida una traducción pendiente sin traducir la nueva s
   on('ui.open', () => ({ value: { isPlaced: true } }))
   on('fs.stat', () => ({ value: FILE }))
   on('fs.read', () => { reads += 1; return { value: CONTENT } })
-  on('ui.input', async ($, e, next) => {
+  on('ui.input', {
+    plugin: 'novanoticia-lector-skills',
+    element: 'skill-path',
+  }, async ($, e, next) => {
     const result = await next(e)
     if (e.kind === 'change' && e.value === 'otra/SKILL.md') edited.resolve()
     return result

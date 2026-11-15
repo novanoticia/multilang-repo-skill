@@ -6,7 +6,8 @@ Componente opcional y separado de `multilang-repo-skill`. La versión `0.3.0`
 implementa la lectura de un `SKILL.md` elegido expresamente y una traducción
 de lectura al español, solicitada solo al pulsar «Traducir». La integración
 con el modelo cuenta con una comprobación humana de un ejemplo sintético en
-Claude Code `2.1.325`. Sigue pendiente resolver una prueba del kit oficial.
+Claude Code `2.1.325`. Sigue pendiente ejecutar la corrección de una prueba del
+kit oficial.
 
 El identificador del plugin es `novanoticia-lector-skills`. Su carpeta es
 `mods/skill-reader/` y el comando es `/skill-reader`.
@@ -184,7 +185,10 @@ pasado. En el entorno de desarrollo, el kit oficial terminó antes de cargar los
 dos archivos de pruebas; una prueba mínima externa reprodujo ese problema.
 La ejecución posterior en el equipo de la persona usuaria sí cargó las 14
 pruebas: 13 superadas y 1 fallida, según su captura (resultado de plataforma
-comunicado). Falta obtener el nombre y el error de la prueba fallida y resolverlo.
+comunicado). La prueba de cambiar la ruta durante una traducción agotó su espera
+de cinco segundos. A su hook de prueba `ui.input` le faltaba el filtro del plugin
+propietario del campo; ya se ha añadido. La ejecución oficial de esa corrección
+sigue pendiente. No se ha cambiado el código del lector ni el tiempo de espera.
 
 La versión mínima compatible sigue pendiente de determinar. Desktop y VS Code
 no se han probado.
@@ -213,8 +217,8 @@ El portal advierte que el icono de la ficha se toma solo al guardar o enviar
 el plugin por primera vez. Añadirlo a otra versión no garantiza cambiar la
 imagen de una ficha ya guardada.
 
-Antes de enviarlo como producto terminado, hay que identificar y resolver la
-prueba fallida del kit oficial y repetir la validación del borrador de la versión
+Antes de enviarlo como producto terminado, hay que confirmar que la prueba
+corregida supera el kit oficial y repetir la validación del borrador de la versión
 actual. La traducción real del ejemplo sintético ya cuenta con comprobación
 humana; no sustituye las demás pruebas de la guía.
 

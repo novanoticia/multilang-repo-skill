@@ -15,8 +15,9 @@ generar coste; solo se inicia al pulsar «Traducir» después de leer el aviso.
 
 La validación estática estricta ha pasado con Claude Code `2.1.325`. La persona
 usuaria ha aportado una captura de la ejecución del kit oficial con 14 pruebas:
-13 superadas y 1 fallida (resultado de plataforma comunicado). El nombre y el
-mensaje de la prueba fallida están pendientes.
+13 superadas y 1 fallida (resultado de plataforma comunicado). La prueba de
+cambiar la ruta durante una traducción agotó su espera de cinco segundos.
+Se ha corregido su filtro de eventos; la ejecución oficial posterior está pendiente.
 
 La persona usuaria también ha confirmado la traducción real del ejemplo sintético
 de esta guía y ha aportado una captura en Claude Code CLI `2.1.325` (nivel humano).
@@ -80,9 +81,17 @@ del ejecutor. No se cuentan como superadas ni como 14 aserciones fallidas las
 pruebas que no llegaron a cargarse.
 
 En una ejecución posterior comunicada por la persona usuaria, Claude Code
-`2.1.325` cargó las 14 pruebas y comunicó 13 superadas y 1 fallida. La captura
-disponible no contiene el nombre ni el mensaje del fallo; su diagnóstico y
-resolución siguen pendientes.
+`2.1.325` cargó las 14 pruebas y comunicó 13 superadas y 1 fallida. La salida
+completa identifica `cambiar la ruta invalida una traducción pendiente sin
+traducir la nueva selección`, con `timed out after 5000 ms`.
+
+La revisión estática localizó una espera de `ui.input` cuyo hook de prueba no
+especificaba el plugin propietario del campo. Los [tipos oficiales de
+`UiInputArgument`](https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts)
+indican que un hook sin filtro `plugin` solo recibe eventos de sus propios campos.
+Se añadió el filtro de `novanoticia-lector-skills` y `skill-path`, conservando
+las aserciones y los cinco segundos del ejecutor. No cambió el código del lector.
+La ejecución oficial posterior a esta corrección sigue pendiente.
 
 Los archivos `tests/panel.test.ts` y `tests/translation-panel.test.ts` contienen
 14 pruebas escritas: seis del lector y ocho de la integración de traducción.
@@ -189,7 +198,7 @@ Repite la validación del borrador con la carpeta `mods/skill-reader` y la rama
 `skill-reader-prototipo`. Los avisos de capacidad pueden seguir apareciendo.
 Un resultado del portal no sustituye la ejecución de las pruebas anteriores.
 La prueba real del ejemplo sintético cuenta con comprobación humana. Antes de
-enviar esta versión como producto terminado, resuelve la prueba fallida y vuelve
+enviar esta versión como producto terminado, confirma la prueba corregida y vuelve
 a ejecutar el kit oficial y la validación del borrador.
 
 Elaborado con asistencia de IA; requiere revisión humana.
