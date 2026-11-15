@@ -1,4 +1,4 @@
-<!-- i18n fuente-sha256=1e6573709488 estado=borrador-ia -->
+<!-- i18n fuente-sha256=6877aa04df4d estado=borrador-ia -->
 
 # AGENTS.md
 
