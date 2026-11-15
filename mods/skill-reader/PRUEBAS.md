@@ -14,10 +14,10 @@ generar coste; solo se inicia al pulsar «Traducir» después de leer el aviso.
 - **Humana:** inspección del panel en una sesión real.
 
 La validación estática estricta ha pasado con Claude Code `2.1.325`. La persona
-usuaria ha aportado una captura de la ejecución del kit oficial con 14 pruebas:
-13 superadas y 1 fallida (resultado de plataforma comunicado). La prueba de
-cambiar la ruta durante una traducción agotó su espera de cinco segundos.
-Se ha corregido su filtro de eventos; la ejecución oficial posterior está pendiente.
+usuaria ha ejecutado el kit oficial sobre el commit `ccd6721` y ha comunicado
+su salida completa: **14 pruebas superadas y ninguna fallida** (resultado de
+plataforma comunicado). Incluye la prueba corregida de cambiar la ruta durante
+una traducción pendiente.
 
 La persona usuaria también ha confirmado la traducción real del ejemplo sintético
 de esta guía y ha aportado una captura en Claude Code CLI `2.1.325` (nivel humano).
@@ -80,7 +80,7 @@ mínima externa al repositorio. No se ha confirmado aquí la causa de ese proble
 del ejecutor. No se cuentan como superadas ni como 14 aserciones fallidas las
 pruebas que no llegaron a cargarse.
 
-En una ejecución posterior comunicada por la persona usuaria, Claude Code
+En la primera ejecución comunicada por la persona usuaria, Claude Code
 `2.1.325` cargó las 14 pruebas y comunicó 13 superadas y 1 fallida. La salida
 completa identifica `cambiar la ruta invalida una traducción pendiente sin
 traducir la nueva selección`, con `timed out after 5000 ms`.
@@ -91,7 +91,10 @@ especificaba el plugin propietario del campo. Los [tipos oficiales de
 indican que un hook sin filtro `plugin` solo recibe eventos de sus propios campos.
 Se añadió el filtro de `novanoticia-lector-skills` y `skill-path`, conservando
 las aserciones y los cinco segundos del ejecutor. No cambió el código del lector.
-La ejecución oficial posterior a esta corrección sigue pendiente.
+La ejecución oficial posterior sobre `ccd6721`, comunicada por la persona usuaria
+con la salida completa, dio **14 pass y 0 fail** en dos archivos. La prueba de
+cambiar la ruta también pasó. Es un resultado de plataforma comunicado en
+Claude Code `2.1.325`; no fue una ejecución del entorno de desarrollo.
 
 Los archivos `tests/panel.test.ts` y `tests/translation-panel.test.ts` contienen
 14 pruebas escritas: seis del lector y ocho de la integración de traducción.
@@ -197,8 +200,9 @@ quedar sin traducir por la protección conservadora del prototipo.
 Repite la validación del borrador con la carpeta `mods/skill-reader` y la rama
 `skill-reader-prototipo`. Los avisos de capacidad pueden seguir apareciendo.
 Un resultado del portal no sustituye la ejecución de las pruebas anteriores.
-La prueba real del ejemplo sintético cuenta con comprobación humana. Antes de
-enviar esta versión como producto terminado, confirma la prueba corregida y vuelve
-a ejecutar el kit oficial y la validación del borrador.
+La suite oficial cuenta con 14 pruebas superadas y la traducción real del ejemplo
+sintético, con comprobación humana. Falta validar el último commit en el portal y
+completar la revisión y publicación. La instalación desde el directorio todavía
+no se ha probado. Vuelve a ejecutar las pruebas si cambia el código o los tests.
 
 Elaborado con asistencia de IA; requiere revisión humana.

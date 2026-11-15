@@ -6,8 +6,8 @@ Componente opcional y separado de `multilang-repo-skill`. La versión `0.3.0`
 implementa la lectura de un `SKILL.md` elegido expresamente y una traducción
 de lectura al español, solicitada solo al pulsar «Traducir». La integración
 con el modelo cuenta con una comprobación humana de un ejemplo sintético en
-Claude Code `2.1.325`. Sigue pendiente ejecutar la corrección de una prueba del
-kit oficial.
+Claude Code `2.1.325`. La suite oficial ha superado sus 14 pruebas en el equipo
+de la persona usuaria, según la salida que ha comunicado.
 
 El identificador del plugin es `novanoticia-lector-skills`. Su carpeta es
 `mods/skill-reader/` y el comando es `/skill-reader`.
@@ -102,6 +102,7 @@ claude --plugin-dir ./skill-reader
 ```
 
 Esta entrega de desarrollo no está publicada todavía en el directorio de Claude.
+La carpeta incluye su [licencia MIT](LICENSE); consérvala al compartirla.
 
 ## Privacidad, lectura y consumo
 
@@ -181,14 +182,16 @@ En ese ejemplo se ve la prosa en español y se conservan los metadatos iniciales
 no acredita todos los casos de error, interrupción y limpieza de estado.
 
 La validación estática estricta se ha ejecutado con Claude Code `2.1.325` y ha
-pasado. En el entorno de desarrollo, el kit oficial terminó antes de cargar los
-dos archivos de pruebas; una prueba mínima externa reprodujo ese problema.
-La ejecución posterior en el equipo de la persona usuaria sí cargó las 14
-pruebas: 13 superadas y 1 fallida, según su captura (resultado de plataforma
-comunicado). La prueba de cambiar la ruta durante una traducción agotó su espera
-de cinco segundos. A su hook de prueba `ui.input` le faltaba el filtro del plugin
-propietario del campo; ya se ha añadido. La ejecución oficial de esa corrección
-sigue pendiente. No se ha cambiado el código del lector ni el tiempo de espera.
+pasado. La persona usuaria ha ejecutado el kit oficial sobre el commit `ccd6721`
+y ha comunicado su salida completa: **14 pruebas superadas y ninguna fallida**
+(resultado de plataforma comunicado). Incluye la comprobación de cambiar la
+ruta durante una traducción pendiente, tras corregir el filtro del hook de
+prueba `ui.input`. No se cambió el código del lector ni el tiempo de espera.
+
+En el entorno de desarrollo, el kit terminó antes de cargar los dos archivos;
+una prueba mínima externa reprodujo ese problema y su causa sigue sin determinar.
+Ese resultado se distingue de la ejecución satisfactoria comunicada por la
+persona usuaria.
 
 La versión mínima compatible sigue pendiente de determinar. Desktop y VS Code
 no se han probado.
@@ -201,6 +204,19 @@ Comprobación local del icono: PNG válido de 1254 × 1254 píxeles y
 El objetivo es publicarlo por separado para Claude Code. En el portal, usa la
 carpeta de plugin `mods/skill-reader`, no la raíz del repositorio. El manifiesto
 y el marketplace de la raíz no se modifican para desarrollar este componente.
+
+Abre el envío existente de esta carpeta en el [portal de
+desarrollo](https://claude.ai/directory/manage) y comprueba los datos de origen:
+
+| Campo del portal | Valor |
+| --- | --- |
+| Repository | `https://github.com/novanoticia/multilang-repo-skill` |
+| Plugin path | `mods/skill-reader` |
+| Branch or tag | `skill-reader-prototipo` |
+
+Selecciona «Validate» o «Re-validate» después del último commit. La validación
+corresponde a un commit concreto; una validación anterior no cubre cambios nuevos.
+El mod no necesita una entrada en el marketplace raíz para este envío.
 
 La validación de plataforma de la versión anterior, comunicada por la persona
 usuaria, pasó con avisos: reconoció un mod, ningún servidor MCP, el nombre,
@@ -217,10 +233,11 @@ El portal advierte que el icono de la ficha se toma solo al guardar o enviar
 el plugin por primera vez. Añadirlo a otra versión no garantiza cambiar la
 imagen de una ficha ya guardada.
 
-Antes de enviarlo como producto terminado, hay que confirmar que la prueba
-corregida supera el kit oficial y repetir la validación del borrador de la versión
-actual. La traducción real del ejemplo sintético ya cuenta con comprobación
-humana; no sustituye las demás pruebas de la guía.
+La suite oficial y la traducción real del ejemplo sintético ya cuentan con los
+resultados descritos arriba. Falta validar el commit actual en el portal y
+completar su revisión y publicación. La instalación desde una ficha publicada
+todavía no se ha probado. Los resultados locales no garantizan la admisión en
+el directorio.
 
 ## Referencias oficiales
 
