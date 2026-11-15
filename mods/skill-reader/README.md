@@ -5,7 +5,8 @@
 Componente opcional y separado de `multilang-repo-skill`. La versión `0.3.0`
 implementa la lectura de un `SKILL.md` elegido expresamente y una traducción
 de lectura al español, solicitada solo al pulsar «Traducir». La integración
-con el modelo todavía necesita una prueba real en Claude Code.
+con el modelo cuenta con una comprobación humana de un ejemplo sintético en
+Claude Code `2.1.325`. Sigue pendiente resolver una prueba del kit oficial.
 
 El identificador del plugin es `novanoticia-lector-skills`. Su carpeta es
 `mods/skill-reader/` y el comando es `/skill-reader`.
@@ -172,17 +173,18 @@ La integración tiene 15 escenarios locales simulados superados. Las funciones
 de preparación y reconstrucción tienen 19 pruebas locales superadas. Estas
 comprobaciones no utilizan un modelo real ni prueban el motor de Claude Code.
 
-Una prueba manual comunicada por la persona usuaria confirma apertura del panel
-y lectura visible del original, con estado «Preparado», en Claude Code CLI
-`2.1.325` (nivel humano). Esta comprobación corresponde a la versión anterior
-del lector. El selector, las vistas y la integración con el modelo de `0.3.0`
-todavía necesitan comprobación real.
+La persona usuaria ha confirmado una traducción real del ejemplo sintético de
+la guía en Claude Code CLI `2.1.325` y ha aportado una captura (nivel humano).
+En ese ejemplo se ve la prosa en español y se conservan los metadatos iniciales,
+`Read`, `docs/guide.md`, el bloque de código, `R17` y la URL. Esta comprobación
+no acredita todos los casos de error, interrupción y limpieza de estado.
 
 La validación estática estricta se ha ejecutado con Claude Code `2.1.325` y ha
-pasado. El kit oficial se intentó ejecutar, pero aquí terminó antes de cargar los
-dos archivos de pruebas. Una prueba mínima externa reprodujo el mismo problema
-del ejecutor; por tanto, las 14 pruebas escritas siguen sin un resultado de
-ejecución oficial. La guía recoge el diagnóstico y el comando para tu equipo.
+pasado. En el entorno de desarrollo, el kit oficial terminó antes de cargar los
+dos archivos de pruebas; una prueba mínima externa reprodujo ese problema.
+La ejecución posterior en el equipo de la persona usuaria sí cargó las 14
+pruebas: 13 superadas y 1 fallida, según su captura (resultado de plataforma
+comunicado). Falta obtener el nombre y el error de la prueba fallida y resolverlo.
 
 La versión mínima compatible sigue pendiente de determinar. Desktop y VS Code
 no se han probado.
@@ -211,9 +213,10 @@ El portal advierte que el icono de la ficha se toma solo al guardar o enviar
 el plugin por primera vez. Añadirlo a otra versión no garantiza cambiar la
 imagen de una ficha ya guardada.
 
-Antes de enviarlo como producto terminado, hay que ejecutar el kit oficial,
-probar una traducción real de contenido sintético y revisar el resultado en
-Claude Code. La guía de pruebas indica cuándo se consume uso de la cuenta.
+Antes de enviarlo como producto terminado, hay que identificar y resolver la
+prueba fallida del kit oficial y repetir la validación del borrador de la versión
+actual. La traducción real del ejemplo sintético ya cuenta con comprobación
+humana; no sustituye las demás pruebas de la guía.
 
 ## Referencias oficiales
 

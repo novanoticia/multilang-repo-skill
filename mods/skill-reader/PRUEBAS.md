@@ -13,13 +13,16 @@ generar coste; solo se inicia al pulsar «Traducir» después de leer el aviso.
 - **Plataforma:** validación y pruebas con Claude Code o con el portal del directorio.
 - **Humana:** inspección del panel en una sesión real.
 
-Las pruebas del kit oficial se entregan escritas; no se ha confirmado su
-resultado. La validación estática estricta sí ha pasado con Claude Code
-`2.1.325`. Una prueba manual comunicada por la persona usuaria y acompañada de
-captura confirma apertura y lectura visible del original en Claude Code CLI
-`2.1.325`, con estado «Preparado» (nivel humano). Corresponde al lector anterior,
-sin traducción. No acredita los controles nuevos de `0.3.0`, todos los casos de
-la tabla ni las pruebas automáticas.
+La validación estática estricta ha pasado con Claude Code `2.1.325`. La persona
+usuaria ha aportado una captura de la ejecución del kit oficial con 14 pruebas:
+13 superadas y 1 fallida (resultado de plataforma comunicado). El nombre y el
+mensaje de la prueba fallida están pendientes.
+
+La persona usuaria también ha confirmado la traducción real del ejemplo sintético
+de esta guía y ha aportado una captura en Claude Code CLI `2.1.325` (nivel humano).
+Se ve la prosa en español y la conservación de los metadatos iniciales, `Read`,
+`docs/guide.md`, el bloque de código, `R17` y la URL. Esta evidencia no acredita
+todos los casos de las tablas ni todos los controles del mod.
 
 Una simulación local no comprueba el motor de mods, los permisos efectivos ni
 cómo se dibuja la interfaz real.
@@ -54,8 +57,9 @@ espacios originales, fences y comentarios HTML, identificadores y URLs, colision
 de marcadores, intercambio entre segmentos, respuestas malformadas y límites.
 
 La conservación literal y el rechazo de respuestas malformadas no demuestran
-fidelidad semántica de una traducción. La prueba con un modelo y la revisión
-humana del texto traducido siguen pendientes.
+fidelidad semántica de una traducción. El ejemplo sintético de esta guía cuenta
+con una comprobación humana de traducción real. La fidelidad de otros documentos
+requiere su propia revisión.
 
 ## Kit oficial de Claude Code
 
@@ -73,7 +77,12 @@ con el mensaje `the file did not load` y `its run ended without a report
 (exit code 0)`. El mismo resultado apareció con un mod vacío y una sola prueba
 mínima externa al repositorio. No se ha confirmado aquí la causa de ese problema
 del ejecutor. No se cuentan como superadas ni como 14 aserciones fallidas las
-pruebas que no llegaron a cargarse: deben ejecutarse en otro entorno compatible.
+pruebas que no llegaron a cargarse.
+
+En una ejecución posterior comunicada por la persona usuaria, Claude Code
+`2.1.325` cargó las 14 pruebas y comunicó 13 superadas y 1 fallida. La captura
+disponible no contiene el nombre ni el mensaje del fallo; su diagnóstico y
+resolución siguen pendientes.
 
 Los archivos `tests/panel.test.ts` y `tests/translation-panel.test.ts` contienen
 14 pruebas escritas: seis del lector y ocho de la integración de traducción.
@@ -179,7 +188,8 @@ quedar sin traducir por la protección conservadora del prototipo.
 Repite la validación del borrador con la carpeta `mods/skill-reader` y la rama
 `skill-reader-prototipo`. Los avisos de capacidad pueden seguir apareciendo.
 Un resultado del portal no sustituye la ejecución de las pruebas anteriores.
-No envíes esta versión como producto terminado hasta completar el kit oficial,
-la prueba real y la revisión humana de la traducción.
+La prueba real del ejemplo sintético cuenta con comprobación humana. Antes de
+enviar esta versión como producto terminado, resuelve la prueba fallida y vuelve
+a ejecutar el kit oficial y la validación del borrador.
 
 Elaborado con asistencia de IA; requiere revisión humana.
