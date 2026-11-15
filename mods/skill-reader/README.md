@@ -2,28 +2,33 @@
 
 ![Icono de NovaNoticia · Lector de skills](.claude-plugin/icon.png)
 
-Componente opcional y separado de `multilang-repo-skill`. La versión `0.2.1`
-permite introducir la ruta de un archivo `SKILL.md`, cargarlo expresamente y
-ver su contenido original. La traducción está pendiente de implementar.
+Componente opcional y separado de `multilang-repo-skill`. La versión `0.3.0`
+implementa la lectura de un `SKILL.md` elegido expresamente y una traducción
+de lectura al español, solicitada solo al pulsar «Traducir». La integración
+con el modelo todavía necesita una prueba real en Claude Code.
 
 El identificador del plugin es `novanoticia-lector-skills`. Su carpeta es
 `mods/skill-reader/` y el comando es `/skill-reader`.
 
-## Objetivo previsto
+## Función del prototipo
 
-Mostrar el original y una traducción de lectura en un panel propio. El idioma
-inicial será español. En una tarea posterior, solo el botón «Traducir» iniciará
-una petición al modelo, después de mostrar el contenido que se enviará y un
-aviso sobre el posible consumo o coste.
+El panel permite cargar un archivo local, elegir «Español» en un selector
+ampliable y solicitar su traducción. Antes del botón se explica qué se enviará
+y que puede consumir uso o generar coste. Los estados son «Preparado»,
+«Traduciendo…», «Completado» y «Error», además del estado de lectura del archivo.
 
-La traducción será para la persona: no se incorporará como instrucciones del
-agente ni modificará el archivo original.
+Original y traducción se consultan mediante dos vistas dentro del mismo panel.
+Se dibuja una sola vista cada vez para respetar el límite de texto de la interfaz.
+
+La traducción es para la persona: no se incorpora como instrucciones del agente
+ni modifica el archivo original. Se identifica como texto generado con IA que
+requiere revisión humana.
 
 ## Preparación de la traducción
 
-Se incluye un módulo de funciones puras para preparar la prosa y comprobar una
-respuesta estructurada antes de reconstruir el documento. En esta entrega
-todavía no está conectado al panel ni a un modelo.
+El módulo de funciones puras prepara la prosa y comprueba la respuesta
+estructurada antes de reconstruir el documento. El panel lo utiliza para
+preparar la petición y para aceptar o rechazar el resultado completo.
 
 Los bloques técnicos identificados se conservan localmente. Los literales
 reconocibles dentro de la prosa se sustituyen por marcadores. El mensaje preparado
@@ -45,7 +50,8 @@ requieren revisión humana; no basta con superar una comprobación estructural.
 La preparación admite originales de hasta 64 KiB UTF-8. El mensaje preparado
 y la respuesta se limitan a 512 KiB; la reconstrucción, a 90.000 caracteres.
 Si el documento genera demasiados fragmentos, falla la preparación antes de
-una futura llamada al modelo.
+llamar al modelo. Estos límites no garantizan que el proveedor acepte una
+petición ni que la salida quepa en el límite de generación.
 
 ## Carga, uso y retirada
 
@@ -61,22 +67,39 @@ Dentro de esa sesión:
 2. Introduce una ruta local, por ejemplo
    `skills/multilang-repo-skill/SKILL.md`.
 3. Pulsa «Cargar original» o Enter en el campo de ruta.
-4. Lee el original en el panel. El estado pasa de «Leyendo…» a «Preparado»;
-   si falla la carga, aparece «Error» con una explicación breve.
-5. Cierra con «Cerrar» o con Esc cuando el panel tenga el foco.
+4. Lee el original. El estado pasa de «Leyendo…» a «Preparado»; si falla la
+   carga, aparece «Error» con una explicación breve.
+5. Comprueba el idioma y lee el aviso de privacidad y consumo. Solo si estás
+   autorizado a enviar ese contenido, pulsa «Traducir».
+6. Si el resultado supera las comprobaciones, aparece «Completado» y se muestra
+   la traducción. Usa «Original» y «Traducción» para comparar las vistas.
+7. Cierra con «Cerrar» o con Esc cuando el panel tenga el foco.
 
 Las rutas relativas parten del directorio de la sesión. Se admiten espacios
 en la ruta, sin comillas. No se expande `~`. El nombre del archivo debe ser
 exactamente `SKILL.md`. El límite de esta versión es 64 KiB.
 El archivo debe ser texto UTF-8.
 
-Escribir o cambiar la ruta no lee el archivo. Cambiarla descarta la carga
-anterior. Cerrar el panel, terminar la sesión o ejecutar `/clear` también
-descarta las referencias al contenido y la selección.
+Abrir el panel, escribir la ruta, cargar el original, elegir idioma o cambiar de
+vista no llama al modelo. Escribir la ruta tampoco lee el archivo: la lectura
+requiere «Cargar original» o Enter.
+
+Cambiar la ruta descarta el contenido anterior. Cerrar el panel, terminar la
+sesión o ejecutar `/clear` también descarta las referencias al contenido y la
+selección. Si hay una traducción en curso, se solicita su interrupción y se
+descarta cualquier respuesta tardía. Interrumpir no garantiza evitar el consumo.
 
 La carga con `--plugin-dir` termina al salir de esa sesión. Para compartir el
 componente, entrega solo la carpeta `skill-reader` o un ZIP que la contenga.
 Para retirarlo del repositorio, elimina `mods/skill-reader/`.
+
+Quien reciba solo esa carpeta puede cargarla desde el directorio que la contiene:
+
+```bash
+claude --plugin-dir ./skill-reader
+```
+
+Esta entrega de desarrollo no está publicada todavía en el directorio de Claude.
 
 ## Privacidad, lectura y consumo
 
@@ -90,13 +113,36 @@ ni comandos, y no se usa un renderizador Markdown que active enlaces o imágenes
 Los saltos CRLF se muestran como saltos de línea normales, conservando el texto
 leído en memoria. Se rechazan archivos vacíos, NUL y otros controles no admitidos.
 
-El mod no escribe archivos ni guarda contenido de forma persistente. El comando
-devuelve `{}` para no añadir el original al historial del agente. Si una lectura
-termina después de cerrar el panel o cambiar la selección, se descarta su resultado.
+El mod no escribe archivos ni guarda contenido o traducciones de forma
+persistente. El comando devuelve `{}` para no añadir el original ni la
+traducción al historial del agente. Si una lectura o traducción termina después
+de cerrar el panel o cambiar la selección, se descarta su resultado.
 
-Esta versión no llama a modelos, no inicia procesos, no hace peticiones de red,
-no requiere claves de API y no genera consumo de modelo propio. La traducción
-futura necesitará su propia comprobación de privacidad y consumo.
+Al pulsar «Traducir», el mod solicita el alias `haiku` mediante
+`$.model.complete`, independientemente del modelo usado por la conversación.
+Utiliza el cliente y las credenciales de la sesión: plan de Claude, API o
+proveedor configurado. No pide ni incorpora nuevas claves y no añade servicios
+de traducción externos.
+
+La petición independiente contiene las reglas de traducción, el idioma y los
+segmentos preparados del archivo elegido, además del bloque identificativo que
+añade Claude Code. No incluye el historial, `CLAUDE.md`, herramientas ni otros
+archivos. El texto se trata como datos no confiables; sus instrucciones no son
+órdenes para el traductor. La conservación de datos por parte del proveedor o
+del entorno anfitrión depende de sus propias políticas: la ausencia de escritura
+por parte del mod no equivale a ausencia de retención en esos servicios.
+
+Cada intento con prosa traducible puede consumir cuota o generar cargos. El mod
+no cambia automáticamente de modelo ante un error ni reintenta por su cuenta.
+Si solo hay literales y no hay prosa que traducir, conserva el texto sin llamar
+al modelo y lo indica.
+La petición tiene un máximo de 32.000 tokens de salida y un tiempo de espera de
+120 segundos. Un error, una interrupción o una respuesta rechazada puede haber
+consumido uso. Si Claude Code devuelve recuentos, se muestran tokens, no un
+importe monetario ni una estimación de coste.
+
+Un fallo conserva el original y no muestra una traducción parcial. La persona
+puede revisar el mensaje y decidir si desea volver a intentarlo.
 
 ## Eventos que utiliza el mod
 
@@ -112,22 +158,34 @@ futura necesitará su propia comprobación de privacidad y consumo.
 - `session.end`: limpia el estado propio y deja continuar el final de sesión,
   incluido el que acompaña a `/clear`, `/resume` o `/branch`.
 
-El campo de ruta cambia el estado local. La carga usa `$.fs.stat` y `$.fs.read`;
-el botón «Cerrar» usa `$.ui.close`. No se registran herramientas ni agentes y
-no se interceptan ni aprueban permisos o llamadas a herramientas de Claude.
+El campo de ruta y las vistas cambian el estado local. La carga usa `$.fs.stat`
+y `$.fs.read`; «Traducir» usa `$.model.complete` solo después de pulsarlo y
+«Cerrar» usa `$.ui.close`. No se registran herramientas ni agentes y no se
+interceptan ni aprueban permisos o llamadas a herramientas de Claude.
 
 ## Comprobaciones y compatibilidad
 
 La [guía de pruebas](PRUEBAS.md) distingue comprobaciones locales simuladas,
 pruebas escritas para el kit oficial y comprobaciones reales pendientes.
 
+La integración tiene 15 escenarios locales simulados superados. Las funciones
+de preparación y reconstrucción tienen 19 pruebas locales superadas. Estas
+comprobaciones no utilizan un modelo real ni prueban el motor de Claude Code.
+
 Una prueba manual comunicada por la persona usuaria confirma apertura del panel
 y lectura visible del original, con estado «Preparado», en Claude Code CLI
-`2.1.325` (nivel humano). Esta comprobación corresponde al lector; la preparación
-de traducciones todavía no está conectada al panel.
+`2.1.325` (nivel humano). Esta comprobación corresponde a la versión anterior
+del lector. El selector, las vistas y la integración con el modelo de `0.3.0`
+todavía necesitan comprobación real.
 
-No se ha confirmado el resultado del kit oficial de pruebas. La versión mínima
-compatible sigue pendiente de determinar. Desktop y VS Code no se han probado.
+La validación estática estricta se ha ejecutado con Claude Code `2.1.325` y ha
+pasado. El kit oficial se intentó ejecutar, pero aquí terminó antes de cargar los
+dos archivos de pruebas. Una prueba mínima externa reprodujo el mismo problema
+del ejecutor; por tanto, las 14 pruebas escritas siguen sin un resultado de
+ejecución oficial. La guía recoge el diagnóstico y el comando para tu equipo.
+
+La versión mínima compatible sigue pendiente de determinar. Desktop y VS Code
+no se han probado.
 
 Comprobación local del icono: PNG válido de 1254 × 1254 píxeles y
 1.133.861 bytes. El portal ha aceptado el icono en la validación de desarrollo.
@@ -142,7 +200,7 @@ La validación de plataforma de la versión anterior, comunicada por la persona
 usuaria, pasó con avisos: reconoció un mod, ningún servidor MCP, el nombre,
 el editor y el icono. Esto no comprueba el funcionamiento del lector ni
 sustituye el escaneo y la revisión posteriores a una solicitud. La versión
-`0.2.1` necesita una validación nueva.
+`0.3.0` necesita una validación nueva.
 
 El portal ha mostrado `LOCAL_CODE_MOD` y `LOCAL_CODE_FILE_TYPE` como avisos que
 todavía no rechazan este mod, anunciando una futura restricción para
@@ -153,8 +211,9 @@ El portal advierte que el icono de la ficha se toma solo al guardar o enviar
 el plugin por primera vez. Añadirlo a otra versión no garantiza cambiar la
 imagen de una ficha ya guardada.
 
-Antes de enviarlo como producto terminado, hay que completar y probar la
-traducción del archivo elegido y comprobar el lector en Claude Code.
+Antes de enviarlo como producto terminado, hay que ejecutar el kit oficial,
+probar una traducción real de contenido sintético y revisar el resultado en
+Claude Code. La guía de pruebas indica cuándo se consume uso de la cuenta.
 
 ## Referencias oficiales
 

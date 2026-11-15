@@ -1,9 +1,9 @@
 {
   "name": "novanoticia-lector-skills",
   "displayName": "NovaNoticia · Lector de skills",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "icon": "./.claude-plugin/icon.png",
-  "description": "Lector de SKILL.md: carga un archivo elegido expresamente y muestra su original en un panel. Traducción aún pendiente.",
+  "description": "Lee un SKILL.md elegido expresamente y solicita una traducción de lectura al español solo al pulsar Traducir, sin modificar el original.",
   "author": {
     "name": "novanoticia"
   },
