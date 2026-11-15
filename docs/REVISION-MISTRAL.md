@@ -41,7 +41,13 @@ aparente quedan plegadas.
 El modelo devuelve escenarios examinados por lectura, comprobaciones pendientes
 y hallazgos con citas literales. El validador comprueba las citas contra el diff
 enviado; la sangría y los espacios de los extremos de cada línea citada no
-cuentan, el resto es literal. Las comprobaciones de rutas admiten renombrados,
+cuentan, el resto es literal. Desde el 2026-11-15 una cita también puede ser
+**varias líneas seguidas de un mismo hunk**, cada una completa; las líneas en
+blanco no cuentan, y dos líneas reales pero separadas siguen invalidando la
+respuesta. Se portó de email-triage-plugin (PR #210): allí GLM 5.3 Flash vio el
+defecto del caso de control de la evaluación, lo citó con sus dos líneas y se
+perdía la revisión entera. El prompt sigue pidiendo una sola línea.
+Las comprobaciones de rutas admiten renombrados,
 permisos y binarios sin hunks. Una respuesta inválida hace fallar el check, pero
 no equivale a un defecto demostrado en la skill. Si la API corta la respuesta, el
 informe añade su código de causa (`length` cuando se agota el margen de 16.000
